@@ -28,7 +28,14 @@ github_username:  jekyll
 markdown: kramdown
 theme: minima
 plugins:
+  - jekyll-paginate
   - jekyll-feed
+
+paginate: 6
+paginate_path: "/blog/page:num/"
+
+compress_html:
+  clippings: all
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
