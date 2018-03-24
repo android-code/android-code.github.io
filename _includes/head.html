@@ -1,18 +1,23 @@
 <head>
   	
 	<meta charset="utf-8">
-  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  	{% seo %}
+	{% seo %}
 
 	<style class="inlineCSS">
-    	{% include critical.css %}
+		{% include assets/critical.css %}
 	</style>
 
-  	<link rel="preload" href="{{ '/assets/css/main.css' | relative_url }}" as="style" onload="this.rel='stylesheet'">
-  	<noscript><link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}"></noscript>
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="preload" href="{{ '/assets/css/main.css' | relative_url }}" as="style" onload="this.rel='stylesheet'">
+	<noscript>
+		<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+	</noscript>
 
-  	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<script type="text/javascript">
+		{% include assets/loadCss.js %}
+	</script>
 
 </head>
