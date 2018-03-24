@@ -7,13 +7,14 @@
 {% include header.html %}
 
   {% if page.image %}
-
   <div class="hero lazyload" data-bg="{{site.url}}/assets/img/posts/{{page.image}}.jpg">
     {% else %}
     <div class="hero dark-bg">
       {% endif %}
       <div class="hero__wrap">
         <h1 class="hero__title">{{ page.title }}</h1>
+        <h4 class="hero__meta">{{ page.categories }}</h4>
+        <h5 class="hero__meta"">{{ page.tags }}</h5>
         <p class="hero__meta">
             <span>
               <time>{{ page.date | date_to_string }}</time>&nbsp;
