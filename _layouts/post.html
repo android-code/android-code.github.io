@@ -6,9 +6,9 @@
 
 {% include header.html %}
 
-  {% if page.featured-img %}
+  {% if page.image %}
 
-  <div class="hero lazyload" data-bg="{{site.url}}/assets/img/posts/{{page.featured-img}}.jpg">
+  <div class="hero lazyload" data-bg="{{site.url}}/assets/img/posts/{{page.image}}.jpg">
     {% else %}
     <div class="hero dark-bg">
       {% endif %}
@@ -70,20 +70,6 @@
         </div>
       </div>
     </div>
-
-    {% if site.disqus.shortname %}
-
-    <div class="comments">
-      <div class="container">
-        <div class="post-content">
-
-          {% include disqus.html %}
-
-        </div>
-      </div>
-    </div>
-
-    {% endif %}
 
   </main>
 

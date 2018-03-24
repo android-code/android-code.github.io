@@ -1,14 +1,14 @@
 <a class="post-card" href="{{ post.url | relative_url }}" itemprop="blogPosts" itemscope="" itemtype="http://schema.org/BlogPosting">
-  {% if post.featured-img %}
+  {% if post.image %}
   <figure class="post-card__thumb">
 
-    <img src="{{site.url}}/assets/img/posts/{{post.featured-img}}_placehold.jpg",
-      data-src="{{site.url}}/assets/img/posts/{{post.featured-img}}_thumb.jpg"
+    <img src="{{site.url}}/assets/img/posts/{{post.image}}_placehold.jpg",
+      data-src="{{site.url}}/assets/img/posts/{{post.image}}_thumb.jpg"
       class="lazyload blur"
       alt="{{post.title}}"/>
       
     <noscript>
-    	<img src="{{site.url}}/assets/img/posts/{{post.featured-img}}_thumb.jpg" alt="{{ post.title }}">
+    	<img src="{{site.url}}/assets/img/posts/{{post.image}}_thumb.jpg" alt="{{ post.title }}">
     </noscript>
 
   </figure>
