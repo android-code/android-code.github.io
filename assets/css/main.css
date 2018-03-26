@@ -394,7 +394,7 @@ pre>code {
 }
 
 .container {
-  padding: 0 20px;
+  padding: 1px 20px 1px 20px;
 }
 
 @media (min-width: 0) {
@@ -897,6 +897,14 @@ button:disabled:hover,button:disabled :focus {
   -ms-flex-pack: center;
   justify-content: center;
   margin: 1.25rem auto;
+}
+
+.pagination em {
+  margin: 3px;
+}
+
+.pagination span {
+  margin: 3px;
 }
 
 input,textarea {

@@ -1,25 +1,21 @@
-{% if paginator.total_pages > 1 %}
-<div class="pagination">
-  {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Prev</a>
-  {% else %}
-    <span>&laquo; Prev</span>
-  {% endif %}
-
-  {% for page in (1..paginator.total_pages) %}
-    {% if page == paginator.page %}
-      <em>{{ page }}</em>
-    {% elsif page == 1 %}
-      <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
-    {% else %}
-      <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+<div class="controls__inner">
+  <div class="controls__item prev">
+    {% if paginator.previous_page %}
+    <span>Previous</span>
+    <a href="{{ paginator.previous_page_path }}">
+      <i class='fa fa-angle-left'></i>
+      Page: {{ paginator.previous_page }} of {{ paginator.total_pages }}
+    </a>
     {% endif %}
-  {% endfor %}
+  </div>
 
-  {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a>
-  {% else %}
-    <span>Next &raquo;</span>
-  {% endif %}
+  <div class="controls__item next">
+    {% if paginator.next_page %}
+    <span>Next</span>
+    <a href="{{ paginator.next_page_path }}">
+      Page: {{ paginator.next_page }} of {{ paginator.total_pages }}
+      <i class='fa fa-angle-right'></i>
+    </a>
+    {% endif %}
+  </div>
 </div>
-{% endif %}
