@@ -1,10 +1,10 @@
 {% if post.title != null %}
   {% if group == null or group == post.group %}
-    <li>
+    <div>
       <a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a>
       <span class="entry-date">
-        <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">{{ post.date | date: "%B %d, %Y" }}</time>
+        <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">({{ post.date | date: "%B %d, %Y" }})</time>
       </span>
-    </li>
+    </div>
   {% endif %}
 {% endif %}
