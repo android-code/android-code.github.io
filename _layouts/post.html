@@ -1,77 +1,34 @@
 <html lang="{{ page.lang | default: site.lang | default: "en_US" }}">
 
-{% include head.html %}
+  {% include head.html %}
 
-<body class="site">
+  <body class="site">
 
-{% include header.html %}
+  {% include header.html %}
 
   {% if page.image %}
-  <div class="hero lazyload" data-bg="{{site.url}}/assets/img/posts/{{page.image}}.jpg">
+    <div class="hero lazyload" data-bg="{{site.url}}/assets/img/posts/{{page.image}}.jpg">
   {% else %}
-  <div class="hero dark-bg">
+    <div class="hero dark-bg">
   {% endif %}
-    <div class="hero__wrap">
-     
-      <h1 class="hero__title">{{ page.title }}</h1>
-      <h4 class="hero__category">{{ page.categories }}</h4>
 
-      <ul class="hero__tag">
-        {% for tag in page.tags %}
-          <li>{{ tag }}</li>
-        {% endfor %}
-      </ul>
+    {% include post-metadata.html %}
 
-      <p class="hero__meta">
-        <span>
-          <time>{{ page.date | date_to_string }} </time>&nbsp; | &nbsp;
-        </span>
-        <span>
-          {% assign words = content | number_of_words %}
-            {% if words < 360 %}
-              1 min
-            {% else %}
-              {{ words | divided_by:180 }} mins
-          {% endif %} read
-        </span>
-      </p>
     </div>
-  </div>
-  </div>
-
-  <main class="site__content">
-    <div class="container">
-      <article class="post-content" itemprop="articleBody">
-        {{ content }}
-      </article>
-
-      <div class="post-content controls__inner">
-        <div class="controls__item prev">
-          {% if page.previous.url %}
-          <span>Previous</span>
-          <a href="{{page.previous.url | relative_url }}">
-            <i class='fa fa-angle-left'></i>
-            {{page.previous.title | strip_html | truncate: 30}}
-          </a>
-          {% endif %}
-        </div>
-
-        <div class="controls__item next">
-          {% if page.next.url %}
-          <span>Next</span>
-          <a href="{{page.next.url | relative_url }}">
-            {{page.next.title | strip_html | truncate: 30}}
-            <i class='fa fa-angle-right'></i>
-          </a>
-          {% endif %}
-        </div>
-      </div>
     </div>
 
-  </main>
+    <main class="site__content">
+      <div class="container">
+        <article class="post-content" itemprop="articleBody">
+          {{ content }}
+        </article>
 
-  {% include footer.html %}
+        {% include post-controls.html %}
 
-</body>
+    </main>
+
+    {% include footer.html %}
+
+  </body>
 
 </html>

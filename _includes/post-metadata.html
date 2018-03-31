@@ -1,0 +1,25 @@
+<div class="hero__wrap">
+ 
+  <h1 class="hero__title">{{ page.title }}</h1>
+  <h4 class="hero__category">{{ page.categories }}</h4>
+
+  <ul class="hero__tag">
+    {% for tag in page.tags %}
+      <li>{{ tag }}</li>
+    {% endfor %}
+  </ul>
+
+  <p class="hero__meta">
+    <span>
+      <time>{{ page.date | date_to_string }} </time>&nbsp; | &nbsp;
+    </span>
+    <span>
+      {% assign words = content | number_of_words %}
+        {% if words < 360 %}
+          1 min
+        {% else %}
+          {{ words | divided_by:180 }} mins
+      {% endif %} read
+    </span>
+  </p>
+</div>

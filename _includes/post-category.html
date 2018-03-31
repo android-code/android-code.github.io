@@ -1,0 +1,11 @@
+<h3 id="{{ category[0] }}">{{ category[0] | capitalize }}</h3>
+<ul>
+  {% assign post_list = category[1] %}
+  
+  {% for post in post_list %}
+     {% include post-card-small.html %}
+  {% endfor %}
+
+  {% assign post_list = nil %}
+  {% assign group = nil %}
+</ul>

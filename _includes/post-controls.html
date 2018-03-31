@@ -1,0 +1,22 @@
+<div class="post-content controls__inner">
+  <div class="controls__item prev">
+    {% if page.previous.url %}
+    <span>Previous</span>
+    <a href="{{page.previous.url | relative_url }}">
+      <i class='fa fa-angle-left'></i>
+      {{page.previous.title | strip_html | truncate: 30}}
+    </a>
+    {% endif %}
+  </div>
+
+  <div class="controls__item next">
+    {% if page.next.url %}
+    <span>Next</span>
+    <a href="{{page.next.url | relative_url }}">
+      {{page.next.title | strip_html | truncate: 30}}
+      <i class='fa fa-angle-right'></i>
+    </a>
+    {% endif %}
+  </div>
+</div>
+</div>
