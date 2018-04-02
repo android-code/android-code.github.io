@@ -19,7 +19,14 @@
           1 min
         {% else %}
           {{ words | divided_by:180 }} mins
-      {% endif %} read
+      {% endif %} 
+
+      {% if site.data.strings.post-read %}
+        {{ site.data.strings.post-read }}
+      {% else %}
+        read
+      {% endif %}
+
     </span>
   </p>
 </div>

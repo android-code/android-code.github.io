@@ -21,7 +21,14 @@
       {% endif %}
     </nav>
 
-    <span>&copy; {{ site.time | date: '%Y' }} {{ site.title | escape }}. All rights reserved.</span>
+    <span>&copy; {{ site.time | date: '%Y' }} {{ site.title | escape }}. 
+    {% if site.data.strings.all-rights-reserved %}
+      {{ site.data.strings.all-rights-reserved }}
+    {% else %}
+      All rights reserved.
+    {% endif %}
+    </span>
+
   </div>
 </footer>
 
