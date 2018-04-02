@@ -907,73 +907,6 @@ button:disabled:hover,button:disabled :focus {
   margin: 3px;
 }
 
-input,textarea {
-  display: inline-block;
-  padding: 5px 0;
-  width: 100%;
-  border: 0;
-  border-bottom: 2px solid #ededed;
-  outline: none;
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
-  background: transparent;
-}
-
-input:focus,textarea:focus {
-  border-color: #277cea;
-  -webkit-transition: border-color .25s;
-  transition: border-color .25s;
-}
-
-.form__input {
-  position: relative;
-  display: inline-block;
-  width: 100%;
-  margin-bottom: 35px;
-}
-
-.form__input::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: #277cea;
-  z-index: 5;
-  -webkit-transition: width 0.45s cubic-bezier(0.694, 0.048, 0.335, 1);
-  transition: width 0.45s cubic-bezier(0.694, 0.048, 0.335, 1);
-  -webkit-transition-delay: .1s;
-  transition-delay: .1s;
-}
-
-.form__input::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: #ff6161;
-  z-index: 4;
-  -webkit-transition: width 0.45s cubic-bezier(0.694, 0.048, 0.335, 1);
-  transition: width 0.45s cubic-bezier(0.694, 0.048, 0.335, 1);
-}
-
-.form__input:hover::after,.form__input :focus::after,.form__input :active::after {
-  width: 100%;
-}
-
-.form__input:hover::before,.form__input :focus::before,.form__input :active::after {
-  width: 100%;
-}
-
-.form__input.error:hover::after,.form__input.error :focus::after,.form__input.error :active::after {
-  width: 0%;
-}
-
-.form__input.error:hover::before,.form__input.error :focus::before,.form__input.error :active::after {
-  width: 0%;
-}
 
 .error input {
   border-bottom-color: #ff6161;
@@ -989,96 +922,6 @@ input:focus,textarea:focus {
   position: absolute;
   left: 0;
   bottom: -21px;
-}
-
-.modal {
-  position: fixed;
-  display: none;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  outline: 0;
-  overflow-y: auto;
-  z-index: 999;
-}
-
-.modal__inner {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 1 auto;
-  flex: 0 1 auto;
-  position: relative;
-  margin: 1.875em;
-  width: auto;
-  max-width: 768px;
-  outline: 0;
-  opacity: 0;
-  -webkit-transform: translateY(200px);
-  transform: translateY(200px);
-  -webkit-transition: -webkit-transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  transition: -webkit-transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), -webkit-transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 1050;
-}
-
-.modal__content {
-  position: relative;
-  padding: 2rem 2.5rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  background-color: #fff;
-  border-radius: 4px;
-}
-
-.modal__content h1 {
-  text-align: center;
-}
-
-.modal__close-button {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  background-color: transparent;
-  border: 0;
-  outline: 0;
-  color: #313237;
-  cursor: pointer;
-}
-
-.modal__close-button:hover {
-  background-color: transparent;
-}
-
-.modal__overlay {
-  position: fixed;
-  display: none;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 1040;
-  opacity: 0;
-  background-color: rgba(0,0,0,0.75);
-  -webkit-transition: opacity 1s ease 0.1s;
-  transition: opacity 1s ease 0.1s;
-}
-
-body.modal--open {
-  overflow: hidden;
 }
 
 table {
@@ -1599,4 +1442,37 @@ table th,table td {
 
 .controls__item a:hover svg {
   fill: #277cea;
+}
+
+
+.show-more-state {
+  display: none;
+}
+
+.show-more-target {
+  opacity: 0;
+  max-height: 0;
+  font-size: 0;
+  transition: .25s ease;
+}
+
+.show-more-state:checked ~ .show-more-wrap .show-more-target {
+  opacity: 1;
+  font-size: inherit;
+  max-height: 999em;
+}
+
+.show-more-state ~ .show-more-trigger:before {
+  content: 'Show all posts in category';
+}
+
+.show-more-state:checked ~ .show-more-trigger:before {
+  content: 'Show less';
+}
+
+.show-more-trigger {
+  cursor: pointer;
+  text-align: right;
+  display: block;
+  padding-bottom: 16px;
 }

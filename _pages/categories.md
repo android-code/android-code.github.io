@@ -5,5 +5,5 @@ permalink: /categories/
 ---
 
 {% for category in site.categories %}
-  {% include post-category.html %}
+  {% include category-posts.html %}
 {% endfor %}
