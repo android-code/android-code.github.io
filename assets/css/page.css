@@ -1,0 +1,11 @@
+.page-content {
+  max-width: 52.5rem;
+  margin: 0 auto;
+  padding: 2.5em 0;
+}
+
+@media (min-width: 48em) {
+  .page-content {
+    padding: 3.75rem 0;
+  }
+}

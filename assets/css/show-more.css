@@ -1,0 +1,31 @@
+.show-more-state {
+  display: none;
+}
+
+.show-more-target {
+  opacity: 0;
+  max-height: 0;
+  font-size: 0;
+  transition: .25s ease;
+}
+
+.show-more-state:checked ~ .show-more-wrap .show-more-target {
+  opacity: 1;
+  font-size: inherit;
+  max-height: 999em;
+}
+
+.show-more-state ~ .show-more-trigger:before {
+  content: 'Show all posts in category';
+}
+
+.show-more-state:checked ~ .show-more-trigger:before {
+  content: 'Show less';
+}
+
+.show-more-trigger {
+  cursor: pointer;
+  text-align: right;
+  display: block;
+  padding-bottom: 16px;
+}

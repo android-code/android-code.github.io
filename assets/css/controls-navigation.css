@@ -1,0 +1,69 @@
+.controls__inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 1.375rem 0 1.25rem;
+  border-top: 1px solid #ededed;
+}
+
+.pagination__inner {
+  border-top: 0px;
+}
+
+.controls__inner .prev {
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.controls__inner .next {
+  -webkit-box-align: end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.controls__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+
+.controls__item span {
+  font-size: 0.875rem;
+  color: #838c8d;
+}
+
+.controls__item a {
+  color: #313237;
+  font-weight: bold;
+  border-bottom: 0;
+}
+
+.controls__item a svg {
+  -webkit-transition: all .2s linear;
+  transition: all .2s linear;
+}
+
+.controls__item a:hover {
+  color: #277cea;
+  border-bottom: 0;
+}
+
+.controls__item a:hover svg {
+  fill: #277cea;
+}

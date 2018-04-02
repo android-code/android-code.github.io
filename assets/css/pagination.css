@@ -1,0 +1,17 @@
+.pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin: 1.25rem auto;
+}
+
+.pagination em {
+  margin: 3px;
+}
+
+.pagination span {
+  margin: 3px;
+}
