@@ -271,7 +271,6 @@ a {
   text-decoration: none;
   -webkit-transition: all .2s linear;
   transition: all .2s linear;
-  border-bottom: 1px dashed #277cea;
 }
 
 a:active,a:focus {

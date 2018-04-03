@@ -1,25 +1,24 @@
-<div>
+<div class="category-posts-wrapper">
 	{% assign category_name = category[0] %}
 	{% assign category_posts = category[1] %}
 	{% assign max_posts = 5 %}
 
-	<h3 id="{{ category_name }}">{{ category_name | capitalize }}</h3>
+	<h2 class="category-title" id="{{ category_name }}">{{ category_name | capitalize | strip_html | truncate: 50 }}</h2>
 	<input type="checkbox" class="show-more-state" id="category-posts-{{ category_name }}" />
+	{% if category_posts.size > max_posts %}
+		<label class="category-title show-more-trigger" float="right" for="category-posts-{{ category_name }}"></label>
+	{% endif %}
 
 	<ul class="show-more-wrap">
 	{% assign counter = 1 %}
 	  {% for post in category_posts %}
 		{% if counter <= max_posts %}
-	  		<div>{% include post-category.html %}</div>
+	  		<div class="category-post">{% include post-category.html %}</div>
 	  		{% assign counter = counter | plus: 1 %}
 	  	{% else %}
-	  		<div class="show-more-target">{% include post-category.html %}</div>
+	  		<div class="category-post show-more-target">{% include post-category.html %}</div>
 	  	{% endif %}
 	  {% endfor %}
 	</ul>
-
-	{% if category_posts.size > max_posts %}
-		<label for="category-posts-{{ category_name }}" class="show-more-trigger"></label>
-	{% endif %}
 
 </div>
