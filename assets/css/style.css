@@ -1486,6 +1486,10 @@ table th,table td {
   border-bottom: 1px solid #68a4f1;
 }
 
+ul.show-more-wrap {
+  padding-left: 5px;
+}
+
 .category-posts-wrapper {
   padding: 1.25rem 0 0.25rem;
   border-bottom: 1px solid #f3f3f3;
@@ -1511,5 +1515,11 @@ table th,table td {
   padding: 0 0.3em;
   margin-left: 1em;
   margin-top: 2px;
-  float: right;
+  float: none;
+}
+
+@media (min-width: 30em) {
+  .category-post-date {
+    float: right;
+  }
 }
