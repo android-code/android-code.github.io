@@ -1450,6 +1450,7 @@ table th,table td {
   opacity: 0;
   max-height: 0;
   font-size: 0;
+  padding: 0;
   transition: .25s ease;
 }
 
@@ -1457,6 +1458,14 @@ table th,table td {
   opacity: 1;
   font-size: inherit;
   max-height: 999em;
+}
+
+.show-more-state:checked ~ .show-more-wrap .show-more-target.category-post {
+  padding: 0.25rem 0;
+}
+
+.show-more-target.category-post {
+  padding: 0;
 }
 
 .show-more-state ~ .show-more-trigger:before {

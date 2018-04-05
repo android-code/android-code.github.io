@@ -6,7 +6,7 @@
 	<h2 class="category-title" id="{{ category_name }}">{{ category_name | capitalize | strip_html | truncate: 50 }}</h2>
 	<input type="checkbox" class="show-more-state" id="category-posts-{{ category_name }}" />
 	{% if category_posts.size > max_posts %}
-		<label class="category-title show-more-trigger" float="right" for="category-posts-{{ category_name }}"></label>
+		<label class="category-title show-more-trigger" for="category-posts-{{ category_name }}"></label>
 	{% endif %}
 
 	<ul class="show-more-wrap">
