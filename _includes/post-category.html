@@ -1,8 +1,8 @@
 {% if post.title != null %}
   {% if group == null or group == post.group %}
-      <a href="{{ site.url }}{{ post.url }}">{{ post.title | strip_html | truncate: 50 }}</a>
       <span class="category-post-date">
         {{ post.date | date: "%b %-d, %Y" }}
       </span>
+      <a href="{{ site.url }}{{ post.url }}">{{ post.title | strip_html | truncate: 50 }}</a>
   {% endif %}
 {% endif %}
