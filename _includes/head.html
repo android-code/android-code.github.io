@@ -1,25 +1,47 @@
 <head>
   	
+  	<!-- META -->
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="Content-Type" content="{{ site.title }}; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{{ page.title }} | {{ site.title }}</title>
+	<meta name="description" content="{{ site.description }}">
+	<meta name="author" content="{{ site.author }}">
+	<meta name="keywords" content="{{ site.keywords }}"/>
+	<link rel="canonical" href="{{ site.url }}{{ page.url | replace:'index.html',''}}">
 
-	{% seo %}
+	<!-- OG META -->
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="{{ page.title }} | {{ site.title }}" />
+	<meta property="og:description" content="{{ site.description }}"/>
+	<meta property="og:url" content="{{ site.url }}{{ page.url | replace:'index.html',''}}" />
+	<meta property="og:locale" content="pl_PL" />
+	<meta property="og:locale:alternate" content="en_US" />
+	<meta property="og:locale:alternate" content="en_GB" />
+	{% if page.image %}
+		<meta property="og:image" content="{{site.url}}/assets/img/posts/{{page.image}}.jpg" />
+		<meta property="og:image:secure_url" content="{{site.url}}/assets/img/posts/{{page.image}}.jpg" />
+	{% else %}
+		<meta property="og:image" content="{{site.url}}/assets/img/logo.png" />
+		<meta property="og:image:secure_url" content="{{site.url}}/assets/img/logo.png" />
+	{% endif %}
 
-	<style class="inlineCSS">
-		{% include assets/critical.css %}
-	</style>
-
- 	<link rel="icon" type="image/png" sizes="32x32" href="{{'/assets/img/icons/favicon-32x32.png' | relative_url }}">
-  	<link rel="icon" type="image/png" sizes="16x16" href="{{'/assets/img/icons/favicon-16x16.png' | relative_url }}">
+	<!-- FAVICON -->
 	<link rel="shortcut icon" href="{{ '/assets/img/icons/favicon.ico | relative_url }}" type="image/x-icon">
 	<link rel="icon" href="{{ '/assets/img/icons/favicon.ico | relative_url }}" type="image/x-icon" />
+	<link rel="icon" type="image/png" sizes="32x32" href="{{'/assets/img/icons/favicon-32x32.png' | relative_url }}">
+  	<link rel="icon" type="image/png" sizes="16x16" href="{{'/assets/img/icons/favicon-16x16.png' | relative_url }}">
+
+  	<!-- STYLESHEET -->
+  	<style class="inlineCSS">
+		{% include assets/critical.css %}
+	</style>
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="preload" href="{{ '/assets/css/style.css' | relative_url }}" as="style" onload="this.rel='stylesheet'">
 	<noscript>
 		<link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 	</noscript>
-
 	<script type="text/javascript">
 		{% include assets/loadCss.js %}
 	</script>
