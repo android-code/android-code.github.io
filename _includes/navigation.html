@@ -1,43 +1,27 @@
 <nav class="header__links">
 	<div class="container header__links-wrapper">
 
-	  <a class="header__link" href="{{ '/blog' | relative_url }}" itemprop="url">
+	  <a class="header__link" href="{{ site.data.strings.page-blog | default: "blog" | downcase | relative_url }}" itemprop="url">
 	  	<span itemprop="name">
-	  	{% if site.data.strings.page-blog %}
-	  		{{ site.data.strings.page-blog }}
-	  	{% else %}
-	  		Blog
-	  	{% endif %}
+	  		{{ site.data.strings.page-blog | default: "Blog" }}	
 	  	</span>
 	  </a>
 
-	  <a class="header__link" href="{{ '/categories' | relative_url }}" itemprop="url">
+	  <a class="header__link" href="{{ site.data.strings.page-categories | default: "categories" | downcase | relative_url }}" itemprop="url">
 	  	<span itemprop="name">
-	  	{% if site.data.strings.page-categories %}
-	  		{{ site.data.strings.page-categories }}
-	  	{% else %}
-	  		Categories
-	  	{% endif %}
+	  		{{ site.data.strings.page-categories | default: "Categories" }}
 	  </span>
 	  </a>
 
-	  <a class="header__link" href="{{ '/about' | relative_url }}" itemprop="url">
+	  <a class="header__link" href="{{ site.data.strings.page-about | default: "about" | downcase | relative_url }}" itemprop="url">
 	  	<span itemprop="name">
-	  	{% if site.data.strings.page-about %}
-	  		{{ site.data.strings.page-about }}
-	  	{% else %}
-	  		About
-	  	{% endif %}
+	  		{{ site.data.strings.page-about | default: "About" }}
 	  	</span>
 	  </a>
 
-	  <a class="header__link" href="{{ '/contact' | relative_url }}" itemprop="url">
+	  <a class="header__link" href="{{ site.data.strings.page-contact | default: "contact" | downcase | relative_url }}" itemprop="url">
 	  	<span itemprop="name">
-	  	{% if site.data.strings.page-contact %}
-	  		{{ site.data.strings.page-contact }}
-	  	{% else %}
-	  		Contact
-	  	{% endif %}
+	  		{{ site.data.strings.page-contact | default: "Contact" }}
 	  	</span>
 	  </a>
 	  

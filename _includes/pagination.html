@@ -4,27 +4,14 @@
     {% if paginator.previous_page %}
     
     <span>
-      {% if site.data.strings.controls-previous %}
-        {{ site.data.strings.controls-previous }}
-      {% else %}
-        Previous
-      {% endif %}
+      {{ site.data.strings.controls-previous | default: "Previous" }}
     </span>
 
     <a href="{{ paginator.previous_page_path }}">
       <i class='fa fa-angle-left'></i>
-      {% if site.data.strings.controls-page %}
-        {{ site.data.strings.controls-page }}:
-      {% else %}
-        Page:
-      {% endif %}
+      {{ site.data.strings.controls-page | default: "Page:" }}
       {{ paginator.previous_page }} 
-
-      {% if site.data.strings.controls-page-of %}
-        {{ site.data.strings.controls-page-of }}
-      {% else %}
-        of
-      {% endif %}
+      {{ site.data.strings.controls-page-of | default: "of" }}
       {{ paginator.total_pages }}
     </a>
 
@@ -35,26 +22,13 @@
     {% if paginator.next_page %}
     
     <span>
-      {% if site.data.strings.controls-next %}
-        {{ site.data.strings.controls-next }}
-      {% else %}
-        Next
-      {% endif %}
+      {{ site.data.strings.controls-next | default: "Next" }}
     </span>
 
     <a href="{{ paginator.next_page_path }}">
-      {% if site.data.strings.controls-page %}
-        {{ site.data.strings.controls-page }}:
-      {% else %}
-        Page:
-      {% endif %}
+      {{ site.data.strings.controls-page | default: "Page:"}}
       {{ paginator.next_page }} 
-
-      {% if site.data.strings.controls-page-of %}
-        {{ site.data.strings.controls-page-of }}
-      {% else %}
-        of
-      {% endif %}
+      {{ site.data.strings.controls-page-of | default: "of" }}
       {{ paginator.total_pages }}
       <i class='fa fa-angle-right'></i>
     </a>

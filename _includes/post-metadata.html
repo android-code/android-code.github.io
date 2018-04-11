@@ -12,14 +12,10 @@
         {% if words < 360 %}
           1 min
         {% else %}
-          {{ words | divided_by:180 }} mins
+          {{ words | divided_by:180 }} min
       {% endif %} 
 
-      {% if site.data.strings.post-read %}
-        {{ site.data.strings.post-read }}
-      {% else %}
-        read
-      {% endif %}
+      {{ site.data.strings.post-read | default: "read" }}
 
     </span>
   </p>

@@ -3,15 +3,11 @@
   <div class="controls__item prev">
     {% if page.previous.url %}
     <span>
-      {% if site.data.strings.controls-previous %}
-        {{ site.data.strings.controls-previous }}
-      {% else %}
-        Previous
-      {% endif %}
+      {{ site.data.strings.controls-previous | default: "Previous" }}
     </span>
     <a href="{{page.previous.url | relative_url }}">
       <i class='fa fa-angle-left'></i>
-      {{page.previous.title | strip_html | truncate: 30}}
+      {{ page.previous.title | strip_html | truncate: 30 }}
     </a>
     {% endif %}
   </div>
@@ -19,14 +15,10 @@
   <div class="controls__item next">
     {% if page.next.url %}
     <span>
-      {% if site.data.strings.controls-next %}
-        {{ site.data.strings.controls-next }}
-      {% else %}
-        Next
-      {% endif %}
+      {{ site.data.strings.controls-next | default: "Next" }}
     </span>
     <a href="{{page.next.url | relative_url }}">
-      {{page.next.title | strip_html | truncate: 30}}
+      {{ page.next.title | strip_html | truncate: 30 }}
       <i class='fa fa-angle-right'></i>
     </a>
     {% endif %}
