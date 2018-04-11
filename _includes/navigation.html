@@ -1,31 +1,34 @@
 <nav class="header__links">
 	<div class="container header__links-wrapper">
 
-	  <a class="header__link" href="{{ site.data.strings.page-blog | default: "blog" | downcase | relative_url }}" itemprop="url">
-	  	<span itemprop="name">
-	  		{{ site.data.strings.page-blog | default: "Blog" }}	
-	  	</span>
-	  </a>
+		 <a class="header__link" href="{{ site.data.strings.page-blog | default: "blog" | downcase | relative_url }}" itemprop="url">
+		  	<span itemprop="name">
+		  		{{ site.data.strings.page-blog | default: "Blog" }}	
+		  	</span>
+		 </a>
 
-	  <a class="header__link" href="{{ site.data.strings.page-categories | default: "categories" | downcase | relative_url }}" itemprop="url">
-	  	<span itemprop="name">
-	  		{{ site.data.strings.page-categories | default: "Categories" }}
-	  </span>
-	  </a>
+		 <a class="header__link" href="{{ site.data.strings.page-categories | default: "categories" | downcase | relative_url }}" itemprop="url">
+		  	<span itemprop="name">
+		  		{{ site.data.strings.page-categories | default: "Categories" }}
+		  </span>
+		 </a>
 
-	  <a class="header__link" href="{{ site.data.strings.page-about | default: "about" | downcase | relative_url }}" itemprop="url">
-	  	<span itemprop="name">
-	  		{{ site.data.strings.page-about | default: "About" }}
-	  	</span>
-	  </a>
+		 <a class="header__link" href="{{ site.data.strings.page-about | default: "about" | downcase | relative_url }}" itemprop="url">
+		  	<span itemprop="name">
+		  		{{ site.data.strings.page-about | default: "About" }}
+		  	</span>
+		 </a>
 
-	  <a class="header__link" href="{{ site.data.strings.page-contact | default: "contact" | downcase | relative_url }}" itemprop="url">
-	  	<span itemprop="name">
-	  		{{ site.data.strings.page-contact | default: "Contact" }}
-	  	</span>
-	  </a>
+		 <a class="header__link" href="{{ site.data.strings.page-contact | default: "contact" | downcase | relative_url }}" itemprop="url">
+		  	<span itemprop="name">
+		  		{{ site.data.strings.page-contact | default: "Contact" }}
+		  	</span>
+		 </a>
+
+		 {% include language-switcher.html %}
 	  
 	</div>
+
 </nav>
 
 <div class="header__toggle">

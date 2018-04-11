@@ -1,0 +1,14 @@
+{% if site.lang == "pl" %}
+<a class="header__link" href="{{ 'en' | relative_url }}" itemprop="url">
+  	<span itemprop="name">
+  		 <img src="/assets/img/lang/uk.png">
+  	</span>
+</a>
+{% else %}
+<a class="header__link" href="{{ relative_url }}" itemprop="url">
+  	<span itemprop="name">
+  		<img src="/assets/img/lang/poland.png">
+  	</span>
+</a>
+{% endif %}
+
