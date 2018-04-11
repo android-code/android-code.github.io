@@ -6,8 +6,10 @@ twitter: maciejnowa
 github: android-code
 baseurl: ""
 url: ""
-lang: "en"
 
+# Language
+lang: "en"
+lang-switch: yes
 
 # Build settings
 markdown: kramdown

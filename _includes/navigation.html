@@ -25,7 +25,9 @@
 		  	</span>
 		 </a>
 
-		 {% include language-switcher.html %}
+		 {% if site.lang-switch %}
+		 	{% include language-switcher.html %}
+		 {% endif %}
 	  
 	</div>
 
