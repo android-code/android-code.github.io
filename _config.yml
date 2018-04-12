@@ -7,9 +7,10 @@ github: android-code
 baseurl: ""
 url: ""
 
-# Language
+# Switches
 lang: "en"
-lang-switch: yes
+lang-enable: yes
+share-enable: yes
 
 # Build settings
 markdown: kramdown

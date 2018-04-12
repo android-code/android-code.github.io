@@ -1,5 +1,4 @@
-description: >-
-  Android online treasury knowledge.
+description: Android online treasury knowledge.
 keywords: "android, code, coding, programming, programer, java, kotlin, libraries, mobile"
 
 page-blog: Blog
@@ -11,6 +10,9 @@ controls-next: Next
 controls-previous: Previous
 controls-page: "Page:"
 controls-page-of: of
+
+share: "Share:"
+share-on: Share on
 
 post-read: read
 
