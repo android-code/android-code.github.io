@@ -36,7 +36,7 @@
 
 .hero {
   margin: 3.75rem auto 0;
-  min-height: 16.25rem;
+  min-height: 16.5rem;
   width: 100%;
   position: relative;
   background-color: #dde5ea;
@@ -48,7 +48,7 @@
 @media (min-width: 62em) {
   .hero {
     margin: 0 auto;
-    height: 36em;
+    height: 25em;
   }
 }
 
@@ -65,7 +65,7 @@
 
 .hero--big {
   margin: 3.75rem auto 0;
-  min-height: 25.25rem;
+  min-height: 21rem;
   width: 100%;
   position: relative;
   background-color: #dde5ea;
@@ -77,7 +77,7 @@
 @media (min-width: 62em) {
   .hero--big {
     margin: 0 auto;
-    height: 48em;
+    height: 36em;
   }
 }
 
