@@ -505,11 +505,11 @@ a {
 }
 
 .show-more-state ~ .show-more-trigger:before {
-  content: '\02193 \00a0 Show all';
+  content: attr(text-all);
 }
 
 .show-more-state:checked ~ .show-more-trigger:before {
-  content: '\02191 \00a0 Show less';
+  content: attr(text-less);
 }
 
 .show-more-trigger {
@@ -538,6 +538,10 @@ ul.show-more-wrap {
 .category-posts-wrapper {
   padding: 1.25rem 0 0.25rem;
   border-bottom: 1px solid #f3f3f3;
+}
+
+.category-posts-wrapper:last-child {
+  border: 0;
 }
 
 .category-title {
