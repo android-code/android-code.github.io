@@ -9,8 +9,12 @@ url: ""
 
 # Switches
 lang: "en"
-lang-enable: yes
-share-enable: yes
+lang-switch-enable: true
+post-share-enable: true
+post-controls-enable: true
+category-posts-show-less-number: 5
+category-posts-show-less-enable: true
+social-links-enable: true
 
 # Build settings
 markdown: kramdown

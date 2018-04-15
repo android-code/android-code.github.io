@@ -1,26 +1,27 @@
 <footer class="footer">
   <div class="container">
 
-    <nav class="social">
-      {% if site.github %}
-        <a class="social__link" target="_blank" rel="noopener noreferrer" href="https://github.com/{{ site.data.social.github }}">
-          <i class='fa fa-github fa-2x'></i>
-        </a>
-      {% endif %}
+    {% if site.social-links-enable | default: true %}
+      <nav class="social">
+        {% if site.github %}
+          <a class="social__link" target="_blank" rel="noopener noreferrer" href="https://github.com/{{ site.data.social.github }}">
+            <i class='fa fa-github fa-2x'></i>
+          </a>
+        {% endif %}
 
-      {% if site.twitter %}
-        <a class="social__link" target="_blank" rel="noopener noreferrer" href="https://www.twitter.com/{{ site.data.social.twitter }}">
-          <i class='fa fa-twitter fa-2x'></i>
-        </a>
-      {% endif %}
+        {% if site.twitter %}
+          <a class="social__link" target="_blank" rel="noopener noreferrer" href="https://www.twitter.com/{{ site.data.social.twitter }}">
+            <i class='fa fa-twitter fa-2x'></i>
+          </a>
+        {% endif %}
 
-      {% if site.facebook %}
-        <a class="social__link" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/{{ site.data.social.facebook }}">
-          <i class='fa fa-facebook fa-2x'></i>
-        </a>
-      {% endif %}
-
-    </nav>
+        {% if site.facebook %}
+          <a class="social__link" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/{{ site.data.social.facebook }}">
+            <i class='fa fa-facebook fa-2x'></i>
+          </a>
+        {% endif %}
+      </nav>
+    {% endif %}
 
     <span>Copyright &copy; {{ site.time | date: '%Y' }} {{ site.title | escape }}. 
       {{ site.data.strings.all-rights-reserved | default: "All rights reserved." }}

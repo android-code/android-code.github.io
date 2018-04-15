@@ -25,7 +25,7 @@
 		  	</span>
 		 </a>
 
-		 {% if site.lang-enable %}
+		 {% if site.lang-switch-enable | default: true %}
 		 	{% include language-switcher.html %}
 		 {% endif %}
 	  

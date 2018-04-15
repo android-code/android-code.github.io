@@ -25,12 +25,14 @@ layout: compress
         <article class="post-content" itemprop="articleBody">
           {{ content }}
 
-          {% if site.share-enable %}
+          {% if site.post-share-enable %}
             {% include post-share-buttons.html %}
           {% endif %}
         </article>
 
-        {% include post-controls.html %}
+        {% if site.post-controls-enable %}
+          {% include post-controls.html %}
+        {% endif %}
 
       </div>
 
