@@ -4,6 +4,8 @@ title: Categories
 permalink: /categories/
 ---
 
-{% for category in site.categories %}
-  {% include category-posts.html %}
-{% endfor %}
+<div class="categories-post-wrapper">
+	{% for category in site.categories %}
+	  {% include category-posts.html %}
+	{% endfor %}
+</div>
