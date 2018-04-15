@@ -19,12 +19,6 @@
 		  	</span>
 		 </a>
 
-		 <a class="header__link" href="{{ site.data.strings.page-contact | default: "contact" | downcase | relative_url }}" itemprop="url">
-		  	<span itemprop="name">
-		  		{{ site.data.strings.page-contact | default: "Contact" }}
-		  	</span>
-		 </a>
-
 		 {% if site.lang-switch-enable | default: true %}
 		 	{% include language-switcher.html %}
 		 {% endif %}
