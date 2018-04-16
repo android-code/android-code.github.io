@@ -1,9 +1,9 @@
 <div class="hero__wrap">
  
-  <h1 class="hero__title">{{ page.title }}</h1>
+  <h1 class="hero__title">{{ page.title | strip_to_html | truncate: 50 }}</h1>
   <h3 class="hero__category">{{ page.categories }}</h3>
 
-  <p class="hero__meta">
+  <div class="hero__meta">
     <span>
       <time>{{ page.date | date_to_string }} </time>&nbsp; | &nbsp;
     </span>
@@ -16,7 +16,7 @@
       {% endif %} 
 
       {{ site.data.strings.post-read | default: "read" }}
-
     </span>
-  </p>
+  </div>
+  
 </div>
