@@ -239,7 +239,7 @@ body {
   background-color: #fff;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.75;
   color: #343851;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
@@ -256,6 +256,7 @@ body {
 }
 
 p {
+  text-align: justify;
   margin-top: 0;
   margin-bottom: 1.25rem;
 }
