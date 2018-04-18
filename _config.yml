@@ -8,7 +8,7 @@ baseurl: ""
 url: ""
 
 # Switches
-lang: "en"
+lang: "pl"
 lang-switch-enable: true
 post-share-enable: true
 post-controls-enable: true

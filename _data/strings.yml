@@ -1,21 +1,21 @@
-description: Blog about Android programming
-keywords: "android, code, coding, programming, programer, java, kotlin, libraries, mobile"
+description: Blog o programowaniu na platformę Android
+keywords: "android, code, programowanie, programista, java, kotlin, biblioteki, mobile"
 
 page-blog: Blog
-page-categories: Categories
-page-about: About
+page-categories: Kategorie
+page-about: Autor
 
-controls-next: Next
-controls-previous: Previous
-controls-page: "Page:"
-controls-page-of: of
+controls-next: Następny
+controls-previous: Poprzedni
+controls-page: "Strona:"
+controls-page-of: z
 
-share: "Share:"
-share-on: Share on
+share: "Udostępnij:"
+share-on: Udostępnij przez
 
-post-read: read
+post-read: czytania
 
-show-all-posts: Show all
-show-less-posts: Show less
+show-all-posts: Pokaż wszystko
+show-less-posts: Pokaż mniej
 
-all-rights-reserved: All rights reserved.
+all-rights-reserved: Wszelkie prawa zastrzeżone.
