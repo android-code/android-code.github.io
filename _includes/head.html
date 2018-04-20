@@ -5,9 +5,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta http-equiv="Content-Type" content="{{ site.title }}; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
 	{% if page.title == 'Home' %}
-		<title>{{ site.title }}</title>
+		<title>{{ site.title }} | {{ site.data.strings.description-home }}</title>
 	{% else %}
 		<title>{{ page.title }} | {{ site.title }}</title>
 	{% endif %}
