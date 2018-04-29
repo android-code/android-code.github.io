@@ -233,6 +233,11 @@ body {
   flex: 1;
 }
 
+.center-image {
+    margin: 0 auto;
+    display: block;
+}
+
 img {
   max-width: 100%;
   height: auto;

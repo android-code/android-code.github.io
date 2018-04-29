@@ -15,6 +15,11 @@
   flex: 1;
 }
 
+.center-image {
+    margin: 0 auto;
+    display: block;
+}
+
 .hidden {
   display: none;
   visibility: hidden;
