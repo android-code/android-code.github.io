@@ -4,19 +4,19 @@
     {% if site.social-links-enable | default: true %}
       <nav class="social">
         {% if site.github %}
-          <a class="social__link" target="_blank" rel="noopener noreferrer" href="https://github.com/{{ site.data.social.github }}">
+          <a class="social__link" target="_blank" rel="noopener noreferrer" href="https://github.com/{{ site.github }}">
             <i class='fa fa-github fa-2x'></i>
           </a>
         {% endif %}
 
         {% if site.twitter %}
-          <a class="social__link" target="_blank" rel="noopener noreferrer" href="https://www.twitter.com/{{ site.data.social.twitter }}">
+          <a class="social__link" target="_blank" rel="noopener noreferrer" href="https://www.twitter.com/{{ site.twitter }}">
             <i class='fa fa-twitter fa-2x'></i>
           </a>
         {% endif %}
 
         {% if site.facebook %}
-          <a class="social__link" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/{{ site.data.social.facebook }}">
+          <a class="social__link" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/{{ site.facebook }}">
             <i class='fa fa-facebook fa-2x'></i>
           </a>
         {% endif %}

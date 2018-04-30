@@ -4,6 +4,7 @@ title: "Singleton"
 date:  2018-04-29
 categories: ["Wzorce projektowe"]
 image: singleton
+github: Singleton
 ---
 
 ## Zastosowanie
@@ -20,7 +21,7 @@ Istnieje wiele implementacji tego wzorca. Jedna z najprostszych opiera się na i
 
 ![Singleton diagram](/assets/img/diagrams/singleton.svg){: .center-image }
 
-Poniższy listing przedstawia najprostszą implementacje Singleton. Rodzin ona jednak problemy w środowisku wielowątkowym.
+Poniższy listing przedstawia najprostszą implementacje `Singleton`. Rodzin ona jednak problemy w środowisku wielowątkowym.
 
 {% highlight java %}
 public class Singleton {
@@ -39,7 +40,7 @@ public class Singleton {
 }
 {% endhighlight %}
 
-Aby Singleton mógł zostać użyty w wielowątkowych aplikacjach należy skorzystać z podwójnego sprawdzania i blokowania.
+Aby `Singleton` mógł zostać użyty w wielowątkowych aplikacjach należy skorzystać z podwójnego sprawdzania i blokowania.
 
 {% highlight java %}
 public class DoubleCheckSingleton {
@@ -60,7 +61,7 @@ public class DoubleCheckSingleton {
 }
 {% endhighlight %}
 
-Optymalnym rozwiąaniem jest Singleton Holder, który zapewnia leniwe tworzenie instancji oraz nie wymaga synchronizacji. 
+Optymalnym rozwiązaniem jest `Singleton Holder`, który zapewnia leniwe tworzenie instancji oraz nie wymaga synchronizacji. 
 
 {% highlight java %}
 public class SingletonHolder {
@@ -79,9 +80,8 @@ public class SingletonHolder {
 {% endhighlight %}
 
 ## Przykład
-SharedPreferences umożliwia przechowywanie ustawień aplikacji. Dostęp do odczytu i zapisu zapewnia instancja klasy, a operacje te są od niej niezależne. Zatem prawdopodobnie nie ma potrzeby przechowywania w pamięciu wielu instancji SharedPreferences. Dostęp do ustawień aplikacji może być wykorzystywany w wielu miejscach dlatego zastosowanie wzorca Singleton wydaje się być uzasadnione. SharedPreferences w sposób niejawny korzystają z wzorca Singleton. Poniższy listing przedstawia jego jawną implementacje.
+Aplikacja ma za zadanie przechowywać oraz wyświetlać dane użytkownika. Dostęp do danych powinien być możliwy z różnych miejsc aplikacji. Do realizacji można wykorzystać `SharedPreferences`, który umożliwia przechowywanie ustawień aplikacji. Dostęp do odczytu i zapisu zapewnia instancja klasy, a operacje te są od niej niezależne. Zatem prawdopodobnie nie ma potrzeby przechowywania w pamięciu wielu instancji `SharedPreferences`. Dostęp do ustawień aplikacji może być wykorzystywany w wielu miejscach dlatego zastosowanie wzorca `Singleton` wydaje się być uzasadnione. `SharedPreferences` w sposób niejawny korzysta ze wzorca `Singleton`. Poniższy listing przedstawia jego jawną implementacje.
 
-###
 {% highlight java %}
 public class SharedPref {
 

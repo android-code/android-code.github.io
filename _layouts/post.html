@@ -25,6 +25,10 @@ layout: compress
         <article class="post-content" itemprop="articleBody">
           {{ content }}
 
+          {% if page.github %}
+            {% include post-repository.html %}
+          {% endif %}
+
           {% if site.post-share-enable %}
             {% include post-share-buttons.html %}
           {% endif %}

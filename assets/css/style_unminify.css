@@ -1523,3 +1523,11 @@ ul.show-more-wrap {
 .fa-envelope-square:hover {
     background-color: #444444;
 }
+
+.fa-github-square {
+    color: #333;
+}
+
+.fa-github-square:hover {
+    background-color: #333;
+}
