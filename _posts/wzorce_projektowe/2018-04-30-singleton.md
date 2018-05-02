@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Singleton"
-date:  2018-04-29
+date:  2018-04-30
 categories: ["Wzorce projektowe"]
 image: singleton
 github: Singleton
