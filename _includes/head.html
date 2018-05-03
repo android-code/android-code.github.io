@@ -32,6 +32,8 @@
 	<meta property="og:locale" content="pl_PL" />
 	<meta property="og:locale:alternate" content="en_US" />
 	<meta property="og:locale:alternate" content="en_GB" />
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:site" content="@maciejnowa">
 
 	{% if page.title == 'Home' %}
 		<meta property="og:title" content="{{ site.title }} | {{ site.data.strings.description-home }}" />	
@@ -41,16 +43,20 @@
 
 	{% if page.description %}
 		<meta property="og:description" content="{{ page.description }}"/>
+		<meta name="twitter:description"  content="{{ page.description }}"/>
 	{% else %}
 		<meta property="og:description" content="{{ site.data.strings.description }}"/>
+		<meta name="twitter:description"  content="{{ site.data.strings.description }}"/>
 	{% endif %}
 	
 	{% if page.image %}
 		<meta property="og:image" content="{{ site.url }}/assets/img/posts/{{ page.image }}_placehold.jpg" />
 		<meta property="og:image:secure_url" content="{{ site.url }}/assets/img/posts/{{ page.image }}_placehold.jpg" />
+		<meta property="twitter:image" content="{{ site.url }}/assets/img/posts/{{ page.image }}_placehold.jpg" />
 	{% else %}
 		<meta property="og:image" content="{{ site.url }}/assets/img/logo.png" />
 		<meta property="og:image:secure_url" content="{{ site.url }}/assets/img/logo.png" />
+		<meta property="twitter:image" content="{{ site.url }}/assets/img/logo.png" />
 	{% endif %}
 
 	<!-- FAVICON -->
