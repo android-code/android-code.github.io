@@ -37,22 +37,24 @@
 
 	{% if page.title == 'Home' %}
 		<meta property="og:title" content="{{ site.title }} | {{ site.data.strings.description-home }}" />	
+		<meta name="twitter:title" content="{{ site.title }} | {{ site.data.strings.description-home }}" />
 	{% else %}
 		<meta property="og:title" content="{{ page.title }} | {{ site.title }}" />
+		<meta name="twitter:title" content="{{ page.title }} | {{ site.title }}" />
 	{% endif %}
 
 	{% if page.description %}
-		<meta property="og:description" content="{{ page.description }}"/>
-		<meta name="twitter:description"  content="{{ page.description }}"/>
+		<meta property="og:description" content="{{ page.description }}" />
+		<meta name="twitter:description"  content="{{ page.description }}" />
 	{% else %}
-		<meta property="og:description" content="{{ site.data.strings.description }}"/>
-		<meta name="twitter:description"  content="{{ site.data.strings.description }}"/>
+		<meta property="og:description" content="{{ site.data.strings.description }}" />
+		<meta name="twitter:description"  content="{{ site.data.strings.description }}" />
 	{% endif %}
 	
 	{% if page.image %}
-		<meta property="og:image" content="{{ site.url }}/assets/img/posts/{{ page.image }}_placehold.jpg" />
-		<meta property="og:image:secure_url" content="{{ site.url }}/assets/img/posts/{{ page.image }}_placehold.jpg" />
-		<meta name="twitter:image" content="{{ site.url }}/assets/img/posts/{{ page.image }}_placehold.jpg" />
+		<meta property="og:image" content="{{ site.url }}/assets/img/posts/{{ page.image }}_thumb.jpg" />
+		<meta property="og:image:secure_url" content="{{ site.url }}/assets/img/posts/{{ page.image }}_thumb.jpg" />
+		<meta name="twitter:image" content="{{ site.url }}/assets/img/posts/{{ page.image }}_thumb.jpg" />
 	{% else %}
 		<meta property="og:image" content="{{ site.url }}/assets/img/logo.png" />
 		<meta property="og:image:secure_url" content="{{ site.url }}/assets/img/logo.png" />
