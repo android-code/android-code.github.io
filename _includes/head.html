@@ -52,11 +52,11 @@
 	{% if page.image %}
 		<meta property="og:image" content="{{ site.url }}/assets/img/posts/{{ page.image }}_placehold.jpg" />
 		<meta property="og:image:secure_url" content="{{ site.url }}/assets/img/posts/{{ page.image }}_placehold.jpg" />
-		<meta property="twitter:image" content="{{ site.url }}/assets/img/posts/{{ page.image }}_placehold.jpg" />
+		<meta name="twitter:image" content="{{ site.url }}/assets/img/posts/{{ page.image }}_placehold.jpg" />
 	{% else %}
 		<meta property="og:image" content="{{ site.url }}/assets/img/logo.png" />
 		<meta property="og:image:secure_url" content="{{ site.url }}/assets/img/logo.png" />
-		<meta property="twitter:image" content="{{ site.url }}/assets/img/logo.png" />
+		<meta name="twitter:image" content="{{ site.url }}/assets/img/logo.png" />
 	{% endif %}
 
 	<!-- FAVICON -->
