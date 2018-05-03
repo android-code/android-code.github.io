@@ -5,32 +5,49 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta http-equiv="Content-Type" content="{{ site.title }}; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="{{ site.author }}">
+	<link rel="canonical" href="{{ site.url }}{{ page.url | replace:'index.html',''}}">
+
 	{% if page.title == 'Home' %}
 		<title>{{ site.title }} | {{ site.data.strings.description-home }}</title>
 	{% else %}
 		<title>{{ page.title }} | {{ site.title }}</title>
 	{% endif %}
-	<title>{{ page.title }} {% if page.url != "/index.html" %} | {% endif %} {{ site.title }}</title>
-	<meta name="description" content="{{ site.data.strings.description }}">
-	<meta name="author" content="{{ site.author }}">
-	<meta name="keywords" content="{{ site.data.strings.keywords }}"/>
-	<link rel="canonical" href="{{ site.url }}{{ page.url | replace:'index.html',''}}">
+
+	{% if page.description %}
+		<meta name="description" content="{{ page.description }}">
+	{% else %}
+		<meta name="description" content="{{ site.data.strings.description }}">
+	{% endif %}
+	
+	{% if page.keywords %}
+		<meta name="keywords" content="{{ page.keywords }}">
+	{% else %}
+		<meta name="keywords" content="{{ site.data.strings.keywords }}"/>
+	{% endif %}
 
 	<!-- OG META -->
 	<meta property="og:type" content="website" />
-	{% if page.title == 'Home' %}
-		<meta property="og:title" content="{{ site.title }}" />	
-	{% else %}
-		<meta property="og:title" content="{{ page.title }} | {{ site.title }}" />
-	{% endif %}
-	<meta property="og:description" content="{{ page.categories }}"/>
 	<meta property="og:url" content="{{ site.url }}{{ page.url | replace:'index.html',''}}" />
 	<meta property="og:locale" content="pl_PL" />
 	<meta property="og:locale:alternate" content="en_US" />
 	<meta property="og:locale:alternate" content="en_GB" />
+
+	{% if page.title == 'Home' %}
+		<meta property="og:title" content="{{ site.title }} | {{ site.data.strings.description-home }}" />	
+	{% else %}
+		<meta property="og:title" content="{{ page.title }} | {{ site.title }}" />
+	{% endif %}
+
+	{% if page.description %}
+		<meta property="og:description" content="{{ page.description }}"/>
+	{% else %}
+		<meta property="og:description" content="{{ site.data.strings.description }}"/>
+	{% endif %}
+	
 	{% if page.image %}
-		<meta property="og:image" content="{{ site.url }}/assets/img/posts/{{ page.image }}.jpg" />
-		<meta property="og:image:secure_url" content="{{ site.url }}/assets/img/posts/{{ page.image }}.jpg" />
+		<meta property="og:image" content="{{ site.url }}/assets/img/posts/{{ page.image }}_placehold.jpg" />
+		<meta property="og:image:secure_url" content="{{ site.url }}/assets/img/posts/{{ page.image }}_placehold.jpg" />
 	{% else %}
 		<meta property="og:image" content="{{ site.url }}/assets/img/logo.png" />
 		<meta property="og:image:secure_url" content="{{ site.url }}/assets/img/logo.png" />

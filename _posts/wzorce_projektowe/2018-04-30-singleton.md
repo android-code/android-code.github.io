@@ -5,6 +5,8 @@ date:  2018-04-30
 categories: ["Wzorce projektowe"]
 image: singleton
 github: Singleton
+description: "Wzorce projektowe / konstrukcyjny"
+keywords: "singleton, wzorzec, wzorce projektowe, wzorzec konstrukcyjny, sharedpreferences, android, java, programowanie"
 ---
 
 ## Zastosowanie
@@ -21,7 +23,7 @@ Istnieje wiele implementacji tego wzorca. Jedna z najprostszych opiera się na i
 
 ![Singleton diagram](/assets/img/diagrams/singleton.svg){: .center-image }
 
-Poniższy listing przedstawia najprostszą implementacje `Singleton`. Rodzin ona jednak problemy w środowisku wielowątkowym.
+Poniższy listing przedstawia najprostszą implementacje `Singleton`. Rodzi ona jednak problemy w środowisku wielowątkowym.
 
 {% highlight java %}
 public class Singleton {
