@@ -6,7 +6,7 @@ categories: ["Wzorce projektowe"]
 image: singleton
 github: Singleton
 description: "Wzorce projektowe / konstrukcyjny"
-keywords: "singleton, wzorzec, wzorce projektowe, wzorzec konstrukcyjny, sharedpreferences, android, java, programowanie"
+keywords: "singleton, wzorzec, wzorce projektowe, wzorzec konstrukcyjny, design patterns, sharedpreferences, android, java, programowanie"
 ---
 
 ## Zastosowanie
