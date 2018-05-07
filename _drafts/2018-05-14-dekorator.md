@@ -5,10 +5,12 @@ date:  2018-05-14
 categories: ["Wzorce projektowe"]
 image: decorator
 github: Decorator
+description: "Wzorce projektowe / strukturalny"
+keywords: "dekorator, decorator, wzorzec, wzorce projektowe, wzorzec strukturalny, design patterns, android, java, decor, programowanie, programming"
 ---
 
 ## Zastosowanie
-`Dekorator` (wzorzec strukturalny) umożliwia rozszerzenie funkcjonalności lub modyfikacje stanu istniejącego obiektu bez zmiany jego struktury w trakcie działania programu. Jest alternatywą dla `dziedziczenia`, które w przeciwieństwie do `Dekoratora` zachodzi w trakcie kompilacji. Spełnia zasady `OCP` - otwarte/zamknięte oraz `SRP` - pojedynczej odpowiedzialności. Wzorzec ten jest swego rodzaju `Wrapperem` dla istniejącej klasy. Obiekt klasy podstawowej może być rozszerzony przez kilka dekoratorów umożliwiając tym samym tworzenie wielu wariantów zachowań bez ingerencji w strukturę rozszerzanej klasy. Proces ten odnosi się do jednego obiektu, a nie wszystkich instancji klasy. Dzięki temu struktura klas oraz dziedziczenia staje się przejrzysta, a projekt jest otwarty i elastyczny na przyszłe modyfikacje i nowe rozszerzenia.
+`Dekorator` (ang. `Decorator`) (wzorzec strukturalny) umożliwia rozszerzenie funkcjonalności lub modyfikacje stanu istniejącego obiektu bez zmiany jego struktury w trakcie działania programu. Jest alternatywą dla `dziedziczenia`, które w przeciwieństwie do `Dekoratora` zachodzi w trakcie kompilacji. Spełnia zasady `OCP` - otwarte/zamknięte oraz `SRP` - pojedynczej odpowiedzialności. Wzorzec ten jest swego rodzaju `Wrapperem` dla istniejącej klasy. Obiekt klasy podstawowej może być rozszerzony przez kilka dekoratorów umożliwiając tym samym tworzenie wielu wariantów zachowań bez ingerencji w strukturę rozszerzanej klasy. Proces ten odnosi się do jednego obiektu, a nie wszystkich instancji klasy. Dzięki temu struktura klas oraz dziedziczenia staje się przejrzysta, a projekt jest otwarty i elastyczny na przyszłe modyfikacje i nowe rozszerzenia.
 
 ## Ograniczenia
 Zagrożenie płynące ze stosowania `Dekoratora` może być nadmiarowa ilość klas. Należałoby wówczas zastanowić się czy implementacja tego wzorca jest rzeczywiście najlepszym sposobem rozwiązania problemu.
@@ -110,7 +112,7 @@ component.getValue(); //18
 {% endhighlight %}
 
 ## Przykład
-Aplikacja jest szkicem procesu budowania awatara (`Component`) postaci w grze komputerowej. Gracz rozwija swoją postać na różnych etapach gry poprzez zdobywanie punktów siły oraz nowych umiejętności (`Decorator`). Interakcje między postaciami jak np.: walka zależą od siły ich profili. Profil ten zmienia się w czasie, a dzięki różnorodności zdobywanych umiejętności świat postaci jest różnorodny. Poniższy listing przedstawia komponenty wzorca (przykładowe początkowe wcielenia).
+Aplikacja jest szkicem procesu budowania awatara (`Component`) postaci w grze komputerowej. Gracz rozwija swoją postać na różnych etapach gry poprzez zdobywanie punktów siły oraz nowych umiejętności (`Decorator`). Interakcje między postaciami jak np.: walka zależą od siły ich profili. Profil ten zmienia się w czasie, a dzięki różnorodności zdobywanych umiejętności świat postaci jest różnorodny. Poniższy listing przedstawia podstawowe komponenty wzorca.
 
 {% highlight java %}
 public abstract class Avatar {
