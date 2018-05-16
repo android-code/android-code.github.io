@@ -77,8 +77,6 @@ public class Director {
         return builder.getProduct();
     }
 }
-
-
 {% endhighlight %}
 
 Klient korzystając z nadzorcy wykorzystuje zaimplementowany wzorzec w następujący sposób.
