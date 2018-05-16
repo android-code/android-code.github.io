@@ -32,6 +32,9 @@ plugins:
 paginate: 6
 paginate_path: "blog/page:num/"
 
+# Date
+date_format: "%d %b %Y"
+
 # Permalinks
 permalink: /blog/:title/
 

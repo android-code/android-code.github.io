@@ -28,71 +28,71 @@ Poniższe listing przedstawiają przykładową implementacje wzorca `Dekorator`.
 {% highlight java %}
 public abstract class Component {
 
-	protected String name;
+    protected String name;
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public abstract int getValue();
+    public abstract int getValue();
 }
 
 public class Component1 extends Component {
-	
-	public Component1() {
-		name = "Component1";
-	}
+    
+    public Component1() {
+        name = "Component1";
+    }
 
-	@Override
-	public int getValue() {
-		return 10;
-	}
+    @Override
+    public int getValue() {
+        return 10;
+    }
 }
 
 public abstract class Decorator extends Component {
-	
-	protected Component component;
+    
+    protected Component component;
 
-	public Decorator(Component component) {
-		this.component = component;
-	}
+    public Decorator(Component component) {
+        this.component = component;
+    }
 
-	@Override
-	public abstract String getName();
+    @Override
+    public abstract String getName();
 }
 
 public class Decorator1 extends Decorator {
-	
-	public Decorator1(Component component) {
-		super(component);
-	}
+    
+    public Decorator1(Component component) {
+        super(component);
+    }
 
-	@Override
-	public String getName() {
-		return component.getName() + " + Decorator1";
-	}
+    @Override
+    public String getName() {
+        return component.getName() + " + Decorator1";
+    }
 
-	@Override
-	public int getValue() {
-		return component.getValue() + 5;
-	}
+    @Override
+    public int getValue() {
+        return component.getValue() + 5;
+    }
 }
 
 public class Decorator2 extends Decorator {
-	
-	public Decorator2(Component component) {
-		super(component);
-	}
+    
+    public Decorator2(Component component) {
+        super(component);
+    }
 
-	@Override
-	public String getName() {
-		return component.getName() + " + Decorator2";
-	}
+    @Override
+    public String getName() {
+        return component.getName() + " + Decorator2";
+    }
 
-	@Override
-	public int getValue() {
-		return component.getValue() + 3;
-	}
+    @Override
+    public int getValue() {
+        return component.getValue() + 3;
+    }
 }
 {% endhighlight %}
 

@@ -5,7 +5,7 @@
 
   <div class="hero__meta">
     <span>
-      <time>{{ page.date | date_to_string }} </time>&nbsp; | &nbsp;
+      <time>{% include date-translated.html date=page.date format=site.date_format %}</time>&nbsp; | &nbsp;
     </span>
     <span>
       {% assign words = content | number_of_words %}
