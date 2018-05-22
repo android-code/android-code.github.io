@@ -5,12 +5,12 @@ date:  2018-04-30
 categories: ["Wzorce projektowe"]
 image: singleton
 github: Singleton
-description: "Wzorce projektowe / konstrukcyjny"
-keywords: "singleton, wzorzec, wzorce projektowe, wzorzec konstrukcyjny, design patterns, sharedpreferences, android, java, programowanie"
+description: "Wzorce projektowe / kreacyjny"
+keywords: "singleton, wzorzec, wzorce projektowe, wzorzec kreacyjny, design patterns, sharedpreferences, android, java, programowanie"
 ---
 
 ## Zastosowanie
-`Singleton` (ang. `Singleton`) (wzorzec konstrukcyjny) ma za zadanie przede wszystkim ograniczenie tworzenia obiektów danej klasy do jednej instancji oraz zapewnieniu do niego globalnego dostępu. Swoje pochodzenie zawdzięcza `C++`, gdzie pełnił rolę następnika zmiennej globalnej używanej przez preprocesor. Jest wzorcem, który wzbudza wiele kontrowersji - z pozoru prosty, łatwy w implementacji, jednakże źle wykorzystany stanowi popularny antywzorzec. Dzieje się tak, gdy jego rola jest sprowadzona do zmiennej globalnej bez uwzględnienia kontekstu wykorzystania. `Singleton` można zastosować tam, gdzie rzeczywiście istnieje pewność występienia tylko jednej współdzielonej instancji klasy.
+`Singleton` (ang. `Singleton`) (wzorzec kreacyjny) ma za zadanie przede wszystkim ograniczenie tworzenia obiektów danej klasy do jednej instancji oraz zapewnieniu do niego globalnego dostępu. Swoje pochodzenie zawdzięcza `C++`, gdzie pełnił rolę następnika zmiennej globalnej używanej przez preprocesor. Jest wzorcem, który wzbudza wiele kontrowersji - z pozoru prosty, łatwy w implementacji, jednakże źle wykorzystany stanowi popularny antywzorzec. Dzieje się tak, gdy jego rola jest sprowadzona do zmiennej globalnej bez uwzględnienia kontekstu wykorzystania. `Singleton` można zastosować tam, gdzie rzeczywiście istnieje pewność występienia tylko jednej współdzielonej instancji klasy.
 
 ## Ograniczenia
 `Singleton` tworzony jest w oparciu o prywatny konstruktor, który uniemożliwia rozszerzenie klasy. Poza zarządzaniem swoim cyklem życia pełni rolę logiki biznesowej czym łamie zasadę `SRP` - pojedynczej odpowiedzialności. Co więcej łamie zasadę `OCP` - otwarte/zamknięte, która mówi, że klasy powinnyć być otwarte na rozszerzenie lecz zamknięte na modyfikacje. `Singleton` utrudnia testowanie ponieważ przed wywołaniem testów należy pamiętać, aby był on właściwie zainicjonowany. Ze względu na architekturę systemu `Android`, `Singleton` nie jest zalecanym wzorcem. `Singleton Mutable` może utracić swój stan, gdy system potrzebuje zwolnić zasoby pamięci. Natomiast `Singleton Immutable` może być często zastąpiony klasami typu `Utility` (z metodami statycznymi).
