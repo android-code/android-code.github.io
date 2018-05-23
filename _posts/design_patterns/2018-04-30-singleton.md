@@ -4,7 +4,7 @@ title: "Singleton"
 date:  2018-04-30
 categories: ["Wzorce projektowe"]
 image: singleton
-github: Singleton
+github: singleton
 description: "Wzorce projektowe / kreacyjny"
 keywords: "singleton, wzorzec, wzorce projektowe, wzorzec kreacyjny, design patterns, sharedpreferences, android, java, programowanie"
 ---

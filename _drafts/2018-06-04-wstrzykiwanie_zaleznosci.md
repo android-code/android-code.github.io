@@ -149,24 +149,6 @@ public class NetworkLogger implements Logger {
     }
 }
 
-public class MockLogger implements Logger {
-
-    @Override
-    public void logState(AppState appState) {
-    	Console.log(appState.toString());
-    }
-
-    @Override
-    public void logClickEvent(ClickEvent clickEvent) {
-    	Console.log(clickEvent.toString());
-    }
-
-    @Override
-    public void logError(Error error) {
-    	Console.log(error.toString());
-    }
-}
-
 public class FileLogger implements Logger {
 
     @Override
@@ -182,6 +164,24 @@ public class FileLogger implements Logger {
     @Override
     public void logError(Error error) {
     	FileManager.write(error);
+    }
+}
+
+public class MockLogger implements Logger {
+
+    @Override
+    public void logState(AppState appState) {
+    	Console.log(appState.toString());
+    }
+
+    @Override
+    public void logClickEvent(ClickEvent clickEvent) {
+    	Console.log(clickEvent.toString());
+    }
+
+    @Override
+    public void logError(Error error) {
+    	Console.log(error.toString());
     }
 }
 
