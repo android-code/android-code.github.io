@@ -10,23 +10,126 @@ keywords: "obserwator, observer, wzorzec, wzorce projektowe, design patterns, an
 ---
 
 ## Zastosowanie
-`Obserwator` (ang. `Observer`) (wzorzec behawioralny) służy do powiadamiania obiektów zainteresowanych (`Subskrybentów`) o zmianie stanu obiektu śledzonego (`Obserwowanego`). Obiekty nasłuchujące mogą być zależne od stanu obiektu obserwowanego w związku czym musi istnieć między nimi mechanizm komunikacji. Zmiana stanu jest równoważna za zmianą wartości pól obiektu. Wzorzec `Obserwator` może być stosowany również do powiadamiania o stanie podjętej operacji i wygenerowaniu odpowiedniego zdarzenia (`event`). Obiekt może być obserwowany przez wielu subskrybentów, a także sam może być obserwatorem innego obiektu. Komunikaty nadawane przez obiekt obserwowany trafiają do wszystkich obserwatorów.
+`Obserwator` (ang. `Observer`) (wzorzec behawioralny) służy do powiadamiania obiektów zainteresowanych - subskrybentów o zmianie stanu obiektu śledzonego - obserwowanego. Obiekty nasłuchujące mogą być zależne od stanu obiektu obserwowanego w związku z czym musi istnieć mechanizm komunikacji między nimi. Zmiana stanu może być utożsamiana ze zmianą wartości pól obiektu. Wzorzec `Obserwator` może być stosowany również do powiadamiania o stanie podjętej operacji poprzez wygenerowanie odpowiedniego zdarzenia. Obiekt może być obserwowany przez wielu subskrybentów, a także sam może być obserwatorem innych obiektów. Komunikaty nadawane przez obiekt obserwowany trafiają do wszystkich obserwatorów.
 
 ## Ograniczenia
-Obserwatorzy otrzymują komunikat z którego wiadomo, że coś się zmieniło, ale nie zawsze wiadomo co. Ponadto komunikat ten trafia do wszystkich subskrybentów, którzy niekoniecznie są zainteresowani daną zmianą stanu. Jeśli obiekt obserwowany jest także obserwatorem wówczas istnieje ryzyko zapętlęnia mechanizmu powiadamiania. 
+Obserwatorzy otrzymują komunikat z którego wiadomo, że coś się zmieniło, ale nie zawsze wiadomo co. Ponadto komunikat ten trafia do wszystkich subskrybentów, którzy niekoniecznie są zainteresowani daną zmianą stanu czy zdarzenia co wymusza na obserwatorach filtrowanie otrzymanego powiadomienia. Obserwatorzy nie wiedzą o istnieniu innych obserwatorów co może prowadzić do komplikacji. Jeśli obiekt obserwowany jest także obserwatorem wówczas istnieje ryzyko zapętetlęnia mechanizmu powiadamiania. 
 
 ## Użycie
-`Obserwator` wykorzystywany jest tam, gdzie istnieje potrzeba informowania wielu obiektów w jednakowy sposób o zmianie stanu obserwowanego lub stanu podjętej operacji. Ze względu na ograniczenia wzorzec ten bywa przede wszystkim używany do informowania elementów systemu o wystąpieniu zdarzenia błędu czy też odpowiedzi sieciowych. 
+`Obserwator` wykorzystywany jest tam, gdzie istnieje potrzeba informowania wielu obiektów w jednakowy sposób o zmianie stanu obiektu obserwowanego lub stanu podjętej operacji. Ze względu na ograniczenia wzorzec ten bywa przede wszystkim używany do informowania elementów systemu o wystąpieniu zdarzenia błędu czy też odpowiedzi sieciowej. 
 
 ## Implementacja
+Obiekt obserwowany `ConcreteObservable` zawiera liste obserwatorów `Observer` oraz implementuje interfejs `Observable` za pomocą którego zapisuje, wypisuje i powiadamia obserwatorów o zmianie stanu. Obserwatorzy `Observer1`, `Observer2` implementują interfejs `Observer`. Opcjonalny obiekt przekazywany jako parametr metody aktualizującej może pełnić podobną rolę jak zdarzenia w programowaniu reaktywnym, tzn.: określa rodzaj zdarzenia wraz z zestawem danych.
 
 ![Obserwator diagram](/assets/img/diagrams/observer.svg){: .center-image }
 
-{% highlight java %}
+Poniższy listing przedstawia implementacje interfejsów obiektu obserwowanego `Observable` oraz jego obserwatorów `Observer`.
 
+{% highlight java %}
+public class ConcreteObservable implements Observable {
+
+	private List<Observer> observers;
+
+	//other fields
+
+	public ConcreteObservable() {
+		observers = new ArrayList();
+	}
+	
+	@Override
+	public void registerObserver(Observer observer) {
+		observers.add(observer);
+	}
+
+	@Override
+	public void unregisterObserver(Observer observer) {
+		observers.remove(observer);
+	}
+
+	@Override
+	public void notifyObservers() {
+		for(Observer observer : observers)
+			observer.update(this, null);
+	}
+
+	@Override
+	public void notifyObservers(Object object) {
+		for(Observer observer : observers)
+			observer.update(this, object);
+	}
+
+	public void method1() {
+		//do some work
+		notifyObservers();
+	}
+
+	public void method2() {
+		//do some work
+		Event event = new Event(); //intialize proper event or values wrapper
+		notifyObservers(event);
+	}
+
+	//others methods
+}
+
+public class Observer1 implements Observer {
+	
+	@Override
+	public void update(Observable observable, Object object) {
+		if(observable instanceof ConcreteObservable) {
+			//do some work
+		}
+		else {
+			//do some work
+		}
+	}
+
+	//other methods
+}
+
+public class Observer2 implements Observer {
+	
+	@Override
+	public void update(Observable observable, Object object) {
+		if(observable instanceof ConcreteObservable) {
+			if(object instanceof Event) {
+				//do some work
+			}
+		}
+	}
+
+	//other methods
+}
+
+public interface Observable {
+	public void registerObserver(Observer observer);
+	public void unregisterObserver(Observer observer);
+	public void notifyObservers(Object object);
+	public void notifyObservers();
+}
+
+public interface Observer {
+	public void update(Observable observable, Object object);
+}
+{% endhighlight %}
+
+Obserwatorzy zapisują się do subskrypcji obiektu klasy `ConcreteObservable` co pokazuje poniższy listing.
+
+{% highlight java %}
+Observable observable = new ConcreteObservable();
+Observer observer1 = new Observer1();
+Observer observer2 = new Observer2();
+
+observable.addObserver(observer1);
+observable.addObserver(observer2);
+
+//all Observers are notify
+observable.method1();  //only observer1 do some update work 
+observable.method2(); //only observer2 do some update work 
 {% endhighlight %}
 
 ## Przykład
+//TODO
 
 ## Biblioteki
-Wzorzec `Obserwator` w implementacji klas `Observer` i `Observable` należał do standardowej biblioteki `Java`, jednakże ze względu na wspomniane zagrożenia oraz brak zapewnienia poprawnego działania w środowisku wielowątkowym, został uznany w `Java 9` jako `deprecated`. Jego następnikiem stały się klasy `PropertyChangeListener` i `PropertyChangeEvent`, a także `reaktywne strumienie` z pakietu `Flow`. Popularnymi bibliotekami wzorca `Obserwator` w Androidzie są `szyny zdarzeń` `EventBus` i `Otto`, a także `RxAndroid` powstały na bazie `RxJava`, który jest implementacją podejścia do `programowania reaktywnego`.
+Wzorzec `Obserwator` w implementacji klas `Observer` i `Observable` należał do standardowej biblioteki `Java`, jednakże ze względu na wspomniane zagrożenia oraz brak zapewnienia poprawnego działania w środowisku wielowątkowym, został uznany w `Java 9` jako `deprecated`. Zalecena jest korzystanie z klas `PropertyChangeListener` i `PropertyChangeEvent` lub `reaktywnych strumieni` z pakietu `Flow`. Popularnymi bibliotekami wzorca `Obserwator` w Androidzie są `szyny zdarzeń` `EventBus` i `Otto`, a także `RxAndroid` powstały na bazie `RxJava`, który jest implementacją podejścia do `programowania reaktywnego`.
