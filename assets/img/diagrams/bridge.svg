@@ -24,15 +24,15 @@
 		.st9 {fill:#ffffff;font-family:Calibri;font-size:0.75em}
 		.st10 {fill:#a5a5a5;stroke:#ffffff;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.5}
 		.st11 {fill:#ffffff;font-family:Calibri;font-size:1.00001em}
-		.st12 {marker-end:url(#mrkr4-30);stroke:#9b9b9b;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5}
-		.st13 {fill:#9b9b9b;fill-opacity:1;stroke:#9b9b9b;stroke-opacity:1;stroke-width:0.37313432835821}
+		.st12 {marker-end:url(#mrkr4-30);stroke:#9b9b9b;stroke-linecap:round;stroke-linejoin:round;stroke-width:1}
+		.st13 {fill:#9b9b9b;fill-opacity:1;stroke:#9b9b9b;stroke-opacity:1;stroke-width:0.28409090909091}
 		.st14 {fill:#ffffff;stroke:none;stroke-linecap:butt;stroke-width:7.2}
 		.st15 {fill:#797979;font-family:Calibri;font-size:0.666664em}
-		.st16 {marker-end:url(#mrkr4-45);stroke:#6ca43d;stroke-dasharray:1.5,3;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5}
-		.st17 {fill:#6ca43d;fill-opacity:1;stroke:#6ca43d;stroke-opacity:1;stroke-width:0.37313432835821}
+		.st16 {marker-end:url(#mrkr4-45);stroke:#6ca43d;stroke-dasharray:1,2;stroke-linecap:round;stroke-linejoin:round;stroke-width:1}
+		.st17 {fill:#6ca43d;fill-opacity:1;stroke:#6ca43d;stroke-opacity:1;stroke-width:0.28409090909091}
 		.st18 {fill:#53802e;font-family:Calibri;font-size:0.666664em}
-		.st19 {marker-end:url(#mrkr4-53);stroke:#5592c9;stroke-dasharray:1.5,3;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5}
-		.st20 {fill:#5592c9;fill-opacity:1;stroke:#5592c9;stroke-opacity:1;stroke-width:0.37313432835821}
+		.st19 {marker-end:url(#mrkr4-53);stroke:#5592c9;stroke-dasharray:1,2;stroke-linecap:round;stroke-linejoin:round;stroke-width:1}
+		.st20 {fill:#5592c9;fill-opacity:1;stroke:#5592c9;stroke-opacity:1;stroke-width:0.28409090909091}
 		.st21 {fill:#41719d;font-family:Calibri;font-size:0.666664em}
 		.st22 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
 	]]>
@@ -42,17 +42,17 @@
 		<g id="lend4">
 			<path d="M 2 1 L 0 0 L 2 -1 L 2 1 " style="stroke:none"/>
 		</g>
-		<marker id="mrkr4-30" class="st13" v:arrowType="4" v:arrowSize="2" v:setback="5.36" refX="-5.36" orient="auto"
+		<marker id="mrkr4-30" class="st13" v:arrowType="4" v:arrowSize="2" v:setback="7.04" refX="-7.04" orient="auto"
 				markerUnits="strokeWidth" overflow="visible">
-			<use xlink:href="#lend4" transform="scale(-2.68,-2.68) "/>
+			<use xlink:href="#lend4" transform="scale(-3.52,-3.52) "/>
 		</marker>
-		<marker id="mrkr4-45" class="st17" v:arrowType="4" v:arrowSize="2" v:setback="5.36" refX="-5.36" orient="auto"
+		<marker id="mrkr4-45" class="st17" v:arrowType="4" v:arrowSize="2" v:setback="7.04" refX="-7.04" orient="auto"
 				markerUnits="strokeWidth" overflow="visible">
-			<use xlink:href="#lend4" transform="scale(-2.68,-2.68) "/>
+			<use xlink:href="#lend4" transform="scale(-3.52,-3.52) "/>
 		</marker>
-		<marker id="mrkr4-53" class="st20" v:arrowType="4" v:arrowSize="2" v:setback="5.36" refX="-5.36" orient="auto"
+		<marker id="mrkr4-53" class="st20" v:arrowType="4" v:arrowSize="2" v:setback="7.04" refX="-7.04" orient="auto"
 				markerUnits="strokeWidth" overflow="visible">
-			<use xlink:href="#lend4" transform="scale(-2.68,-2.68) "/>
+			<use xlink:href="#lend4" transform="scale(-3.52,-3.52) "/>
 		</marker>
 	</defs>
 	<g v:mID="0" v:index="1" v:groupContext="foregroundPage">
@@ -175,7 +175,7 @@
 			<desc>operation1()</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="33.9651" cy="223.835" width="50.68" height="17.6036"/>
-			<path d="M0 223.83 L59.89 223.83" class="st12"/>
+			<path d="M0 223.83 L60.89 223.83" class="st12"/>
 			<rect v:rectContext="textBkgnd" x="13.5318" y="219.035" width="40.8669" height="9.59985" class="st14"/>
 			<text x="13.53" y="226.23" class="st15" v:langID="1045"><v:paragraph v:horizAlign="1"/><v:tabList/>operation1()</text>		</g>
 		<g id="shape10-33" v:mID="10" v:groupContext="shape" v:layerMember="0" transform="translate(273.085,-172.51)">
@@ -183,7 +183,7 @@
 			<desc>operation1()</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="42.1668" cy="238.008" width="50.68" height="17.6036"/>
-			<path d="M0 237.49 L76.29 238.43" class="st12"/>
+			<path d="M0 237.49 L77.29 238.44" class="st12"/>
 			<rect v:rectContext="textBkgnd" x="21.7334" y="233.208" width="40.8669" height="9.59985" class="st14"/>
 			<text x="21.73" y="240.41" class="st15" v:langID="1045"><v:paragraph v:horizAlign="1"/><v:tabList/>operation1()</text>		</g>
 		<g id="shape13-40" v:mID="13" v:groupContext="shape" v:layerMember="0" transform="translate(219.672,-119.219)">
@@ -191,7 +191,7 @@
 			<desc>implement</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="7.34919" cy="241.075" width="45.32" height="17.6036"/>
-			<path d="M6.69 230.92 L7.25 250.51" class="st16"/>
+			<path d="M6.69 230.92 L7.28 251.51" class="st16"/>
 			<rect v:rectContext="textBkgnd" x="-10.4002" y="236.276" width="35.499" height="9.59985" class="st14"/>
 			<text x="-10.4" y="243.48" class="st18" v:langID="1045"><v:paragraph v:horizAlign="1"/><v:tabList/>implement</text>		</g>
 		<g id="shape15-48" v:mID="15" v:groupContext="shape" v:layerMember="0" transform="translate(484.797,-127.774)">
@@ -199,12 +199,12 @@
 			<desc>implement</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="-44.4685" cy="247.9" width="45.32" height="17.6036"/>
-			<path d="M0 230.92 L0 256.43 L-44.47 256.43 L-44.47 259.06" class="st19"/>
+			<path d="M0 230.92 L0 256.43 L-44.47 256.43 L-44.47 260.06" class="st19"/>
 			<rect v:rectContext="textBkgnd" x="-62.2179" y="243.1" width="35.499" height="9.59985" class="st14"/>
 			<text x="-62.22" y="250.3" class="st21" v:langID="1045"><v:paragraph v:horizAlign="1"/><v:tabList/>implement</text>		</g>
 		<g id="shape16-56" v:mID="16" v:groupContext="shape" v:layerMember="0" transform="translate(394.089,-127.774)">
 			<title>Dynamic connector.16</title>
-			<path d="M0 230.92 L0 256.43 L46.24 256.43 L46.24 259.06" class="st19"/>
+			<path d="M0 230.92 L0 256.43 L46.24 256.43 L46.24 260.06" class="st19"/>
 		</g>
 	</g>
 </svg>

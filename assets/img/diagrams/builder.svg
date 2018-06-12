@@ -23,15 +23,15 @@
 		.st8 {fill:#73ae42;stroke:#ffffff;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.5}
 		.st9 {fill:#ffffff;font-family:Calibri;font-size:0.833336em}
 		.st10 {fill:#5b9bd5;stroke:#ffffff;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.5}
-		.st11 {marker-end:url(#mrkr4-31);stroke:#5592c9;stroke-dasharray:1.5,3;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5}
-		.st12 {fill:#5592c9;fill-opacity:1;stroke:#5592c9;stroke-opacity:1;stroke-width:0.37313432835821}
-		.st13 {fill:#ffffff;stroke:none;stroke-linecap:butt;stroke-width:7.2}
+		.st11 {marker-end:url(#mrkr4-31);stroke:#5592c9;stroke-dasharray:1,2;stroke-linecap:round;stroke-linejoin:round;stroke-width:1}
+		.st12 {fill:#5592c9;fill-opacity:1;stroke:#5592c9;stroke-opacity:1;stroke-width:0.28409090909091}
+		.st13 {fill:#ffffff;stroke:none;stroke-linecap:butt}
 		.st14 {fill:#41719d;font-family:Calibri;font-size:0.666664em}
-		.st15 {marker-end:url(#mrkr4-46);stroke:#6ca43d;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5}
-		.st16 {fill:#6ca43d;fill-opacity:1;stroke:#6ca43d;stroke-opacity:1;stroke-width:0.37313432835821}
-		.st17 {fill:#53802e;font-family:Calibri;font-size:0.666664em}
-		.st18 {marker-end:url(#mrkr4-31);stroke:#5592c9;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5}
-		.st19 {fill:#ffffff;stroke:none;stroke-linecap:butt}
+		.st15 {fill:#ffffff;stroke:none;stroke-linecap:butt;stroke-width:7.2}
+		.st16 {marker-end:url(#mrkr4-46);stroke:#6ca43d;stroke-linecap:round;stroke-linejoin:round;stroke-width:1}
+		.st17 {fill:#6ca43d;fill-opacity:1;stroke:#6ca43d;stroke-opacity:1;stroke-width:0.28409090909091}
+		.st18 {fill:#53802e;font-family:Calibri;font-size:0.666664em}
+		.st19 {marker-end:url(#mrkr4-31);stroke:#5592c9;stroke-linecap:round;stroke-linejoin:round;stroke-width:1}
 		.st20 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
 	]]>
 	</style>
@@ -40,13 +40,13 @@
 		<g id="lend4">
 			<path d="M 2 1 L 0 0 L 2 -1 L 2 1 " style="stroke:none"/>
 		</g>
-		<marker id="mrkr4-31" class="st12" v:arrowType="4" v:arrowSize="2" v:setback="5.36" refX="-5.36" orient="auto"
+		<marker id="mrkr4-31" class="st12" v:arrowType="4" v:arrowSize="2" v:setback="7.04" refX="-7.04" orient="auto"
 				markerUnits="strokeWidth" overflow="visible">
-			<use xlink:href="#lend4" transform="scale(-2.68,-2.68) "/>
+			<use xlink:href="#lend4" transform="scale(-3.52,-3.52) "/>
 		</marker>
-		<marker id="mrkr4-46" class="st16" v:arrowType="4" v:arrowSize="2" v:setback="5.36" refX="-5.36" orient="auto"
+		<marker id="mrkr4-46" class="st17" v:arrowType="4" v:arrowSize="2" v:setback="7.04" refX="-7.04" orient="auto"
 				markerUnits="strokeWidth" overflow="visible">
-			<use xlink:href="#lend4" transform="scale(-2.68,-2.68) "/>
+			<use xlink:href="#lend4" transform="scale(-3.52,-3.52) "/>
 		</marker>
 	</defs>
 	<g v:mID="0" v:index="1" v:groupContext="foregroundPage">
@@ -172,45 +172,45 @@
 			<v:textRect cx="30.4724" cy="203.461" width="53.33" height="45.7087"/>
 			<path d="M0 203.46 A30.4724 30.4724 0 0 1 60.94 203.46 A30.4724 30.4724 0 1 1 0 203.46 Z" class="st6"/>
 			<text x="15.17" y="207.66" class="st7" v:langID="1045"><v:paragraph v:horizAlign="1"/><v:tabList/>Part2</text>		</g>
-		<g id="shape25-26" v:mID="25" v:groupContext="shape" v:layerMember="0" transform="translate(60.061,-132.061)">
+		<g id="shape25-26" v:mID="25" v:groupContext="shape" v:layerMember="0" transform="translate(66.8809,-132.061)">
 			<title>Dynamic connector</title>
 			<desc>Extend</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
-			<v:textRect cx="21.7736" cy="244.563" width="40" height="17.6036"/>
-			<path d="M0 233.93 L0 244.56 L27.35 244.56 L27.35 263.35" class="st11"/>
-			<rect v:rectContext="textBkgnd" x="10.555" y="239.763" width="22.4371" height="9.59985" class="st13"/>
-			<text x="10.55" y="246.96" class="st14" v:langID="1045"><v:paragraph v:horizAlign="1"/><v:tabList/>Extend</text>		</g>
-		<g id="shape26-34" v:mID="26" v:groupContext="shape" v:layerMember="0" transform="translate(185.211,-132.061)">
+			<v:textRect cx="-7.08661" cy="252.659" width="40" height="17.6036"/>
+			<path d="M-6.82 233.93 L-7.25 264.35" class="st11"/>
+			<rect v:rectContext="textBkgnd" x="-18.3052" y="247.86" width="22.4371" height="9.59985" class="st13"/>
+			<text x="-18.31" y="255.06" class="st14" v:langID="1045"><v:paragraph v:horizAlign="1"/><v:tabList/>Extend</text>		</g>
+		<g id="shape26-34" v:mID="26" v:groupContext="shape" v:layerMember="0" transform="translate(178.212,-132.061)">
 			<title>Dynamic connector.26</title>
 			<desc>Extend</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
-			<v:textRect cx="19.435" cy="244.563" width="40" height="17.6036"/>
-			<path d="M0 233.93 L0 244.56 L22.68 244.56 L22.68 263.35" class="st11"/>
-			<rect v:rectContext="textBkgnd" x="8.2164" y="239.763" width="22.4371" height="9.59985" class="st13"/>
-			<text x="8.22" y="246.96" class="st14" v:langID="1045"><v:paragraph v:horizAlign="1"/><v:tabList/>Extend</text>		</g>
+			<v:textRect cx="7.08661" cy="252.659" width="40" height="17.6036"/>
+			<path d="M7 233.93 L7.14 264.35" class="st11"/>
+			<rect v:rectContext="textBkgnd" x="-4.13201" y="247.86" width="22.4371" height="9.59985" class="st15"/>
+			<text x="-4.13" y="255.06" class="st14" v:langID="1045"><v:paragraph v:horizAlign="1"/><v:tabList/>Extend</text>		</g>
 		<g id="shape27-41" v:mID="27" v:groupContext="shape" v:layerMember="0" transform="translate(101.872,-166.785)">
 			<title>Dynamic connector.27</title>
 			<desc>build</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="20.7638" cy="226.846" width="40" height="17.6036"/>
-			<path d="M0 226.85 L33.49 226.85" class="st15"/>
-			<rect v:rectContext="textBkgnd" x="12.6232" y="222.047" width="16.2809" height="9.59985" class="st13"/>
-			<text x="12.62" y="229.25" class="st17" v:langID="1045"><v:paragraph v:horizAlign="1"/><v:tabList/>build</text>		</g>
+			<path d="M0 226.85 L34.49 226.85" class="st16"/>
+			<rect v:rectContext="textBkgnd" x="12.6232" y="222.047" width="16.2809" height="9.59985" class="st15"/>
+			<text x="12.62" y="229.25" class="st18" v:langID="1045"><v:paragraph v:horizAlign="1"/><v:tabList/>build</text>		</g>
 		<g id="shape28-49" v:mID="28" v:groupContext="shape" v:layerMember="0" transform="translate(227.022,-166.785)">
 			<title>Dynamic connector.28</title>
 			<desc>buildPart1</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="31.8898" cy="226.846" width="43.59" height="17.6036"/>
-			<path d="M0 226.85 L55.74 226.85" class="st18"/>
-			<rect v:rectContext="textBkgnd" x="15.0053" y="222.047" width="33.7692" height="9.59985" class="st13"/>
+			<path d="M0 226.85 L56.74 226.85" class="st19"/>
+			<rect v:rectContext="textBkgnd" x="15.0053" y="222.047" width="33.7692" height="9.59985" class="st15"/>
 			<text x="15.01" y="229.25" class="st14" v:langID="1045"><v:paragraph v:horizAlign="1"/><v:tabList/>buildPart1</text>		</g>
 		<g id="shape29-56" v:mID="29" v:groupContext="shape" v:layerMember="0" transform="translate(351.746,-166.785)">
 			<title>Dynamic connector.29</title>
 			<desc>buildPart2</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="31.8898" cy="226.846" width="43.59" height="17.6036"/>
-			<path d="M0 226.85 L55.74 226.85" class="st18"/>
-			<rect v:rectContext="textBkgnd" x="15.0053" y="222.047" width="33.7692" height="9.59985" class="st19"/>
+			<path d="M0 226.85 L56.74 226.85" class="st19"/>
+			<rect v:rectContext="textBkgnd" x="15.0053" y="222.047" width="33.7692" height="9.59985" class="st13"/>
 			<text x="15.01" y="229.25" class="st14" v:langID="1045"><v:paragraph v:horizAlign="1"/><v:tabList/>buildPart2</text>		</g>
 		<g id="shape30-63" v:mID="30" v:groupContext="shape" transform="translate(404.187,-18.25)">
 			<title>Circle.30</title>
@@ -227,8 +227,8 @@
 			<desc>return product</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="7.08661" cy="254.697" width="57.95" height="17.6036"/>
-			<path d="M7.09 233.93 L7.09 267.42" class="st18"/>
-			<rect v:rectContext="textBkgnd" x="-16.9795" y="249.897" width="48.1325" height="9.59985" class="st13"/>
+			<path d="M7.09 233.93 L7.09 268.42" class="st19"/>
+			<rect v:rectContext="textBkgnd" x="-16.9795" y="249.897" width="48.1325" height="9.59985" class="st15"/>
 			<text x="-16.98" y="257.1" class="st14" v:langID="1045"><v:paragraph v:horizAlign="1"/><v:tabList/>return product</text>		</g>
 	</g>
 </svg>
