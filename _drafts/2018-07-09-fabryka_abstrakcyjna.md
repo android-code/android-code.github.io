@@ -10,7 +10,8 @@ keywords: "fabryka abstrakcyjna, abstract factory, fabryka, factory, wzorzec, wz
 ---
 
 ## Zastosowanie
-`Fabryka abstrakcyjna` (ang. `Abstract factory`) (wzorzec kreacyjny) dostarcza mechanizm do tworzenia powiązanych bądź zależnych obiektów różnych typów bez dokładnej znajomości ich klas. Fabryka abstrakcyjna definiuje rodzinę produktów możliwych do wygenerowania z danej fabryki. Konkretne fabryki mają za zadanie stworzyć obiekty z rodziny produktów. //TODO
+`Fabryka abstrakcyjna` (ang. `Abstract factory`) (wzorzec kreacyjny) dostarcza mechanizm do tworzenia powiązanych bądź zależnych obiektów różnych typów bez dokładnej znajomości ich klas. Fabryka abstrakcyjna definiuje rodzinę produktów możliwych do wygenerowania z danej fabryki. Konkretne fabryki mają za zadanie stworzyć obiekty z rodziny produktów. 
+//TODO
 
 ## Ograniczenia
 //TODO
