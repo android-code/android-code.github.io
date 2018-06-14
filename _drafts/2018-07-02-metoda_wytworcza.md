@@ -32,11 +32,11 @@ public class ProductFactory1 implements ProductFactory {
 	public Product createProduct(Type type) {
 		switch(type) {
 			case TYPE1:
-					return new Product1();
+				return new Product1();
 			case TYPE2:
-					return new Product2();
+				return new Product2();
 			case TYPE3:
-					return new Product3();
+				return new Product3();
 		}
 		throw new IllegalArgumentException("Product type not recognized");
 	}
@@ -57,6 +57,8 @@ public class Product1 extends Product {
 
 	//other methods
 }
+
+//implement other Product class in similar way
 
 public interface ProductFactory {
 
