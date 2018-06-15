@@ -10,14 +10,13 @@ keywords: "fabryka abstrakcyjna, abstract factory, fabryka, factory, wzorzec, wz
 ---
 
 ## Zastosowanie
-`Fabryka abstrakcyjna` (ang. `Abstract factory`) (wzorzec kreacyjny) dostarcza mechanizm do tworzenia powiązanych bądź zależnych obiektów różnych typów bez dokładnej znajomości ich klas. Fabryka abstrakcyjna definiuje rodzinę produktów możliwych do wygenerowania z danej fabryki. Konkretne fabryki mają za zadanie stworzyć obiekty z rodziny produktów. 
-//TODO
+`Fabryka abstrakcyjna` (ang. `Abstract factory`) (wzorzec kreacyjny) dostarcza interfejs do tworzenia powiązanych bądź zależnych obiektów różnych typów bez dokładnej znajomości ich klas. Fabryka abstrakcyjna definiuje rodzinę produktów możliwych do wygenerowania z danej fabryki. Konkretne fabryki mają za zadanie zdecydować o typie i stworzyć obiekty z jednej rodziny produktów. Implementacja wzorca `Fabryki abstrakcyjnej` może być utożsamiana ze zbiorem `Metod wytwórczych` dla każdej abstrakcji produktu. Jednakże w przeciwieństwie do `Metody wytwórczej`, której celem jest tworzenie obiektów o jednym wspólnym typie, `Fabryka abstrakcyjna` realizuje zadanie tworzenia rodziny powiązanych ze sobą obiektów. Proces inicjalizacji obiektów jest centralizowany, kod otwarty na zmiany, a klient odizolowany od szczegółów implementacji rodziny produktów. Klient nie musi znać typów tworzonych produktów, ponieważ cała odpowiedzialność spoczywa na fabryce. Spełnia zasadę `OCP` - otwarte/zamknięte, a także `DIP` - odwrócenia zależności.
 
 ## Ograniczenia
-//TODO
+Wprowadzenie nowego abstrakcyjnego produktu do rodziny produktów wymusza rozbudowę wszystkich fabryk o metodę zwracającą kolejną abstrakcje, natomiast dodanie nowego typu pociąga za sobą modyfikację metod w niektórych fabrykach.
 
 ## Użycie
-//TODO
+`Fabryka abstrakcyjna` znajduje zastosowanie tam, gdzie zachodzi potrzeba tworzenia zbioru powiązanych ze sobą produktów o wspólnych typach, ale różnej implementacji, a klient ma być zwolniony ze znajomości szczegółów implementacji. Ponadto dokładne typy obiektów nie muszą być znane w trakcie tworzenia kodu, a decyzja o tym jakie obiekty zostaną wygenerowane zapada dynamicznie.
 
 ## Implementacja
 Konkretna fabryka implementuje abstrakcyjną fabrykę `AbstractFactory`, która deklaruje dostarczenie grupy produktów ze sobą powiązanych. Każda fabryka odpowiada za stworzenie produktów na swój ustalony sposób. Produkty rozszerzają klasę abstrakcyjną produktu `AbstractProduct` lub implementują jej interfejs.
