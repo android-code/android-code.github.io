@@ -27,53 +27,53 @@ Poniższy listing przedstawia implementacja wzorca `Metoda wytwórcza` dla produ
 
 {% highlight java %}
 public class ProductFactory1 implements ProductFactory {
-
-	@Override
-	public Product createProduct(Type type) {
-		switch(type) {
-			case TYPE1:
-				return new Product1();
-			case TYPE2:
-				return new Product2();
-			case TYPE3:
-				return new Product3();
-		}
-		throw new IllegalArgumentException("Product type not recognized");
-	}
+    
+    @Override
+    public Product createProduct(Type type) {
+        switch(type) {
+            case TYPE1:
+              return new Product1();
+            case TYPE2:
+              return new Product2();
+            case TYPE3:
+              return new Product3();
+        }
+        throw new IllegalArgumentException("Product type not recognized");
+    }
 }
 
 public class Product1 extends Product {
 
-	//other fields
+    //other fields
 
-	public Product1() {
-		name = "Product1";
-	}
+    public Product1() {
+        name = "Product1";
+    }
 
-	@Override
-	public void action() {
-		//do something
-	}
+    @Override
+    public void action() {
+        //do something
+    }
 
-	//other methods
+    //other methods
 }
 
 //implement other Product class in similar way
 
 public interface ProductFactory {
 
-	Product createProduct(Type type);
+    Product createProduct(Type type);
 }
 
 public abstract class Product {
 
-	String name;
+    String name;
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public abstract void action();
+    public abstract void action();
 }
 {% endhighlight %}
 
@@ -93,19 +93,19 @@ public class PoiMap implements PoiFactory {
 
     //some fields
 
-  	@Override
-  	public Poi createPoi(PoiInfo poiInfo) {
-		switch(poiInfo.getType()) {
-  			case MUSEUM:
-  				return new Museum(poiInfo);
-  			case SHOPPING:
-  				return new Shopping(poiInfo);
-  			case RESTAURANT:
-  				return new Restaurant(poiInfo);
-        	default:
-            	return new DefaultPoi(poiInfo);
-		}
-  	}
+    @Override
+    public Poi createPoi(PoiInfo poiInfo) {
+        switch(poiInfo.getType()) {
+            case MUSEUM:
+                return new Museum(poiInfo);
+            case SHOPPING:
+                return new Shopping(poiInfo);
+            case RESTAURANT:
+                return new Restaurant(poiInfo);
+            default:
+                return new DefaultPoi(poiInfo);
+        }
+    }
 
     //some methods
 }
@@ -193,23 +193,23 @@ Jedną z funckjonalności nowej wersji mapy jest wybór wyświetlanego trybu dzi
 {% highlight java %}
 public class PoiNightMap implements PoiFactory {
 
-	//some fields
+    //some fields
 
-  	@Override
-  	public Poi createPoi(PoiInfo poiInfo) {
-		switch(poiInfo.getType()) {
-  			case MUSEUM:
-  				 return new MuseumDark(poiInfo);
-  			case SHOPPING:
-  				 return new ShoppingDark(poiInfo);
-  			case RESTAURANT:
-  				 return new RestaurantDark(poiInfo);
-        	default:
-            	return new DefaultPoi(poiInfo);
-		}
-  	}
+    @Override
+    public Poi createPoi(PoiInfo poiInfo) {
+        switch(poiInfo.getType()) {
+            case MUSEUM:
+                return new MuseumDark(poiInfo);
+            case SHOPPING:
+                return new ShoppingDark(poiInfo);
+            case RESTAURANT:
+                return new RestaurantDark(poiInfo);
+            default:
+                return new DefaultPoi(poiInfo);
+        }
+    }
 
-	//some methods
+    //some methods
 }
 
 //implement Poi types in the same way as for day mode

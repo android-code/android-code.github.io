@@ -28,57 +28,57 @@ Poniższy listing przedstawia implementację fabryki abstrakcyjnej `AbstractFact
 {% highlight java %}
 public class FactoryA extend AbstractFactory {
 
-	@Override
-	public AbstractProduct1 createProduct1(Product1Type type) {
-		//set args to constructor based on type
-		if(type == Product1Type.BIG)
-			return new Product1A("BIG");
-		else
-			return new Product1A();
-	}
+    @Override
+    public AbstractProduct1 createProduct1(Product1Type type) {
+        //set args to constructor based on type
+        if(type == Product1Type.BIG)
+            return new Product1A("BIG");
+        else
+            return new Product1A();
+    }
 
-	@Override
-	public AbstractProduct2 createProduct2(Product2Type type) {
-		//set args to constructor based on type
-		if(type == Product2Type.CIRCLE)
-			return new Product2A("CIRCLE");
-		else
-			return new Product2A();
-	}
+    @Override
+    public AbstractProduct2 createProduct2(Product2Type type) {
+        //set args to constructor based on type
+        if(type == Product2Type.CIRCLE)
+            return new Product2A("CIRCLE");
+        else
+            return new Product2A();
+    }
 }
 
 public class FactoryB extend AbstractFactory {
 
-	@Override
-	public AbstractProduct1 createProduct1(Product1Type type) {
-		//set args to constructor based on type
-		if(type == Product1Type.SMALL)
-			return new Product1B("SMALL");
-		else
-			return new Product1B();
-	}
+    @Override
+    public AbstractProduct1 createProduct1(Product1Type type) {
+        //set args to constructor based on type
+        if(type == Product1Type.SMALL)
+            return new Product1B("SMALL");
+        else
+            return new Product1B();
+    }
 
-	@Override
-	public AbstractProduct2 createProduct2(Product2Type type) {
-		//ignore args for this type
-		return new Product2B();
-	}
+    @Override
+    public AbstractProduct2 createProduct2(Product2Type type) {
+        //ignore args for this type
+        return new Product2B();
+    }
 }
 
 public abstract class AbstractFactory {
 
-	public abstract AbstractProduct1 createProduct1(Product1Type type);
-	public abstract AbstractProduct2 createProduct2(Product2Type type);
+    public abstract AbstractProduct1 createProduct1(Product1Type type);
+    public abstract AbstractProduct2 createProduct2(Product2Type type);
 }
 
 public abstract class AbstractProduct1 {
 
-	//some fields and methods
+    //some fields and methods
 }
 
 public abstract class AbstractProduct2 {
 
-	//some fields and methods
+    //some fields and methods
 }
 {% endhighlight %}
 
@@ -92,15 +92,15 @@ CompleteProduct product = new CompleteProduct(factory);
 //where CompleteProduct looks like below
 public class CompleteProduct {
 
-	private AbstractProduct1 product1;
-	private AbstractProduct2 product2;
+    private AbstractProduct1 product1;
+    private AbstractProduct2 product2;
 
-	public CompleteProduct(AbstractFactory factory) {
-		product1 = factory.createProduct1();
-		product2 = factory.createProduct2();
-	}
+    public CompleteProduct(AbstractFactory factory) {
+        product1 = factory.createProduct1();
+        product2 = factory.createProduct2();
+    }
 
-	//other methods
+    //other methods
 }
 {% endhighlight %}
 
@@ -110,7 +110,7 @@ Sklep internetowy `JerseySport` prowadzi sprzedaż zestawów odzieżowych `Jerse
 {% highlight java %}
 public class Jersey {
 
-  	private Socks socks;
+    private Socks socks;
     private Shorts shorts;
     private Shirt shirt;
 
@@ -281,7 +281,7 @@ public class BasketballFactory extend JerseyFactory {
 
 public abstract class JerseyFactory {
 
-  	public abstract Socks createSocks(Color color);
+    public abstract Socks createSocks(Color color);
     public abstract Shorts createShorts(Size size, Color color);
     public abstract Shirt createShirt(Size size, Color color, boolean longSleeve);
 

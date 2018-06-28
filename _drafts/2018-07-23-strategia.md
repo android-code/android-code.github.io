@@ -28,40 +28,40 @@ Poniższy listing przedstawia implementację wzorca `Strategia` wykorzystywaną 
 {% highlight java %}
 public class Context {
 
-  private AbstractStrategy strategy;
+    private AbstractStrategy strategy;
 
-  public Context(AbstractStrategy strategy) {
-    this.strategy = strategy;
-  }
+    public Context(AbstractStrategy strategy) {
+        this.strategy = strategy;
+    }
 
-  public void setStrategy(AbstractStrategy strategy) {
-    this.strategy = strategy;
-  }
+    public void setStrategy(AbstractStrategy strategy) {
+        this.strategy = strategy;
+    }
 
-  public void run(Object args) {
-    strategy.action(args);
-  }
+    public void run(Object args) {
+        strategy.action(args);
+    }
 }
 
 public class ConcreteStrategy1 implements AbstractStrategy {
 
-  @Override
-  public void action(Object args) {
-    //do action specific for ConcreteStrategy1
-  }
+    @Override
+    public void action(Object args) {
+        //do action specific for ConcreteStrategy1
+    }
 }
 
 public class ConcreteStrategy2 implements AbstractStrategy {
 
-  @Override
-  public void action(Object args) {
-    //do action specific for ConcreteStrategy2
-  }
+    @Override
+    public void action(Object args) {
+        //do action specific for ConcreteStrategy2
+    }
 }
 
 interface AbstractStrategy {
 
-  void action(Object args);
+    void action(Object args);
 }
 {% endhighlight %}
 
@@ -84,102 +84,102 @@ Aplikacja sklepu internetowego znajdującego się na terenie Europy obsługuje d
 {% highlight java %}
 public class Cart {
 
-  private Shopping shopping;
-  private List<Product> products;
+    private Shopping shopping;
+    private List<Product> products;
 
-  public Context(Shopping shopping) {
-    this.shopping = shopping;
-    products = new ArrayList();
-  }
-
-  public void setShoppingRegion(Shopping shopping) {
-    this.shopping = shopping;
-  }
-
-  public double getTotalPrice() {
-    return shopping.calculatePrice(products);
-  }
-
-  public boolean addProduct(Product product) {
-    if(shopping.checkAvailability(product)) {
-      products.add(product);
-      return true;
+    public Context(Shopping shopping) {
+        this.shopping = shopping;
+        products = new ArrayList();
     }
-    else return false;
-  }
 
-  public boolean removeProduct(Product product) {
-    return products.remove(product);
-  }
+    public void setShoppingRegion(Shopping shopping) {
+        this.shopping = shopping;
+    }
+
+    public double getTotalPrice() {
+        return shopping.calculatePrice(products);
+    }
+
+    public boolean addProduct(Product product) {
+        if(shopping.checkAvailability(product)) {
+          products.add(product);
+          return true;
+        }
+        else return false;
+    }
+
+    public boolean removeProduct(Product product) {
+        return products.remove(product);
+    }
 }
 
 public class EuropeShopping implements Shopping {
 
-  @Override
-  public double calculatePrice(List<Product> products) {
-    double totalPrice = 0;
-    double deliveryCost = 5;
-    for(Product product : products) {
-      totalPrice += product.getPrice();
-      if(product.getSize() == Size.BIG)
-        deliveryCost += 2;
+    @Override
+    public double calculatePrice(List<Product> products) {
+        double totalPrice = 0;
+        double deliveryCost = 5;
+        for(Product product : products) {
+            totalPrice += product.getPrice();
+            if(product.getSize() == Size.BIG)
+                deliveryCost += 2;
+        }
+        return totalPrice;
     }
-    return totalPrice;
-  }
 
-  @Override
-  public boolean checkAvailability(Product product) {
-    return true;
-  }
+    @Override
+    public boolean checkAvailability(Product product) {
+        return true;
+    }
 
-  @Override
-  public Currency getCurrency {
-    return Currency.EUR;
-  }
+    @Override
+    public Currency getCurrency {
+        return Currency.EUR;
+    }
 }
 
 public class AmericaShopping implements Shopping {
 
-  private final double USD_RATE = 0.75;
-  private final double CUSTOMS_DUTY = 1.1;
-  private final double CUSTOMS_DUTY_NORMAL = 1.5;
+    private final double USD_RATE = 0.75;
+    private final double CUSTOMS_DUTY = 1.1;
+    private final double CUSTOMS_DUTY_NORMAL = 1.5;
 
-  @Override
-  public double calculatePrice(List<Product> products) {
-    double totalPrice = 0;
-    double deliveryCost = 10;
-    for(Product product : products) {
-      if(product.getSize == Size.NORMAL) {
-        totalPrice += product.getPrice() * CUSTOMS_DUTY_NORMAL;
-        deliveryCost += 5;
-      }
-      else {
-        totalPrice += product.getPrice() * CUSTOMS_DUTY;
-        deliveryCost += 2;
-      }
+    @Override
+    public double calculatePrice(List<Product> products) {
+        double totalPrice = 0;
+        double deliveryCost = 10;
+        for(Product product : products) {
+            if(product.getSize == Size.NORMAL) {
+                totalPrice += product.getPrice() * CUSTOMS_DUTY_NORMAL;
+                deliveryCost += 5;
+            }
+            else {
+                totalPrice += product.getPrice() * CUSTOMS_DUTY;
+                deliveryCost += 2;
+            }
+        }
+        return (totalPrice + deliveryCost) * USD_RATE;
     }
-    return (totalPrice + deliveryCost) * USD_RATE;
-  }
 
-  @Override
-  public boolean checkAvailability(Product product) {
-    if(product.getSize == Size.BIG)
-      return false;
-    else
-      return true;
-  }
+    @Override
+    public boolean checkAvailability(Product product) {
+        if(product.getSize == Size.BIG)
+            return false;
+        else
+            return true;
+    }
 
-  @Override
-  public Currency getCurrency {
-    return Currency.USD;
-  }
+    @Override
+    public Currency getCurrency {
+        return Currency.USD;
+    }
 }
 
 interface Shopping {
 
-  double calculatePrice(List<Product> products);
-  boolean checkAvailability(Product product);
-  Currency getCurrency();
+    double calculatePrice(List<Product> products);
+    boolean checkAvailability(Product product);
+    Currency getCurrency();
 }
 {% endhighlight %}
 
@@ -189,11 +189,11 @@ Użytkownik dodaje produkty do swojego koszyka, a w przypadku braku możliwości
 //check world region
 Shopping shopping;
 if(Region.EUROPE)
-  shopping = new EuropeShopping();
+    shopping = new EuropeShopping();
 else if(Region.AMERICA)
-  shopping = new AmericaShopping();
+    shopping = new AmericaShopping();
 else {
-  //stop shopping or choose another strategy if is possible
+    //stop shopping or choose another strategy if is possible
 }
 
 //if delivery not available for products show message  

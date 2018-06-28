@@ -28,42 +28,42 @@ Poniższy listing przedstawia implementację metody szablonowej w klasie `Abstra
 {% highlight java %}
 public abstract class AbstractClass {
 
-  public void templateMethod() {
-    primitiveOperation1();
-    primitiveOperation2();
-    primitiveOperation3();
-  }
+    public void templateMethod() {
+      primitiveOperation1();
+      primitiveOperation2();
+      primitiveOperation3();
+    }
 
-  protected abstract void primitiveOperation2();
+    protected abstract void primitiveOperation2();
 
-  private void primitiveOperation1() {
-    //do something always
-  }
+    private void primitiveOperation1() {
+      //do something always
+    }
 
-  protected void primitiveOperation3() {
-    //do something optional
-  }
+    protected void primitiveOperation3() {
+      //do something optional
+    }
 }
 
 public class ConcreteClass1 extends AbstractClass {
 
-  @Override
-  protected void primitiveOperation2() {
-    //do custom work for ConcreteClass1
-  }
+    @Override
+    protected void primitiveOperation2() {
+      //do custom work for ConcreteClass1
+    }
 
-  @Override
-  protected void primitiveOperation3() {
-    //do custom work for ConcreteClass2 by overriding default
-  }
+    @Override
+    protected void primitiveOperation3() {
+      //do custom work for ConcreteClass2 by overriding default
+    }
 }
 
 public class ConcreteClass2 extends AbstractClass {
 
-  @Override
-  protected void primitiveOperation2() {
-    //do custom work for ConcreteClass2
-  }
+    @Override
+    protected void primitiveOperation2() {
+      //do custom work for ConcreteClass2
+    }
 }
 {% endhighlight %}
 
