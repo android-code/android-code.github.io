@@ -43,11 +43,6 @@ public class Context {
   }
 }
 
-interface AbstractStrategy {
-
-  void action(Object args);
-}
-
 public class ConcreteStrategy1 implements AbstractStrategy {
 
   @Override
@@ -62,6 +57,11 @@ public class ConcreteStrategy2 implements AbstractStrategy {
   public void action(Object args) {
     //do action specific for ConcreteStrategy2
   }
+}
+
+interface AbstractStrategy {
+
+  void action(Object args);
 }
 {% endhighlight %}
 
@@ -111,13 +111,6 @@ public class Cart {
   public boolean removeProduct(Product product) {
     return products.remove(product);
   }
-}
-
-interface Shopping {
-
-  double calculatePrice(List<Product> products);
-  boolean checkAvailability(Product product);
-  Currency getCurrency();
 }
 
 public class EuropeShopping implements Shopping {
@@ -180,6 +173,13 @@ public class AmericaShopping implements Shopping {
   public Currency getCurrency {
     return Currency.USD;
   }
+}
+
+interface Shopping {
+
+  double calculatePrice(List<Product> products);
+  boolean checkAvailability(Product product);
+  Currency getCurrency();
 }
 {% endhighlight %}
 
