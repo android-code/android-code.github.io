@@ -315,7 +315,7 @@ orders.add(factory.createJersey(Size.L, Color.BLUE);
 Socks socks = factory.createSocks(Color.WHITE);
 Shorts shorts = factory.createShorts(Color.BLACK, Size.M);
 Shirt shirt = factory.createShirt(Color.RED, Size.M, true);
-orders.add(factor)
+orders.add(new Jersey(socks, shorts, shirt));
 
 //check availability, price and get order summary before confirm order
 int totalPrice = 0;
