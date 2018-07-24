@@ -209,4 +209,4 @@ ComponentWithLogs componentTest = new ComponentWithLogs(new MockLogger());
 {% endhighlight %}
 
 ## Biblioteki
-Popularnym frameworkiem dla Androida realizujący wstrzykiwanie zależności jest `Dagger 2`. Jest to `Kontener DI`, który ułatwia wstrzykiwanie zależności w całej aplikacji. Innym przykładem jest `Butter Knife`, którego zadaniem jest wiązanie widoków do obiektów.
+Popularnym frameworkiem dla `Androida` realizujący wstrzykiwanie zależności jest `Dagger 2`. Jest to `Kontener DI`, który ułatwia wstrzykiwanie zależności w całej aplikacji. Innym przykładem jest `Butter Knife`, którego zadaniem jest wiązanie widoków do obiektów.

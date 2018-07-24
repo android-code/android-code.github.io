@@ -10,24 +10,24 @@ keywords: "odwiedzajacy, visitor, wzorzec, wzorce projektowe, wzorzec behawioral
 ---
 
 ## Zastosowanie
-`Odwiedzający` (ang. `Visitor`) (wzorzec behawioralny) 
+`Odwiedzający` (ang. `Visitor`) (wzorzec behawioralny) ma za zadanie odsperować implementację algorytmu od struktury istniejących klas bez konieczności modyfikacji ich bieżącego kodu. Klasy rozszerzone o nową funkcjonalność akceptują obiekt `Odwiedzającego` (parametr implementowanej metody) i przenoszą na niego odpowiedzialność realizacji zadania. Obiekt `Odwiedzający` dostarcza implementacje algorytmu zgodnie z typem obiektu `Odwiedzonego`, który został przekazany jako parametr (`double dispatch`). Dodanie funkcjonalności do klas wymaga minimalnego nakładu zmian bez modyfikacji ich aktualnej struktury oraz logiki, a implementacja obiektów `Odwiedzających` może być wymienna. Spełnia zasadę `OCP` - otwartę/zamknięte.
 
 ## Ograniczenia
-TODO
+Należy unikać stosowania wzorca w przypadku niestabilnej, często zmieniającej się struktury i hierarchii klas, ponieważ zmiany te pociągają za sobą modyfikację klas `Odwiedzających`. Co więcej wzorzec narusza hermetyzację komponentów.
 
 ## Użycie
-TODO
+`Odwiedzający` ma zastosowanie w sytuacjach, gdy wymagane jest dodanie funkcjonalności dla zbioru klas, a modyfikacja struktury istniejących klas jest utrudniona lub niedozwolona.
 
 ## Implementacja
-TODO
+Klasy które wymagają rozszerzenia o nową funkcjonalność implementują interfejs `Element`. W metodzie akceptującej wizytację obiektu typu `Visitor`, przekazują referencje do własnej instancji i delegują wykonanie zadania obiektowi `Odwiedzającemu`. Klasy obiektów `Odwiedzających` implementują interfejs `Visitor`, dostarczając realizację tego samego zadania dla różnych typów obiektów `Odwiedzanych`. 
 
-![Odwiedzajacy diagram](/assets/img/diagrams/visitor.svg){: .center-image }
+![Odwiedzający diagram](/assets/img/diagrams/visitor.svg){: .center-image }
 
-TODO
+Poniższy listing przedstawia wizytację obiektów typu Visitor dla klas typu Element.
 
 {% highlight java %}
 public class Element1 implements Element {
-	
+
 	@Override
 	public void accept(Visitor visitor) {
 		visitor.visit(this);
@@ -39,7 +39,7 @@ public class Element1 implements Element {
 }
 
 public class Element2 implements Element {
-	
+
 	@Override
 	public void accept(Visitor visitor) {
 		visitor.visit(this);
@@ -51,7 +51,7 @@ public class Element2 implements Element {
 }
 
 public class Element3 implements Element {
-	
+
 	@Override
 	public void accept(Visitor visitor) {
 		visitor.visit(this);
@@ -63,12 +63,12 @@ public class Element3 implements Element {
 }
 
 public interface Element {
-	
+
 	void accept(Visitor visitor);
 }
 
 public class ConcreteVisitor1 {
-	
+
 	@Override
 	public void visit(Element1 element) {
 		//do something specific for ConcreteVisitor1
@@ -89,7 +89,7 @@ public class ConcreteVisitor1 {
 }
 
 public class ConcreteVisitor2 {
-	
+
 	@Override
 	public void visit(Element1 element) {
 		element.operation();
@@ -110,14 +110,14 @@ public class ConcreteVisitor2 {
 }
 
 public interface Visitor {
-	
+
 	void visit(Element1 element);
 	void visit(Element2 element);
 	void visit(Element3 element);
 }
 {% endhighlight %}
 
-TODO
+Klient dokonuje realizacji zadania poprzez wybór obiektu `Odwiedzającego` i wywołaniu metody akceptacji dla kolekcji elementów `Odwiedzanych`.
 
 {% highlight java %}
 //create some elements
@@ -128,13 +128,13 @@ elements.add(new Element3());
 
 //choose visitor
 Visitor visitor = new ConcreteVisitor1();
-for(Element element : elements) 
-	element.visit(visitor); //do specific job for ConcreteVisitor1
+for(Element element : elements)
+	element.accept(visitor); //do specific job for ConcreteVisitor1
 
 //change visitor type
 visitor = new ConcreteVisitor2();
-for(Element element : elements) 
-	element.visit(visitor); //do specific job for ConcreteVisitor2
+for(Element element : elements)
+	element.accept(visitor); //do specific job for ConcreteVisitor2
 {% endhighlight %}
 
 ## Przykład
@@ -151,4 +151,4 @@ TODO
 {% endhighlight %}
 
 ## Biblioteki
-TODO
+Przykładem biblioteki implementującej wzorzec `Odwiedzający` są klasy `ElementVisitor` oraz Element (ze standardowego pakietu `Java`). Ze względu na ich generyczność, mogą być z powodzeniem zastosowane w wielu przypadkach bez konieczności tworzenia własnych interfejsów.

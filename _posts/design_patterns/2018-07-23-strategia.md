@@ -210,4 +210,4 @@ Currency currency = cart.getCurrency();
 {% endhighlight %}
 
 ## Biblioteki
-Przykładem biblioteki realizującej implementacje wzorca `Strategia` może być metoda `sort` z pakietu `Collections` do której wstrzykiwany jest `Comparator`. Wybór odpowiednich zasobów aplikacji (język, widoki, wielkości itp) w `Androidzie` w swojej idei przypomina wzorzec `Strategia`.
+Przykładem biblioteki realizującej implementacje wzorca `Strategia` może być metoda `sort` klasy `Collections` (należącej do standardowego pakietu `Java`) do której wstrzykiwany jest `Comparator`. Wybór odpowiednich zasobów aplikacji (język, widoki, wielkości itp) w `Androidzie` w swojej idei przypomina wzorzec `Strategia`.

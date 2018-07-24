@@ -199,4 +199,4 @@ else {
 {% endhighlight %}
 
 ## Biblioteki
-Wzorzec `Metody szablonowej` wykorzystywany jest m.in. w bibliotekach wspomagających automatyzację testów jednostkowych np.: `jUnit`. Ponadto idea wzorca znajduje zastosowanie tam, gdzie zachodzi pewien stały cykl życia obiektu. Cykl życia Aktywności w Androidzie może być rozpatrywany w kontekście idei `Metody szablonowej`.
+Wzorzec `Metody szablonowej` wykorzystywany jest m.in. w bibliotekach wspomagających automatyzację testów jednostkowych np.: `jUnit`. Ponadto idea wzorca znajduje zastosowanie tam, gdzie zachodzi pewien stały cykl życia obiektu. Cykl życia `Aktywności` w `Androidzie` może być rozpatrywany w kontekście idei `Metody szablonowej`.
