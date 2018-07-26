@@ -189,7 +189,7 @@ Nominal nominal2 = new ConcreteNominal(2);
 Nominal nominal1 = new ConcreteNominal(1);
 
 //cashier gets client's transaction
-Exchange transaction1 = new Exchange(1500, PLN, USD);
+Exchange transaction1 = new Exchange(1500, Currency.PLN, Currency.USD);
 
 //cashier defines default nominals scheme
 nominal100.setSuccessor(nominal50);
@@ -209,10 +209,11 @@ else {
 }
 //show nominals to withdraw
 result.getOperations();
-
+//for course 3.67 the result is:
+//4x100, 1x5, 1x2, 1x1
 
 //cashier gets new transaction
-Exchange transaction2 = new Exchange(5000, USD, GBP);
+Exchange transaction2 = new Exchange(5000, Currency.USD, Currency.GBP);
 //nominals GBP are the same like USD so no need to update the chain
 
 //in deposit there is a lot of nominal 1
@@ -223,6 +224,8 @@ nominal2.setSuccessor(nominal5);
 
 //simulate transaction like above
 nominal100.calculate(transaction2);
+//for course 0.761 and 100x20, 50x30, 10x20 nominals available in deposit to withdraw the result is:
+//20x100, 30x50, 10x20, 10x10, 5x1 
 {% endhighlight %}
 
 ## Biblioteki
