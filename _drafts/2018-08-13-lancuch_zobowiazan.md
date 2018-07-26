@@ -116,16 +116,113 @@ main.handle(request2); //no handler acts
 {% endhighlight %}
 
 ## Przykład
-TODO
+Kantor wymiany walut wykorzystuje aplikację `Exchanger` do optymalizacji wydawanych nominałów w przeprowadzanych transakcjach. Kasjer otrzymuje zapytanie od klienta, a następnie definiuje zasady wydawanych nominałów. Na podstawie zleconej transakcji i zasad przeprowadzana jest symulacja, która w rezultacie podaje informacje o nominałach, które należy wypłacić klientowi. Do realizacji tego zadania wykorzystany został wzorzec `Łańcuch zobowiązań` do prezentuje poniższy listing. 
 
 {% highlight java %}
-TODO
+public abstract class Nominal {
+
+    protected Nominal successor;
+    //some fields
+
+    protected abstract void withdraw(Exchange transaction);
+    protected abstract boolean canWithdraw(Exchange transaction);
+
+    public void setSuccessor(Nominal successor) {
+        this.successor = successor;
+    }
+
+    public Exchange calculate(Exchange transaction) {
+        if(canWithdraw(transaction))
+            withdraw(transaction);
+        if(transaction.getLeftAmount() > 0 && successor != null)
+            return successor.calculate(transaction);
+        else
+            return transaction;
+    }
+
+    //some other methods
+}
+
+public class ConcreteNominal extends Nominal {
+
+    private final int NOMINAL;
+
+    public Nominal(int nominal) {
+        this.NOMINAL = nominal;
+    }
+
+    @Override
+    protected void withdraw(Exchange transaction) {
+        if(transaction.getLeftAmount() >= NOMINAL) {
+            int count = transaction.getLeftAmount() / NOMINAL;
+            int rest = transaction.getLeftAmount() % NOMINAL;
+            transaction.setLeftAmount(rest);
+            transaction.addOperation(count + " x Nominal " + NOMINAL);
+        }
+    }
+
+    @Override
+    protected boolean canWithdraw(Exchange transaction) {
+        if(transaction.getLeftAmount() >= NOMINAL && isDepositEnough(transaction))
+            return true;
+        else
+            return false;
+    }
+
+    private boolean isDepositEnough(Exchange transaction) {
+        //check is concrete nominal enough in deposit 
+        return true; //mocked
+    }
+}
 {% endhighlight %}
 
-TODO
+Kasjer na podstawie zaleceń oraz stanu depozytu definiuje priorytety wydawanych nominałów. Wprowadza zlecenie klienta do systemu i dokonuje symulacji.
 
 {% highlight java %}
-TODO
+//create default nominals scheme
+Nominal nominal100 = new ConcreteNominal(100);
+Nominal nominal50 = new ConcreteNominal(50);
+Nominal nominal20 = new ConcreteNominal(20);
+Nominal nominal10 = new ConcreteNominal(10)
+Nominal nominal5 = new ConcreteNominal(5);
+Nominal nominal2 = new ConcreteNominal(2);
+Nominal nominal1 = new ConcreteNominal(1);
+
+//cashier gets client's transaction
+Exchange transaction1 = new Exchange(1500, PLN, USD);
+
+//cashier defines default nominals scheme
+nominal100.setSuccessor(nominal50);
+nominal50.setSuccessor(nominal20);
+nominal20.setSuccessor(nominal10);
+nominal10.setSuccessor(nominal5);
+nominal5.setSuccessor(nominal2);
+nominal2.setSuccessor(nominal1);
+
+//simulate transaction
+Exchange result1 = nominal100.calculate(transaction1);
+if(result.getLeftAmount() == 0) {
+    //success - can withdraw
+}
+else {
+    //fail - can not withdraw this transaction based on current nominals scheme
+}
+//show nominals to withdraw
+result.getOperations();
+
+
+//cashier gets new transaction
+Exchange transaction2 = new Exchange(5000, USD, GBP);
+//nominals GBP are the same like USD so no need to update the chain
+
+//in deposit there is a lot of nominal 1
+//so cashier wants to spent nominal 1 before nominal 5 and 2
+nominal10.setSuccessor(nominal1);
+nominal1.setSuccessor(nominal2);
+nominal2.setSuccessor(nominal5);
+
+//simulate transaction like above
+nominal100.calculate(transaction2);
 {% endhighlight %}
 
 ## Biblioteki

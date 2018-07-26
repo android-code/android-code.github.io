@@ -92,20 +92,20 @@ public class ConcreteVisitor2 {
 
     @Override
     public void visit(Element1 element) {
-        //do something specific for ConcreteVisitor2
         element.operation();
+        //do something specific for ConcreteVisitor2
     }
 
     @Override
     public void visit(Element2 element) {
-        //do something specific for ConcreteVisitor2
         element.action();
+        //do something specific for ConcreteVisitor2
     }
 
     @Override
     public void visit(Element3 element) {
-        //do something specific for ConcreteVisitor2
         element.work();
+        //do something specific for ConcreteVisitor2
     }
 }
 
@@ -330,11 +330,11 @@ public class JsonGenerator implements FileGenerator {
     }
 }
 
-public interface Visitor {
+public interface FileGenerator {
 
-    void createFile(Book product);
-    void createFile(Film product);
-    void createFile(Game product);
+    void createFile(Book element);
+    void createFile(Film element);
+    void createFile(Game element);
 }
 {% endhighlight %}
 
