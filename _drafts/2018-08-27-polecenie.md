@@ -1,0 +1,122 @@
+---
+layout: post
+title: "Polecenie"
+date:  2018-08-27
+categories: ["Wzorce projektowe"]
+image: command
+github: command
+description: "Wzorce projektowe / behawioralny"
+keywords: "polecenie, command, wzorzec, wzorce projektowe, wzorzec behawioralny, design patterns, android, java, programowanie, programming"
+---
+
+## Zastosowanie
+`Polecenie` (ang. `Command`) (wzorzec behawioralny) enkapsuluje żądanie wykonania określonej czynności (metody) do postaci obiektu zwanego Poleceniem. Obiekty mogą być parametryzowane w zależności od typu odbiorcy oraz rejestrowane w kolejkach wywołań czy też dziennikach zdarzeń. Klasy wywołujące polecenia są rozdzielone od klas, które je wykonują dzięki czemu obiekt wywołujący (`Invoker`) operacje (`Command`) nie musi nic wiedzieć na jej temat, ponieważ wszystkie informacje zawarte są w przekazanym obiekcie. `Invoker` wywołuje odpowiedni obiekt `Command` bez wiedzy nt sposobu jego działania, natomiast obiekt `Command` dostarcza implementacji żądanej operacji bez wiedzy o tym kiedy zostanie wywołana. Spełnia zasadę `OCP` - otwarte/zamknięte.
+
+## Ograniczenia
+Zwiększa poziom skomplikowania kodu z uwagi na dużą ilość dodatkowych klas. Zapewniając możliwość cofania operacji należy liczyć się ze zwiększonym zużyciem zasobów pamięci.
+
+## Użycie
+Wzorzec `Polecenie` wykorzystywany jest w sytuacjach, gdzie obiekt wywołujący operacje nie zna jej implementacji oraz argumentów, a jego odpowiedzialnością jest wywołanie właściwego polecenia w odpowiednim momencie (może być odroczone w czasie). Ponadto znajduje zastosowanie, gdy wymagane jest kolejkowanie lub śledzenie żądań.
+
+## Implementacja
+Klasa `Invoker` decyduje o wyborze właściwego obiektu `Command` na którym wywołuje polecenie. W przypadku wymaganego kolejkowania bądź dziennika zdarzeń dodatkowo zarządza kolekcją poleceń. Klasy poleceń `Command1`, `Command2` implementują interfejs `Command` poprzez delegowanie wykonania operacji do obiektu pomocniczego `Receiver`. Jednakże w niektórych przypadkach obiekt `Receiver` jest pomijany, a implementacja operacji spoczywa wyłącznie na klasie polecenia.
+
+![Polecenie diagram](/assets/img/diagrams/command.svg){: .center-image }
+
+Poniższy listing przedstawia sposób wywołania operacji przy użyciu wzorca `Polecenie`.
+
+{% highlight java %}
+public class Invoker {
+
+    //could be list of commands to provide additional history control if needed
+    private Command command;
+
+    public void setCommand(Command command) {
+        this.command = command;
+    }
+
+    public void start(Command command) {
+        command.execute();
+    }
+}
+
+public class Command1 implements Command {
+
+    private Receiver receiver;
+
+    public ConcreteCommand(Receiver receiver) {
+        this.receiver = receiver;
+    }
+    
+    @Override
+    public void execute() {
+        //run specific action by itself or using receiver
+        receiver.action1();
+    }
+}
+
+public class Command2 implements Command {
+
+    private Receiver receiver;
+
+    public ConcreteCommand(Receiver receiver) {
+        this.receiver = receiver;
+    }
+    
+    @Override
+    public void execute() {
+        //run specific action by itself or using receiver
+        receiver.action2();
+    }
+}
+
+public class Receiver {
+    
+    //fields and constructors
+
+    public void action1() {
+        //do action
+    }
+
+    public void action2() {
+        //do action
+    }
+}
+
+public interface Command {
+    
+    void execute();
+}
+{% endhighlight %}
+
+Klient w odpowiedzi na zdarzenie przekazuje odpowiedni obiekt polecenia.
+
+{% highlight java %}
+Invoker invoker = new Invoker();
+Command command1 = new Command1();
+Command command2 = new Command2();
+
+//if user click something
+invoker.setCommand(command1);
+invoker.start();
+
+//if user click something else
+invoker.setCommand(command2);
+invoker.start();
+{% endhighlight %}
+
+## Przykład
+TODO
+
+{% highlight java %}
+TODO
+{% endhighlight %}
+
+TODO
+
+{% highlight java %}
+TODO
+{% endhighlight %}
+
+## Biblioteki
+Klasa `Thread` oraz `Runnable` standardowego pakietu `Java` są przykładem implementacji wzorca `Polecenie`.
