@@ -142,22 +142,9 @@ Księgarnia korzysta z oprogramowania `Bookstore`, które umożliwia zarządzani
 
 {% highlight java %}
 public class Book implements Product {
-	
-    private String title;
-    private int volume;
-    private String description;
-    private String author;
-    private String isbn;
-    private int pages;
 
-    public Book(String title, int volume, String description, String author, String isbn, int pages) {
-        this.title = title;
-        this.volume = volume;
-        this.description = description;
-        this.author = author;
-        this.isbn = isbn;
-        this.pages = pages;
-    }
+    //fields and constructor
+    //title, volume, description, author, isbn, pages
 
     //the only change
     @Override
@@ -171,21 +158,8 @@ public class Book implements Product {
 
 public class Film implements Product {
 	
-    private String title;
-    private String description;
-    private String director;
-    private String scenario;
-    private List<Actor> actors;
-    private int year;
-
-    public Film(String title, String description, String director, String scenario, List<Actor> actors, int year) {
-        this.title = title;
-        this.description = description;
-        this.director = director;
-        this.scenario = scenario;
-        this.actors = actors;
-        this.year = year;
-    }
+    //fields and constructor
+    //title, description, director, scenario, actors, years
 
     //the only change
     @Override
@@ -198,18 +172,9 @@ public class Film implements Product {
 }
 
 public class Game implements Product {
-	
-    private String title;
-    private String description;
-    private String producer;
-    private long budget;
 
-    public Game(String title, String description, String producer, long budger) {
-        this.title = title;
-        this.description = description;
-        this.producer = producer;
-        this.budget = budget;
-    }
+    //fields and constructor
+    //title, description, producer, budget
 
     //the only change
     @Override
