@@ -106,16 +106,132 @@ invoker.start();
 {% endhighlight %}
 
 ## Przykład
-TODO
+Aplikacja bankowa `BankOnline` pozwala swoim klientom na wykonywania podstawowych operacji informacyjnych takich jak sprawdzanie stanu konta, wyciągów czy podsumowań. Za pośrednictwem aplikacji klient może również dokonać przelewu, zlecić operacje stałe czy wziąć pożyczkę. Operacje finansowe w zależności od ustawień użytkownika wymagają opcjonalnej autoryzacji. Klient może autoryzować każdą operacje pojedynczo lub wykonać autoryzację zbiorczą. Ze względu na możliwość tworzenia operacji i ich późniejszego zbiorczego wykonania użyty został wzorzec `Polecenie`.
 
 {% highlight java %}
-TODO
+public class AccountManager {
+
+    private List<Order> orders = new ArrayList<>();
+
+    public void takeOrder(Order order) {
+    	//authorize
+    	//if authorization success then execue order
+    	order.execute();
+    }
+
+    public void takeOrders() {
+    	//authorize
+    	//if authorization success then execue orders
+        for(Order order : orders) 
+    		order.execute();
+    }
+
+    public void addOrder(Order order) {
+    	orders.add(order);
+    }
+
+    public void clearOrders() {
+    	orders.clear();
+    }
+}
+
+public class StandingOrder implements Order {
+
+    private OrderManager manager;
+    private String recipient;
+    private int amount, intervalDays;
+
+    public StandingOrder(OrderManager manager, String recipient, int amount, int intervalDays) {
+        this.manager = manager;
+    }
+    
+    @Override
+    public void execute() {
+        manager.scheduleStandingOrder(recipient, amount, intervalDays);
+    }
+}
+
+public class Transfer implements Transfer {
+
+    private OrderManager manager;
+    private String recipient, title;
+    private int amount;
+
+    public Transfer(OrderManager manager, String recipient, int amount, String title) {
+        this.manager = manager;
+    }
+
+    @Override
+    public void execute() {
+        manager.transferMoney(recipient, amount, title);
+    }
+}
+
+public class Loan implements Order {
+
+    private OrderManager manager;
+    private int amount, repaymentDays;
+
+    public Loan(OrderManager manager, int amount, repaymentDays) {
+        this.manager = manager;
+    }
+    
+    @Override
+    public void execute() {
+        manager.takeLoan(amount, repaymentDays);
+    }
+}
+
+public class OrderManager {
+
+    //constructors and fields
+
+    public void scheduleStandingOrder(String recipient, int amount, int intervalDays) {
+        //do action
+        Log.log("Standing order to: " + recipient + " for: " + amount + " with interval: " + intervalDays + " days");
+        //save in history
+    }
+
+    public void transferMoney(String recipient, int amount, String title) {
+        //do action
+        Log.log("Transfer to: " + recipient + "for: " + amount + " with title: " + title);
+        //save in history
+    }
+
+    public void takeLoan(int amount, int repaymentDays) {
+        //do action
+        Log.log("Loan for: " + amount + " to repayment until: " + manager.getRepaymentDate(repaymentDays));
+        //save in history
+    }
+
+    public String getRepaymentDate(int repaymentDays) {
+        return LocalDateTime.now().plusDays(repaymentDays).toString();
+    }
+}
+
+public interface Order {
+
+    void execute();
+}
 {% endhighlight %}
 
-TODO
+Klient przechodzi do ekranu zlecania operacji na którym wprowadza dane i zleca ich wykonanie.
 
 {% highlight java %}
-TODO
+//user navigate to account's orders view
+AccountManager accountManager = new AccountManager();
+OrderManager orderManager = new OrderManager();
+
+//user create and execute single order
+accountManager.takeOrder(new Loan(orderManager, 10000, 90)); //authorize and execute
+
+//user decided to create orders and authorizate all of them once
+accountManager.addOrder(new Transfer(orderManager, "12 3456 7890", 500, "For trip"));
+accountManager.addOrder(new Transfer(orderManager, "30 4050 6070", 500, "Auction nr 987"));
+accountManager.addOrder(new StandingOrder(orderManager, "11 2222 3333", 80, "Netflix"));
+
+//authorize and take all orders
+accountManager.takeOrders();
 {% endhighlight %}
 
 ## Biblioteki
