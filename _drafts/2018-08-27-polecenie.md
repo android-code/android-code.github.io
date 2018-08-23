@@ -151,7 +151,7 @@ public class StandingOrder implements Order {
     }
 }
 
-public class Transfer implements Transfer {
+public class Transfer implements Order {
 
     private OrderManager manager;
     private String recipient, title;
