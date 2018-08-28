@@ -28,13 +28,13 @@ Poniższy listing przedstawia implementację wzorca `Strategia` wykorzystywaną 
 {% highlight java %}
 public class Context {
 
-    private AbstractStrategy strategy;
+    private Strategy strategy;
 
-    public Context(AbstractStrategy strategy) {
+    public Context(Strategy strategy) {
         this.strategy = strategy;
     }
 
-    public void setStrategy(AbstractStrategy strategy) {
+    public void setStrategy(Strategy strategy) {
         this.strategy = strategy;
     }
 
@@ -43,23 +43,23 @@ public class Context {
     }
 }
 
-public class ConcreteStrategy1 implements AbstractStrategy {
+public class Strategy1 implements Strategy {
 
     @Override
     public void action(Object args) {
-        //do action specific for ConcreteStrategy1
+        //do action specific for Strategy1
     }
 }
 
-public class ConcreteStrategy2 implements AbstractStrategy {
+public class Strategy2 implements Strategy {
 
     @Override
     public void action(Object args) {
-        //do action specific for ConcreteStrategy2
+        //do action specific for Strategy2
     }
 }
 
-interface AbstractStrategy {
+interface Strategy {
 
     void action(Object args);
 }
@@ -68,12 +68,12 @@ interface AbstractStrategy {
 Klient przed wywołaniem metody docelowej dokonuje wyboru wstrzykniętej strategii w zależności od stanu i spełnionych warunków.
 
 {% highlight java %}
-Context context = new Context(new ConcreteStrategy1());
+Context context = new Context(new Strategy1());
 String arg = "args passed to strategy";
 context.run(arg);
 
 //conditions have changed
-context.setStrategy(new ConcreteStrategy2());
+context.setStrategy(new Strategy2());
 arg = "new args for strategy";
 context.run(arg);
 {% endhighlight %}

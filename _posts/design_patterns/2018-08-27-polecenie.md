@@ -83,7 +83,7 @@ public class Receiver {
     }
 }
 
-public interface Command {
+interface Command {
     
     void execute();
 }
@@ -209,7 +209,7 @@ public class OrderManager {
     }
 }
 
-public interface Order {
+interface Order {
 
     void execute();
 }

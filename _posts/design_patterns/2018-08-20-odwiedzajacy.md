@@ -109,7 +109,7 @@ public class ConcreteVisitor2 {
     }
 }
 
-public interface Visitor {
+interface Visitor {
 
     void visit(Element1 element);
     void visit(Element2 element);
@@ -186,7 +186,7 @@ public class Game implements Product {
     //other methods
 }
 
-public interface Product {
+interface Product {
 
     void accept(FileGenerator visitor);
 }
