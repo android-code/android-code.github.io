@@ -4,7 +4,7 @@ title: "Budowniczy"
 date:  2018-05-21
 categories: ["Wzorce projektowe"]
 image: builder
-github: builder
+github: design-patterns/tree/master/builder
 description: "Wzorce projektowe / kreacyjny"
 keywords: "budowniczy, builder, fluent builder, wzorzec, wzorce projektowe, wzorzec kreacyjny, design patterns, android, java, programowanie, programming"
 ---

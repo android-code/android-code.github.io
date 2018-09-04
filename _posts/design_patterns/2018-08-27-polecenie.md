@@ -4,7 +4,7 @@ title: "Polecenie"
 date:  2018-08-27
 categories: ["Wzorce projektowe"]
 image: command
-github: command
+github: design-patterns/tree/master/command
 description: "Wzorce projektowe / behawioralny"
 keywords: "polecenie, command, wzorzec, wzorce projektowe, wzorzec behawioralny, design patterns, android, java, programowanie, programming"
 ---

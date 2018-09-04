@@ -4,7 +4,7 @@ title: "Odwiedzający"
 date:  2018-08-20
 categories: ["Wzorce projektowe"]
 image: visitor
-github: visitor
+github: design-patterns/tree/master/visitor
 description: "Wzorce projektowe / behawioralny"
 keywords: "odwiedzajacy, visitor, wzorzec, wzorce projektowe, wzorzec behawioralny, design patterns, android, java, programowanie, programming"
 ---

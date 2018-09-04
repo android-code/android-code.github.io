@@ -4,7 +4,7 @@ title: "Wstrzykiwanie zależności"
 date:  2018-06-04
 categories: ["Wzorce projektowe"]
 image: dependency_injection
-github: dependency-injection
+github: design-patterns/tree/master/dependency-injection
 description: "Wzorce projektowe / Odwrócenie Sterowania"
 keywords: "wstrzykiwanie zależności, dependency injection, di, wstrzykiwanie, zależności, odwrócenie sterowania, inversion of control, loose coupling, constructor injection, setter injection, interface injection, field injection, kontener di, wzorzec, wzorce projektowe, design patterns, android, java, programowanie, programming, dagger 2, butter knife"
 ---

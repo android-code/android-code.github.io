@@ -4,7 +4,7 @@ title: "Fabryka abstrakcyjna"
 date:  2018-07-09
 categories: ["Wzorce projektowe"]
 image: abstract_factory
-github: abstract-factory
+github: design-patterns/tree/master/abstract-factory
 description: "Wzorce projektowe / kreacyjny"
 keywords: "fabryka abstrakcyjna, abstract factory, fabryka, factory, wzorzec, wzorce projektowe, wzorzec kreacyjny, design patterns, android, java, programowanie, programming"
 ---

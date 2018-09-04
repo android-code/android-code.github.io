@@ -4,7 +4,7 @@ title: "Metoda wytwórcza"
 date:  2018-07-02
 categories: ["Wzorce projektowe"]
 image: factory_method
-github: factory-method
+github: design-patterns/tree/master/factory-method
 description: "Wzorce projektowe / kreacyjny"
 keywords: "metoda wytwórcza, factory method, fabryka, factory, wzorzec, wzorce projektowe, wzorzec kreacyjny, design patterns, android, java, programowanie, programming"
 ---

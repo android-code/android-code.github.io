@@ -4,7 +4,7 @@ title: "Metoda szablonowa"
 date:  2018-07-16
 categories: ["Wzorce projektowe"]
 image: template_method
-github: template-method
+github: design-patterns/tree/master/template-method
 description: "Wzorce projektowe / behawioralny"
 keywords: "metoda szablonowa, template method, szablon, template, wzorzec, wzorce projektowe, wzorzec behawioralny, design patterns, android, java, programowanie, programming"
 ---

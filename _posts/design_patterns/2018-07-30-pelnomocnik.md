@@ -4,7 +4,7 @@ title: "Pełnomocnik"
 date:  2018-07-30
 categories: ["Wzorce projektowe"]
 image: proxy
-github: proxy
+github: design-patterns/tree/master/proxy
 description: "Wzorce projektowe / strukturalny"
 keywords: "pełnomocnik, proxy, wzorzec, wzorce projektowe, wzorzec strukturalny, design patterns, android, java, programowanie, programming"
 ---

@@ -4,7 +4,7 @@ title: "Dekorator"
 date:  2018-05-14
 categories: ["Wzorce projektowe"]
 image: decorator
-github: decorator
+github: design-patterns/tree/master/decorator
 description: "Wzorce projektowe / strukturalny"
 keywords: "dekorator, decorator, wzorzec, wzorce projektowe, wzorzec strukturalny, design patterns, android, java, decor, programowanie, programming"
 ---

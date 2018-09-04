@@ -4,7 +4,7 @@ title: "Obserwator"
 date:  2018-06-11
 categories: ["Wzorce projektowe"]
 image: observer
-github: observer
+github: design-patterns/tree/master/observer
 description: "Wzorce projektowe / behawioralny"
 keywords: "obserwator, observer, wzorzec, wzorce projektowe, design patterns, android, java, programowanie, programming, rxandroid, rxjava, szyna zdarzeń, eventbus, event bus, otto"
 ---

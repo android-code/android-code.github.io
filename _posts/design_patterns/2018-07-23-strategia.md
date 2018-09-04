@@ -4,7 +4,7 @@ title: "Strategia"
 date:  2018-07-23
 categories: ["Wzorce projektowe"]
 image: strategy
-github: strategy
+github: design-patterns/tree/master/strategy
 description: "Wzorce projektowe / behawioralny"
 keywords: "strategia, strategy, wzorzec, wzorce projektowe, wzorzec behawioralny, design patterns, android, java, programowanie, programming"
 ---

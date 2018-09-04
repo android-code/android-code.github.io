@@ -4,7 +4,7 @@ title: "Łańcuch zobowiązań"
 date:  2018-08-13
 categories: ["Wzorce projektowe"]
 image: chain_responsibility
-github: chain-responsibility
+github: design-patterns/tree/master/chain-responsibility
 description: "Wzorce projektowe / behawioralny"
 keywords: "łańcuch zobowiązań, łańcuch odpowiedzialności, chain of responsibility, wzorzec, wzorce projektowe, wzorzec behawioralny, design patterns, android, java, programowanie, programming"
 ---
