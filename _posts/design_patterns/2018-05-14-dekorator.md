@@ -10,10 +10,10 @@ keywords: "dekorator, decorator, wzorzec, wzorce projektowe, wzorzec strukturaln
 ---
 
 ## Zastosowanie
-`Dekorator` (ang. `Decorator`) (wzorzec strukturalny) umożliwia rozszerzenie funkcjonalności lub modyfikacje stanu istniejącego obiektu bez zmiany jego struktury w trakcie działania programu. Jest alternatywą dla `dziedziczenia`, które w przeciwieństwie do `Dekoratora` zachodzi w trakcie kompilacji. Spełnia zasady `OCP` - otwarte/zamknięte oraz `SRP` - pojedynczej odpowiedzialności. Wzorzec ten jest swego rodzaju `Wrapperem` dla istniejącej klasy. Obiekt klasy podstawowej może być rozszerzony przez kilka dekoratorów umożliwiając tym samym tworzenie wielu wariantów zachowań bez ingerencji w strukturę rozszerzanej klasy. Proces ten odnosi się do jednego obiektu, a nie wszystkich instancji klasy. Dzięki temu struktura klas oraz dziedziczenia staje się przejrzysta, a projekt jest otwarty i elastyczny na przyszłe modyfikacje i nowe rozszerzenia.
+`Dekorator` (ang. `Decorator`) (wzorzec strukturalny) umożliwia rozszerzenie funkcjonalności lub modyfikacje stanu istniejącego obiektu bez zmiany jego struktury w trakcie działania programu. Jest alternatywą dla `dziedziczenia`, które w przeciwieństwie do `Dekoratora` zachodzi w trakcie kompilacji. Wzorzec ten jest swego rodzaju `Wrapperem` dla istniejącej klasy. Obiekt klasy podstawowej może być rozszerzony przez kilka dekoratorów umożliwiając tym samym tworzenie wielu wariantów zachowań bez ingerencji w strukturę rozszerzanej klasy. Proces ten odnosi się do jednego obiektu, a nie wszystkich instancji klasy. Dzięki temu struktura klas oraz dziedziczenia staje się przejrzysta, a projekt jest otwarty i elastyczny na przyszłe modyfikacje i nowe rozszerzenia.
 
 ## Ograniczenia
-Zagrożenie płynące ze stosowania `Dekoratora` może być nadmiarowa ilość klas. Należałoby wówczas zastanowić się czy implementacja tego wzorca jest rzeczywiście najlepszym sposobem rozwiązania problemu.
+Zagrożenie płynące ze stosowania `Dekoratora` może być nadmiarowa ilość małych klas. Należałoby wówczas zastanowić się czy implementacja tego wzorca jest rzeczywiście najlepszym sposobem rozwiązania problemu. Dekorator jest trudny w zastosowaniu dla wielokrotnie 
 
 ## Użycie
 `Dekorator` bywa często używany w implementacji kontrolek interfejsu - klas `View`. Można go spotkać w `strumieniach I/O w Javie`. Jest on implementowany tam, gdzie zachodzi potrzeba tworzenia wielu zachowań dla obiektów tego samego typu w zależności od miejsca ich wystąpienia, a użycie dziedziczenia jest zbyt kosztowne lub nie możliwe do przewidzenia. Takim przykładem może być proces składanie zamówienia danego produktu z opcją dodania do niego składników. Używając `Dekoratora` dla 5 rozszerzeń wystarczy utworzyć 5 Dekoratorów. Korzystając z `dziedziczenia`, aby zachować tą samą ilość typów należałoby stworzyć aż 31 klas!
@@ -256,4 +256,4 @@ katy.fight();
 {% endhighlight %}
 
 ## Biblioteki
-Z uwagi na prostote wzorca, jego specyfikę i niski koszt implementacji używanie bibliotek implementujących wzorzec `Dekorator` mija się z celem. Najczęstszym jego wykorzystaniem w `Androidzie` jest rozszerzanie widoków. `Decor` jest przykładem biblioteki, która ułatwia dodawanie dekoratorów do klas View.
+Z uwagi na prostote wzorca, jego specyfikę i niski koszt implementacji używanie bibliotek implementujących wzorzec `Dekorator` mija się z celem. Najczęstszym jego wykorzystaniem w `Androidzie` jest rozszerzanie widoków. `Decor` jest przykładem biblioteki, która ułatwia dodawanie dekoratorów do klas `View`. Przykładem implementacji wzorca w `Javie` są wszystkie podklasy `InputStream`, `OutputStream`, `Reader` czy też `Writer`.

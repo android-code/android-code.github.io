@@ -10,7 +10,7 @@ keywords: "odwiedzajacy, visitor, wzorzec, wzorce projektowe, wzorzec behawioral
 ---
 
 ## Zastosowanie
-`Odwiedzający` (ang. `Visitor`) (wzorzec behawioralny) ma za zadanie odsperować implementację algorytmu od struktury istniejących klas bez konieczności modyfikacji ich bieżącego kodu. Klasy rozszerzone o nową funkcjonalność akceptują obiekt `Odwiedzającego` (parametr implementowanej metody) i przenoszą na niego odpowiedzialność realizacji zadania. Obiekt `Odwiedzający` dostarcza implementacje algorytmu zgodnie z typem obiektu `Odwiedzonego`, który został przekazany jako parametr (`double dispatch`). Dodanie funkcjonalności do klas wymaga minimalnego nakładu zmian bez modyfikacji ich aktualnej struktury oraz logiki, a implementacja obiektów `Odwiedzających` może być wymienna. Spełnia zasadę `OCP` - otwartę/zamknięte.
+`Odwiedzający` (ang. `Visitor`) (wzorzec behawioralny) ma za zadanie odsperować implementację algorytmu od struktury istniejących klas bez konieczności modyfikacji ich bieżącego kodu. Klasy rozszerzone o nową funkcjonalność akceptują obiekt `Odwiedzającego` (parametr implementowanej metody) i przenoszą na niego odpowiedzialność realizacji zadania. Obiekt `Odwiedzający` dostarcza implementacje algorytmu zgodnie z typem obiektu `Odwiedzonego`, który został przekazany jako parametr (`double dispatch`). Dodanie funkcjonalności do klas wymaga minimalnego nakładu zmian bez modyfikacji ich aktualnej struktury oraz logiki, a implementacja obiektów `Odwiedzających` może być wymienna.
 
 ## Ograniczenia
 Należy unikać stosowania wzorca w przypadku niestabilnej, często zmieniającej się struktury i hierarchii klas, ponieważ zmiany te pociągają za sobą modyfikację klas `Odwiedzających`. Co więcej wzorzec narusza hermetyzację komponentów.

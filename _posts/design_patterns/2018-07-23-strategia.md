@@ -10,10 +10,10 @@ keywords: "strategia, strategy, wzorzec, wzorce projektowe, wzorzec behawioralny
 ---
 
 ## Zastosowanie
-`Strategia` (ang. `Strategy`) (wzorzec behawioralny) definiuje rodzinę wymiennych algorytmów (w postaci klas), które służą do rozwiązywania tego samego problemu na kilka różnych sposobów. Klient może dynamicznie wybrać strategie dla obiektu i dowolnym momencie zmienić ją na inną. Szczegóły implementacji konkretnych strategii są ukryte dla klienta, a ewentualna modyfikacja wiążę się zmianą kodu w klasie konkretnej strategii. Ponadto zwiększa możliwość niezależnego testowania strategii i klienta. W celu usprawnienia procesu wyboru strategii wzorzec ten może być łączony ze wzorcem `Metoda wytwórcza`. Spełnia zasadę `OCP` - otwarte/zamknięte.
+`Strategia` (ang. `Strategy`) (wzorzec behawioralny) definiuje rodzinę wymiennych algorytmów (w postaci klas), które służą do rozwiązywania tego samego problemu na kilka różnych sposobów. Klient może dynamicznie wybrać strategie dla obiektu i dowolnym momencie zmienić ją na inną. Szczegóły implementacji konkretnych strategii są ukryte dla klienta, a ewentualna modyfikacja wiążę się zmianą kodu w klasie konkretnej strategii. Ponadto zwiększa możliwość niezależnego testowania strategii i klienta. W celu usprawnienia procesu wyboru strategii wzorzec ten może być łączony ze wzorcem `Metoda wytwórcza`.
 
 ## Ograniczenia
-Ze względu na podobieństwa w strukturze, wzorzec ten może być mylony ze wzorcami `Adapter` i `Most`, których zastosowanie wynika z realizacji innych celów. Należy zatem się upewnić, że wybór wzorca `Strategia` jest zasadny. W sytuacji, gdy obiekt kontekstu nie wymaga przekazania strategii w konstruktorze, należy zadbać o jej domyślną implementacje. Dodatkowo wzrasta koszt komunikacji między obiektami, a w przypadku wielu implementacji algorytmu powstaje wiele klas.
+Ze względu na podobieństwa w strukturze, wzorzec ten może być mylony ze wzorcami `Adapter` i `Most`, których zastosowanie wynika z realizacji innych celów. Należy zatem się upewnić, że wybór wzorca `Strategia` jest zasadny. W sytuacji, gdy obiekt kontekstu nie wymaga przekazania strategii w konstruktorze, należy zadbać o jej domyślną implementacje. Dodatkowo wzrasta koszt komunikacji między obiektami, a w przypadku wielu implementacji algorytmu powstaje wiele klas. Klient powinien znać różnicę między strategiami w celu wyboru właściwej.
 
 ## Użycie
 Wzorzec ten podobnie jak `Adapter` wykorzystuje mechanizm delegowania operacji do innego obiektu. Ponadto używa podobnej struktury jak `Most`, jednakże celem wzorca `Most` jest zaprojektowanie odpowiedniej struktury klas projektu, natomiast `Strategia` skupia się zmienności zachowania obiektu. `Strategia` ma zastosowanie w sytuacjach, gdzie dane zadanie może zostać zrealizowane na wiele różnych sposobów, a decyzja o wyborze implementacji zapada dynamicznie.
@@ -210,4 +210,4 @@ Currency currency = cart.getCurrency();
 {% endhighlight %}
 
 ## Biblioteki
-Przykładem biblioteki realizującej implementacje wzorca `Strategia` może być metoda `sort` klasy `Collections` (należącej do standardowego pakietu `Java`) do której wstrzykiwany jest `Comparator`. Wybór odpowiednich zasobów aplikacji (język, widoki, wielkości itp) w `Androidzie` w swojej idei przypomina wzorzec `Strategia`.
+Przykładem realizującym implementacje wzorca `Strategia` może być metoda `sort` klasy `Collections` (należącej do standardowego pakietu `Java`) do której wstrzykiwany jest `Comparator` oraz `doFilter` klasy `Filter`. Wybór odpowiednich zasobów aplikacji (język, widoki, wielkości itp) w `Androidzie` w swojej idei przypomina wzorzec `Strategia`.

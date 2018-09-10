@@ -10,10 +10,10 @@ keywords: "metoda wytwórcza, factory method, fabryka, factory, wzorzec, wzorce 
 ---
 
 ## Zastosowanie
-`Metoda wytwórcza` (ang. `Factory method`) (wzorzec kreacyjny) umożliwia tworzenie obiektów o wspólnym typie poprzez dostarczenie interfejsu do tworzenia nieokreślonych instancji jednego typu. Zatem fabryki `Factory` `Metody wytwórczej` są ściśle związane z produktami jednego abstrakcyjnego typu `Product`. Na podstawie przekazanych argumentów bądź innych warunków zależnych od implementacji fabryki, tworzy ona egzemplarz konkretnego typu. Dzięki temu centralizuje oraz hermetyzuje się proces tworzenia obiektów co ułatwia wprowadzanie zmian w istniejącym kodzie. Dodatkowo niweluje zależnosci między implementacją, a zastosowaniem produktu. Klient nie musi znać dokładnego typu produktu oraz wywołania konstruktora, cała odpowiedzialność spada na `Metodę fabrykującą`. Spełnia zasadę `OCP` - otwarte/zamknięte, a także `DIP` - odwrócenia zależności.
+`Metoda wytwórcza` (ang. `Factory method`) (wzorzec kreacyjny) umożliwia tworzenie obiektów o wspólnym typie poprzez dostarczenie interfejsu do tworzenia nieokreślonych instancji jednego typu. Zatem fabryki `Factory` `Metody wytwórczej` są ściśle związane z produktami jednego abstrakcyjnego typu `Product`. Na podstawie przekazanych argumentów bądź innych warunków zależnych od implementacji fabryki, tworzy ona egzemplarz konkretnego typu. Dzięki temu centralizuje oraz hermetyzuje się proces tworzenia obiektów co ułatwia wprowadzanie zmian w istniejącym kodzie. Dodatkowo niweluje zależnosci między implementacją, a zastosowaniem produktu. Klient nie musi znać dokładnego typu produktu oraz wywołania konstruktora, cała odpowiedzialność spada na `Metodę fabrykującą`.
 
 ## Ograniczenia
-Wzorzec ten może wprowadzać zbyt duży poziom abstrakcji, tzn. klient nie wie z jakim obiektem współpracuje. Należy uważać, aby fabryka nie stała się super klasą, a jej rola została ograniczona do generowania obiektów. `Metoda wytwórcza` może być nadużywana, należy zatem umieścić ją tam gdzie rzeczywiście przyniesie ona korzyści, a nie wprowadzi tylko dodatkowy poziom skomplikowania.
+Wzorzec ten może wprowadzać zbyt duży poziom abstrakcji, tzn. klient nie wie z jakim obiektem współpracuje. Należy uważać, aby fabryka nie stała się `super klasą` (`god object`), a jej rola została ograniczona do generowania obiektów. `Metoda wytwórcza` może być nadużywana, należy zatem umieścić ją tam gdzie rzeczywiście przyniesie ona korzyści, a nie wprowadzi tylko dodatkowy poziom skomplikowania.
 
 ## Użycie
 `Metoda wytwórcza` jest stosowana tam gdzie pożądane jest ujednolicenie sposobu tworzenia obiektów danej rodziny oraz odcięcie klienta od szczegółów implementacji tworzenia obiektów. Ponadto dokładny typ obiektu nie musi być znany w trakcie tworzenia kodu, a decyzja o tym jaki obiekt zostanie wygenerowany zapada dynamicznie. Wzorzec ten warto użyć także, gdy klasa ma skomplikowany konstruktor.
@@ -235,4 +235,4 @@ pois.get(itemId).getCoordinates();
 {% endhighlight java %}
 
 ## Biblioteki
-Ze względu na specyfikację wzorca, implementacja `Metody wytwórczej` spoczywa na barkach programisty.
+Ze względu na specyfikację wzorca, implementacja `Metody wytwórczej` spoczywa na barkach programisty. Metodą `getInstance` klasy `Calendar` standardowego pakietu `Java` jest przykłądem realizacji wzorca.

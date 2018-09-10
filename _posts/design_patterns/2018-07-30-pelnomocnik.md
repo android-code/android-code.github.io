@@ -224,4 +224,4 @@ taskManager.addTask(task); //task will be add only to cache
 {% endhighlight %}
 
 ## Biblioteki
-Ze względu na prostotę wzorca opartą o implementacje wspólnego interfejsu, biblioteki implementujące wzorzec `Pełnomocnik` nie mają sensu.
+Ze względu na prostotę wzorca opartą o implementacje wspólnego interfejsu, biblioteki implementujące wzorzec `Pełnomocnik` nie mają sensu. Przykładem realizacji wzorca jest klasa `Proxy` wraz z `InvocationHandler` z pakietu `java.lang.reflect`.

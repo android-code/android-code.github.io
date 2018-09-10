@@ -10,7 +10,7 @@ keywords: "polecenie, command, wzorzec, wzorce projektowe, wzorzec behawioralny,
 ---
 
 ## Zastosowanie
-`Polecenie` (ang. `Command`) (wzorzec behawioralny) enkapsuluje żądanie wykonania określonej czynności (metody) do postaci obiektu zwanego Poleceniem. Obiekty mogą być parametryzowane w zależności od typu odbiorcy oraz rejestrowane w kolejkach wywołań czy też dziennikach zdarzeń. Klasy wywołujące polecenia są rozdzielone od klas, które je wykonują dzięki czemu obiekt wywołujący (`Invoker`) operacje (`Command`) nie musi nic wiedzieć na jej temat, ponieważ wszystkie informacje zawarte są w przekazanym obiekcie. `Invoker` wywołuje odpowiedni obiekt `Command` bez wiedzy nt sposobu jego działania, natomiast obiekt `Command` dostarcza implementacji żądanej operacji bez wiedzy o tym kiedy zostanie wywołana. Spełnia zasadę `OCP` - otwarte/zamknięte.
+`Polecenie` (ang. `Command`) (wzorzec behawioralny) enkapsuluje żądanie wykonania określonej czynności (metody) do postaci obiektu zwanego Poleceniem. Obiekty mogą być parametryzowane w zależności od typu odbiorcy oraz rejestrowane w kolejkach wywołań czy też dziennikach zdarzeń. Klasy wywołujące polecenia są rozdzielone od klas, które je wykonują dzięki czemu obiekt wywołujący (`Invoker`) operacje (`Command`) nie musi nic wiedzieć na jej temat, ponieważ wszystkie informacje zawarte są w przekazanym obiekcie. `Invoker` wywołuje odpowiedni obiekt `Command` bez wiedzy nt sposobu jego działania, natomiast obiekt `Command` dostarcza implementacji żądanej operacji bez wiedzy o tym kiedy zostanie wywołana.
 
 ## Ograniczenia
 Zwiększa poziom skomplikowania kodu z uwagi na dużą ilość dodatkowych klas. Zapewniając możliwość cofania operacji należy liczyć się ze zwiększonym zużyciem zasobów pamięci.

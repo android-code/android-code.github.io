@@ -10,10 +10,10 @@ keywords: "budowniczy, builder, fluent builder, wzorzec, wzorce projektowe, wzor
 ---
 
 ## Zastosowanie
-`Budowniczy` (ang. `Builder`) (wzorzec kreacyjny) rozdziela sposób tworzenia obiektów od ich reprezentacji. Dzieli proces wytwórczy obiektu na etapy. Każdy z etapów może być zaimplementowany na wiele sposobów co umożliwia tworzenie różnych reprezentacji obiektów tej samej klasy. Spełnia zasadę `SRP` - pojedynczej odpowiedzialności, `OCP` - otwarty/zamknięty oraz `DIP` - odwrócenia zależności, dzięki czemu zmiana sposobu tworzenia obiektów jest elastyczna i odbywa się niskim kosztem. Ponadto kod jest łatwiejszy w testowaniu, utrzymaniu, zapewnieniu obsługi wyjątków oraz zapobiega duplikacji. Wzorzec ten działa na podobnej zasadzie co plan budowy. `Dyrektor` odpowiedzialny za całą budowę zleca wykonanie poszczególnej pracy konkretnym `Budowniczym`. W efekcie połączenia ich pracy powstaje finalny `Produkt`. Mówiąc o wzorcu `Budowniczy` nie sposób nie wspomnieć o jego odmianie tzw. `Fluent Builder`. Jego rola sprowadza się do tworzenia obiektów (z dużą ilością parametrów) w czytelny sposób poprzez zastępienie konstruktora.
+`Budowniczy` (ang. `Builder`) (wzorzec kreacyjny) rozdziela sposób tworzenia obiektów od ich reprezentacji. Dzieli proces wytwórczy obiektu na etapy. Każdy z etapów może być zaimplementowany na wiele sposobów co umożliwia tworzenie różnych reprezentacji obiektów tej samej klasy. Dzięki zastosowaniu podejścia `odwrócenia zależności` zmiana sposobu tworzenia obiektów jest elastyczna i odbywa się niskim kosztem. Ponadto kod jest łatwiejszy w testowaniu, utrzymaniu, zapewnieniu obsługi wyjątków oraz zapobiega duplikacji. Wzorzec ten działa na podobnej zasadzie co plan budowy. `Dyrektor` odpowiedzialny za całą budowę zleca wykonanie poszczególnej pracy konkretnym `Budowniczym`. W efekcie połączenia ich pracy powstaje finalny `Produkt`. Mówiąc o wzorcu `Budowniczy` nie sposób nie wspomnieć o jego odmianie tzw. `Fluent Builder`. Jego rola sprowadza się do tworzenia obiektów (z dużą ilością parametrów) w czytelny sposób poprzez zastępienie konstruktora.
 
 ## Ograniczenia
-Stosowanie wzorca wymusza tworzenie konkretnego `Budowniczego` dla każdego typu `Produktu`. Ponadto nie ma gwarancji inicjalizacji pól klasy, a `Wstrzykiwanie Zależności` może być utrudnione.
+Stosowanie wzorca wymusza tworzenie konkretnego `Budowniczego` dla każdego typu `Produktu` co zwiększa ilość klas. Ponadto nie ma gwarancji inicjalizacji pól klasy, a `Wstrzykiwanie Zależności` może być utrudnione.
 
 ## Użycie
 `Budowniczy` używany jest w implementacji złożonych obiektów (`kompozytów`), które mogą być budowane na różne sposoby, a ich inicjalizacja jest procesem wieloetapowym. Zastosowanie wzorca pozwala uniknąć tworzenia super klasy o rozbudowanej odpowiedzialności. Wykorzystywany jest w inicjalizacji `kompozytów` w wielu bibliotekach zewnętrznych oraz także systemowych. W sytuacjach, gdy konstruktor klas ma długą listę parametrów (ok 5) należy rozważyć zastosowanie `Fluent Builder`.
@@ -277,4 +277,4 @@ SpecificMeal specificMeal = new SpecificMeal.Chef()
 {% endhighlight %}
 
 ## Biblioteki
-Wiele bibliotek zewnętrznych jak np.: `Retrofit` czy elementów systemu np.: `AlertDialog`, `Notification` korzysta z `Budowniczego`. Jednakże do samej implementacji wzorca przeważnie nie używa się bibliotek. 
+Wiele bibliotek zewnętrznych jak np.: `Retrofit` czy elementów systemu np.: `AlertDialog`, `Notification` korzysta z `Budowniczego`. Jednakże do samej implementacji wzorca przeważnie nie używa się bibliotek. Metoda `append` klas `StringBuilder` oraz `StringBuffer` mogą być przykładem realizacji wzorca `Budowniczy` w `Javie`.
