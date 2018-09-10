@@ -28,51 +28,51 @@ Poniższy listing przedsawia implementacje wzorca `Interpreter` dla koniukcji wy
 {% highlight java %}
 public class TerminalExpression implements Expression {
 	
-	//some fields
-	private String data;
+    //some fields
+    private String data;
 
-	@Override
-	public boolean interpret(Context context) {
-		//do something specific for TerminalExpression e.g. contains text
-		return context.getText().contains(data);
-	}
+    @Override
+    public boolean interpret(Context context) {
+        //do something specific for TerminalExpression e.g. contains text
+        return context.getText().contains(data);
+    }
 }
 
 public class NonTerminalExpression implements Expression {
 	
-	private TerminalExpression expression1;
-	private TerminalExpression expression2;
+    private TerminalExpression expression1;
+    private TerminalExpression expression2;
 
-	public NonTerminalExpression(TerminalExpression expr1, TerminalExpression expr2) {
-		this.expression1 = expr1;
-		this.expression2 = expr2;
-	}
+    public NonTerminalExpression(TerminalExpression expr1, TerminalExpression expr2) {
+        this.expression1 = expr1;
+        this.expression2 = expr2;
+    }
 
-	@Override
-	public boolean interpret(Context context) {
-		//do something specific for NonTerminalExpression e.g. AndExpression
-		return expression1.interpret(context) && expression2.interpret(context);
-	}
+    @Override
+    public boolean interpret(Context context) {
+        //do something specific for NonTerminalExpression e.g. AndExpression
+        return expression1.interpret(context) && expression2.interpret(context);
+    }
 }
 
 interface Expression {
 	
-	boolean interpret(Context context);
+    boolean interpret(Context context);
 }
 
 public class Context {
 	
-	//some fields
-	private String text;
+    //some fields
+    private String text;
 
-	//constructor and methods
-	public Context(String text) {
-		this.text = text;
-	}
+    //constructor and methods
+    public Context(String text) {
+        this.text = text;
+    }
 
-	public String getText() {
-		return text;
-	}
+    public String getText() {
+        return text;
+    }
 }
 {% endhighlight %}
 
@@ -88,12 +88,12 @@ areBrothers.interpret("Jack has one brother. His name is John"); //false
 
 //brothers expression rule
 public static Expression getBrothersExpression(String name1, String name2) {
-	Expression person1 = new TerminalExpression(new Context(name1));
-	Expression person2 = new TerminalExpression(new Context(name2));
-	Expression brother = new TerminalExpression(new Context("brother"));
+    Expression person1 = new TerminalExpression(new Context(name1));
+    Expression person2 = new TerminalExpression(new Context(name2));
+    Expression brother = new TerminalExpression(new Context("brother"));
 
-	Expression names = new NonTerminalExpression(person1, person2);
-	return new NonTerminalExpression(names, brothers);
+    Expression names = new NonTerminalExpression(person1, person2);
+    return new NonTerminalExpression(names, brothers);
 }
 {% endhighlight %}
 
@@ -103,76 +103,76 @@ Aplikacja `GuessColor` jest grą w której sprawdzane są umiejętności znajomo
 {% highlight java %}
 public class HexToRgb implements Expression {
 
-	@Override
-	public String interpret(String number) {
-		Pattern pattern = Pattern.compile("#([0-9a-f]{6}", Pattern.CASE_INSENSITIVE);
-		Matcher matcher = pattern.matcher(number);
-		if (matcher.matches()) {
-			Expression hexToInt = new HexToInt();
-			String red = hexToInt.interpret(number.substring(1,3));
-			String green = hexToInt.interpret(number.substring(3,5));
-			String blue = hexToInt.interpret(number.substring(5,7));
-			if(!red.contains("Invalid") && !green.contains("Invalid") && !blue.contains("Invalid"))
-				return "#" + red + green + blue;
-			else
-				return "Invalid input. Should be #rrggbb";
-		}
-		else
-			return "Invalid input. Should be #rrggbb";
-	}
+    @Override
+    public String interpret(String number) {
+        Pattern pattern = Pattern.compile("#([0-9a-f]{6}", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(number);
+        if (matcher.matches()) {
+            Expression hexToInt = new HexToInt();
+            String red = hexToInt.interpret(number.substring(1,3));
+            String green = hexToInt.interpret(number.substring(3,5));
+            String blue = hexToInt.interpret(number.substring(5,7));
+            if(!red.contains("Invalid") && !green.contains("Invalid") && !blue.contains("Invalid"))
+                return "#" + red + green + blue;
+            else
+                return "Invalid input. Should be #rrggbb";
+        }
+        else
+            return "Invalid input. Should be #rrggbb";
+    }
 }
 
 public class RgbToHex implements Expression {
 
-	@Override
-	public String interpret(String number) {
-		Pattern pattern = Pattern.compile("rgb *\\( *([0-9]+), *([0-9]+), *([0-9]+) *\\)");
-	    Matcher matcher = pattern.matcher(number);
-	    if (matcher.matches()) {
-	    	Expression intToHex = new IntToHex();
-	    	String red = intToHex.interpret(matcher.group(1));
-			String green = intToHex.interpret(matcher.group(2));
-			String blue = intToHex.interpret(matcher.group(3));
-	    	if(!red.contains("Invalid") && !green.contains("Invalid") && !blue.contains("Invalid"))
-				return "rgb(" + red + green + blue + ")";
-			else
-				return "Invalid input. Should be rgb(int, int, int)";
-	    }
-	    else
-	    	return "Invalid input. Should be rgb(int, int, int)";
-	}
+    @Override
+    public String interpret(String number) {
+        Pattern pattern = Pattern.compile("rgb *\\( *([0-9]+), *([0-9]+), *([0-9]+) *\\)");
+        Matcher matcher = pattern.matcher(number);
+        if (matcher.matches()) {
+            Expression intToHex = new IntToHex();
+            String red = intToHex.interpret(matcher.group(1));
+            String green = intToHex.interpret(matcher.group(2));
+            String blue = intToHex.interpret(matcher.group(3));
+            if(!red.contains("Invalid") && !green.contains("Invalid") && !blue.contains("Invalid"))
+                return "rgb(" + red + green + blue + ")";
+            else
+                return "Invalid input. Should be rgb(int, int, int)";
+        }
+        else
+            return "Invalid input. Should be rgb(int, int, int)";
+    }
 }
 
 public class HexToInt implements Expression {
 
-	@Override
-	public String interpret(String number) {
-		Pattern pattern = Pattern.compile("([0-9a-f]{2}", Pattern.CASE_INSENSITIVE);
-		Matcher matcher = pattern.matcher(number);
-		if (matcher.matches()) {
-			return Integer.parseInt(number, 16);
-		}
-		else
-			return "Invalid input. Should be [0-9a-f]{2}";
-	}
+    @Override
+    public String interpret(String number) {
+        Pattern pattern = Pattern.compile("([0-9a-f]{2}", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(number);
+        if (matcher.matches()) {
+            return Integer.parseInt(number, 16);
+        }
+        else
+            return "Invalid input. Should be [0-9a-f]{2}";
+    }
 }
 
 public class IntToHex implements Expression {
 
-	@Override
-	public String interpret(String number) {
-		Pattern pattern = Pattern.compile("([0-9]{1,3}");
-		Matcher matcher = pattern.matcher(number);
-		if (matcher.matches() && Integer.parseInt(number) <= 255) {
-			return Integer.toHexString(number);
-		else
-			return "Invalid input. Should be a number between 0-255";
-	}
+    @Override
+    public String interpret(String number) {
+        Pattern pattern = Pattern.compile("([0-9]{1,3}");
+        Matcher matcher = pattern.matcher(number);
+        if (matcher.matches() && Integer.parseInt(number) <= 255) {
+            return Integer.toHexString(number);
+        else
+            return "Invalid input. Should be a number between 0-255";
+    }
 }
 
 interface Expression {
 	
-	String interpret(String number);
+    String interpret(String number);
 }
 {% endhighlight %}
 
