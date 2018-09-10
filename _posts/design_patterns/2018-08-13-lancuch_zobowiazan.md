@@ -19,7 +19,7 @@ Klient nie zna ostatecznego wykonawcy. Co więcej `Łańcuch zobowiązań` nie g
 Wzorzec używany jest w mechanizmach przetwarzania podobnych żądań, dla których proces klasyfikacji powinien przebiegać w ustalonym porządku. Klient nie musi znać dokładnego wykonawcy oraz szczegółów implementacji dzięki czemu wykorzystywany jest w sytuacjach dynamicznie zmieniających się wymagań.
 
 ## Implementacja
-Abstrakcyjna klasa `Handler` definiuje szablon metody przepływu obsługi żądania, natomiast klasy ją rozszerzające `ConcreteHandler1`, `ConcreteHandler2` itd dostarczają szczegółów implementacji zadania.
+Abstrakcyjna klasa `Handler` definiuje szablon metody przepływu obsługi żądania, natomiast klasy ją rozszerzające `Handler1`, `Handler2` itd dostarczają szczegółów implementacji zadania.
 
 ![Łańcuch zobowiązań diagram](/assets/img/diagrams/chain_responsibility.svg){: .center-image }
 
@@ -48,11 +48,11 @@ public abstract class Handler {
     //some other methods
 }
 
-public class ConcreteHandler1 extends Handler {
+public class Handler1 extends Handler {
 
     @Override
     protected void action(Request request) {
-        //do specific action for ConcreteHandler1
+        //do specific action for Handler1
     }
 
     @Override
@@ -64,11 +64,11 @@ public class ConcreteHandler1 extends Handler {
     }
 }
 
-public class ConcreteHandler2 extends Handler {
+public class Handler2 extends Handler {
 
     @Override
     protected void action(Request request) {
-        //do specific action for ConcreteHandler2
+        //do specific action for Handler2
     }
 
     @Override
@@ -80,11 +80,11 @@ public class ConcreteHandler2 extends Handler {
     }
 }
 
-public class ConcreteHandler3 extends Handler {
+public class Handler3 extends Handler {
 
     @Override
     protected void action(Request request) {
-        //do specific action for ConcreteHandler3
+        //do specific action for Handler3
     }
 
     @Override
@@ -101,9 +101,9 @@ Klient tworzy `Łańcuch zobowiązań` i zleca obsługę żądania.
 
 {% highlight java %}
 //create chain of responsibility depends
-Handler main = new ConcreteHandler1();
-Handler handler2 = new ConcreteHandler2();
-Handler handler3 = new ConcreteHandler3();
+Handler main = new Handler1();
+Handler handler2 = new Handler2();
+Handler handler3 = new Handler3();
 main.setSuccessor(handler2);
 handler2.setSuccessor(handler3);
 

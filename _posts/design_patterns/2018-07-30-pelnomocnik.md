@@ -65,7 +65,7 @@ interface Subject {
 Klient inicjalizuje obiekt typu `Subject` instancją klasy `Proxy`, a następnie wywołuje na nim żądane metody.
 
 {% highlight java %}
-Subject subject = new ConreteSubject();
+Subject subject = new RealSubject();
 subject.action(); //always execute
 
 Subject proxy = new Proxy();

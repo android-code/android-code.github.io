@@ -67,7 +67,7 @@ public class InterfaceInjection implements IInjection {
     }
 }
 
-public interface IInjection {
+interface IInjection {
 
     void injectDependency1(Dependency1 dependency1);
     void injectDependency2(Dependency2 dependency2);
@@ -185,7 +185,7 @@ public class MockLogger implements Logger {
     }
 }
 
-public interface Logger {
+interface Logger {
 
     void logState(AppState appState);
     void logClickEvent(ClickEvent clickEvent);
