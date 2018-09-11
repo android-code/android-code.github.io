@@ -70,20 +70,6 @@ public class ItemAdapter extends BaseAdapter {
     }
 
     //here should be other adapter methods override from superclass
-    @Override
-    public int getCount() {
-        return items.size();
-    }
-
-    @Override
-    public Item getItem(int position) {
-        return item.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
 }
 {% endhighlight %}
 
@@ -110,7 +96,6 @@ listView.setAdapter(adapter);
 Aplikacja `FoodDeliver` umożliwia użytkownikom dokonanie zamówienia dostawy jedzenia z wybranej restauracji. Wiele widoków aplikacji (w tym widok pozycji menu z danej restauracji) wykorzystuje mechanizm widoku przewijalnej listy. W celu optymalizacji wydajności działania listy do realizacji tego zadania użyto kontrolkę `RecyclerView` wraz z implementacją `ViewHolder`.
 
 {% highlight java %}
-
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
 
     private Context context;
@@ -186,7 +171,6 @@ LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
 recyclerView.setLayoutManager(layoutManager);
 FoodAdapter adapter = new FoodAdapter(getActivity(), items);
 recyclerView.setAdapter(adapter);
-
 //scrolling the list is smooth and faster
 {% endhighlight %}
 

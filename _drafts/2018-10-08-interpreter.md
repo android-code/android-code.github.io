@@ -4,7 +4,7 @@ title: "Interpreter"
 date:  2018-10-08
 categories: ["Wzorce projektowe"]
 image: interpreter
-github: interpreter
+github: design-patterns/tree/master/interpreter
 description: "Wzorce projektowe / behawioralny"
 keywords: "interpreter, wzorzec, wzorce projektowe, wzorzec behawioralny, design patterns, android, java, programowanie, programming"
 ---
