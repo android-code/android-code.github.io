@@ -3,7 +3,7 @@ layout: post
 title: "Metoda szablonowa"
 date:  2018-07-16
 categories: ["Wzorce projektowe"]
-image: template_method
+image: patterns/template_method
 github: design-patterns/tree/master/template-method
 description: "Wzorce projektowe / behawioralny"
 keywords: "metoda szablonowa, template method, szablon, template, wzorzec, wzorce projektowe, wzorzec behawioralny, design patterns, android, java, programowanie, programming"
@@ -21,7 +21,7 @@ Wykorzystując wzorzec `Metoda szablonowa` w celu uniknięcia łamania zasady `p
 ## Implementacja
 Klasa abstrakcyjna `AbstractClass` definiuje szkielet metody szablonowej `templateMethod`, dostarcza implementacje dla metod niezmiennych o prywatnym modyfikatorze dostępu oraz wymusza nadpisanie abstrakcyjnej metody zmiennej. Klasy rozszerzające dostarczają implementacji dla wszystkich metod zmiennych.
 
-![Metoda szablonowa diagram](/assets/img/diagrams/template_method.svg){: .center-image }
+![Metoda szablonowa diagram](/assets/img/diagrams/patterns/template_method.svg){: .center-image }
 
 Poniższy listing przedstawia implementację metody szablonowej w klasie `AbstractClass` oraz rozszerzenie implementacji w klasach pochodnych.
 

@@ -3,7 +3,7 @@ layout: post
 title: "Metoda wytwórcza"
 date:  2018-07-02
 categories: ["Wzorce projektowe"]
-image: factory_method
+image: patterns/factory_method
 github: design-patterns/tree/master/factory-method
 description: "Wzorce projektowe / kreacyjny"
 keywords: "metoda wytwórcza, factory method, fabryka, factory, wzorzec, wzorce projektowe, wzorzec kreacyjny, design patterns, android, java, programowanie, programming"
@@ -21,7 +21,7 @@ Wzorzec ten może wprowadzać zbyt duży poziom abstrakcji, tzn. klient nie wie 
 ## Implementacja
 Konkretna fabryka `ProductFactory1` ma zadanie stworzyć obiekt pochodzący ze wspólnego typu. Realizuje to poprzez implementacje interfejsu fabryki danego typu produktów `ProductFactory`. Produkty `Product1`, `Product2,` itd muszą rozszerzać klasę bazową produktu dla której zostanie dedykowana fabryka `ProductFactory`.
 
-![Metoda wytwórcza diagram](/assets/img/diagrams/factory_method.svg){: .center-image }
+![Metoda wytwórcza diagram](/assets/img/diagrams/patterns/factory_method.svg){: .center-image }
 
 Poniższy listing przedstawia implementacja wzorca `Metoda wytwórcza` dla produktów klasy `Product`.
 

@@ -3,7 +3,7 @@ layout: post
 title: "Dekorator"
 date:  2018-05-14
 categories: ["Wzorce projektowe"]
-image: decorator
+image: patterns/decorator
 github: design-patterns/tree/master/decorator
 description: "Wzorce projektowe / strukturalny"
 keywords: "dekorator, decorator, wzorzec, wzorce projektowe, wzorzec strukturalny, design patterns, android, java, decor, programowanie, programming"
@@ -21,7 +21,7 @@ Zagrożenie płynące ze stosowania `Dekoratora` może być nadmiarowa ilość m
 ## Implementacja
 Podstawowe klasy komponentów `Component1`, `Component2` itd. oraz klasa bazowa dekoratora `Decorator` rozszerzają klasę abstrakcyjną lub implementują wspólny interfejs `Component`. `Decorator` przyjmuje jako parametr obiekt klasy `Component`. Klasy dekoratorów `Decorator1`, `Decorator2` itd. rozszerzają bazową klasę `Decorator`. Dekoratory implementują nowe funkcję oraz rozszerzają działanie metod klasy bazowej `Component`.
 
-![Dekorator diagram](/assets/img/diagrams/decorator.svg){: .center-image }
+![Dekorator diagram](/assets/img/diagrams/patterns/decorator.svg){: .center-image }
 
 Poniższe listing przedstawiają przykładową implementacje wzorca `Dekorator`.
 

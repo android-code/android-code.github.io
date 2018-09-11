@@ -3,7 +3,7 @@ layout: post
 title: "Fabryka abstrakcyjna"
 date:  2018-07-09
 categories: ["Wzorce projektowe"]
-image: abstract_factory
+image: patterns/abstract_factory
 github: design-patterns/tree/master/abstract-factory
 description: "Wzorce projektowe / kreacyjny"
 keywords: "fabryka abstrakcyjna, abstract factory, fabryka, factory, wzorzec, wzorce projektowe, wzorzec kreacyjny, design patterns, android, java, programowanie, programming"
@@ -21,7 +21,7 @@ Wprowadzenie nowego abstrakcyjnego produktu do rodziny produktów wymusza rozbud
 ## Implementacja
 Konkretna fabryka implementuje abstrakcyjną fabrykę `AbstractFactory`, która deklaruje dostarczenie grupy produktów ze sobą powiązanych. Każda fabryka odpowiada za stworzenie produktów na swój ustalony sposób. Produkty rozszerzają klasę abstrakcyjną produktu `AbstractProduct` lub implementują jej interfejs.
 
-![Fabryka abstrakcyjna diagram](/assets/img/diagrams/abstract_factory.svg){: .center-image }
+![Fabryka abstrakcyjna diagram](/assets/img/diagrams/patterns/abstract_factory.svg){: .center-image }
 
 Poniższy listing przedstawia implementację fabryki abstrakcyjnej `AbstractFactory` w oparciu o dwie fabrykie `FactoryA`, `FactoryB` i dwie rodziny produktów `AbstractProduct1`, `AbstractProduct2`.
 

@@ -3,7 +3,7 @@ layout: post
 title: "Odwiedzający"
 date:  2018-08-20
 categories: ["Wzorce projektowe"]
-image: visitor
+image: patterns/visitor
 github: design-patterns/tree/master/visitor
 description: "Wzorce projektowe / behawioralny"
 keywords: "odwiedzajacy, visitor, wzorzec, wzorce projektowe, wzorzec behawioralny, design patterns, android, java, programowanie, programming"
@@ -21,7 +21,7 @@ Należy unikać stosowania wzorca w przypadku niestabilnej, często zmieniające
 ## Implementacja
 Klasy które wymagają rozszerzenia o nową funkcjonalność implementują interfejs `Element`. W metodzie akceptującej wizytację obiektu typu `Visitor`, przekazują referencje do własnej instancji i delegują wykonanie zadania obiektowi `Odwiedzającemu`. Klasy obiektów `Odwiedzających` implementują interfejs `Visitor`, dostarczając realizację tego samego zadania dla różnych typów obiektów `Odwiedzanych`. 
 
-![Odwiedzający diagram](/assets/img/diagrams/visitor.svg){: .center-image }
+![Odwiedzający diagram](/assets/img/diagrams/patterns/visitor.svg){: .center-image }
 
 Poniższy listing przedstawia wizytację obiektów typu `Visitor` dla klas typu `Element`.
 

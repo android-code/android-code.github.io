@@ -3,7 +3,7 @@ layout: post
 title: "Strategia"
 date:  2018-07-23
 categories: ["Wzorce projektowe"]
-image: strategy
+image: patterns/strategy
 github: design-patterns/tree/master/strategy
 description: "Wzorce projektowe / behawioralny"
 keywords: "strategia, strategy, wzorzec, wzorce projektowe, wzorzec behawioralny, design patterns, android, java, programowanie, programming"
@@ -21,7 +21,7 @@ Wzorzec ten podobnie jak `Adapter` wykorzystuje mechanizm delegowania operacji d
 ## Implementacja
 Klasa kontekstu `Context` zawiera referencję do obiektu klasy strategii `AbstractStrategy`. Obiekt strategii może zostać wstrzyknięty przez konstruktor bądź metodę dostępową. Metoda klasy kontekstu wykorzystuje obiekt strategii w celu finalizacji operacji. Klasy strategii `ConcreteStrategy1`, `ConcreteStrategy2` itd. implementują metody interfejsu `AbstractStrategy`.
 
-![Strategia diagram](/assets/img/diagrams/strategy.svg){: .center-image }
+![Strategia diagram](/assets/img/diagrams/patterns/strategy.svg){: .center-image }
 
 Poniższy listing przedstawia implementację wzorca `Strategia` wykorzystywaną w obiektach klasy `Context` w oparciu o dwa warianty `ConcreteStrategy1` oraz `ConcreteStrategy2`.
 

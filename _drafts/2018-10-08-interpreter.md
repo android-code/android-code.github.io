@@ -3,7 +3,7 @@ layout: post
 title: "Interpreter"
 date:  2018-10-08
 categories: ["Wzorce projektowe"]
-image: interpreter
+image: patterns/interpreter
 github: design-patterns/tree/master/interpreter
 description: "Wzorce projektowe / behawioralny"
 keywords: "interpreter, wzorzec, wzorce projektowe, wzorzec behawioralny, design patterns, android, java, programowanie, programming"
@@ -21,7 +21,7 @@ Wzorzec `Interpreter` wykorzystywany jest w celu interpretowania zdań zapisanyc
 ## Implementacja
 Klasy wyrażeń implementują interfejs `Expression` w taki sposób, aby móc zinterpretować wyrażenie wejściowe i przekstałcić je na odpowiednie wyrażenie wyjściowe. Implementacja powinna być odporna na błędny format wprowadzonego zapytania. Klasy wyrażeń mogą być symbolami terminalnymi i nieterminalnymi.
 
-![Interpreter diagram](/assets/img/diagrams/interpreter.svg){: .center-image }
+![Interpreter diagram](/assets/img/diagrams/patterns/interpreter.svg){: .center-image }
 
 Poniższy listing przedsawia implementacje wzorca `Interpreter` dla koniukcji wyrażeń.
 

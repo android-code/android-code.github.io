@@ -3,7 +3,7 @@ layout: post
 title: "Budowniczy"
 date:  2018-05-21
 categories: ["Wzorce projektowe"]
-image: builder
+image: patterns/builder
 github: design-patterns/tree/master/builder
 description: "Wzorce projektowe / kreacyjny"
 keywords: "budowniczy, builder, fluent builder, wzorzec, wzorce projektowe, wzorzec kreacyjny, design patterns, android, java, programowanie, programming"
@@ -21,7 +21,7 @@ Stosowanie wzorca wymusza tworzenie konkretnego `Budowniczego` dla każdego typu
 ## Implementacja
 W klasycznej wersji wzorca obiekt klasy `Director` zleca wykonanie produktu (`Product`) konkretnemu builderowi (`ConcreteBuilder`) nadzorując jego pracę. `Director` przechowuje referencje do `Buildera` i w momencie budowania produktu wywołuje na nim poszczególne operacje. Każdy budowniczy implementuje wspólne zachowania abstrakcyjnej klasy `Builder` lub interfejsu, tworząc produkt na swój określony sposób. `Builder` zawiera referencję do produktu i zwraca go nadzorcy w momencie zakończenia pracy.
 
-![Budowniczy diagram](/assets/img/diagrams/builder.svg){: .center-image }
+![Budowniczy diagram](/assets/img/diagrams/patterns/builder.svg){: .center-image }
 
 Poniższy listing przedstawia implementacje klasycznej postaci wzorca `Budowniczy`.
 

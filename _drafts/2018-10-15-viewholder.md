@@ -3,7 +3,7 @@ layout: post
 title: "ViewHolder"
 date:  2018-10-15
 categories: ["Wzorce projektowe"]
-image: viewholder
+image: patterns/viewholder
 github: design-patterns/tree/master/viewholder
 description: "Wzorce projektowe / kreacyjny"
 keywords: "viewholder, wzorzec, wzorce projektowe, wzorzec kreacyjny, design patterns, android, java, programowanie, programming"
@@ -21,7 +21,7 @@ Wzorzec używany jest w widokach kolekcji w celu optymalizacji zużycia zasobów
 ## Implementacja
 Wewnętrzna klasa `ViewHolder` przechowuje referencję do obiektów widoku `View`. Referencje są ustawiane w klasie adaptera bezpośrednio na obiekcie viewholder lub przekazywany jest cały widok do konstruktora `ViewHolder`, który sam dba o związanie obiektów widoku. Klasa `Adapter` wykorzystuje obiekt typu `ViewHolder` do pobrania referencji i przekazania danych do widoków.
 
-![ViewHolder diagram](/assets/img/diagrams/viewholder.svg){: .center-image }
+![ViewHolder diagram](/assets/img/diagrams/patterns/viewholder.svg){: .center-image }
 
 W celu uproszczenia idei wzorca `ViewHolder` przedstawiona poniżej implementacja dedykowania jest dla widoku kolekcji typu `ListView` oraz klasy adaptera rozszerzającego `BaseAdapter`. Jednakże zalecane jest wykorzystanie widoku kolekcji `RecyclerView` wraz implementacją klasy rozszerzającej `RecyclerView.Adapter`.
 

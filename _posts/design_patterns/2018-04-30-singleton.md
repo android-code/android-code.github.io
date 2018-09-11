@@ -3,7 +3,7 @@ layout: post
 title: "Singleton"
 date:  2018-04-30
 categories: ["Wzorce projektowe"]
-image: singleton
+image: patterns/singleton
 github: design-patterns/tree/master/singleton
 description: "Wzorce projektowe / kreacyjny"
 keywords: "singleton, wzorzec, wzorce projektowe, wzorzec kreacyjny, design patterns, sharedpreferences, android, java, programowanie"
@@ -21,7 +21,7 @@ Wzorzec ten jest wykorzystywany w dostępie do `SharedPreferences`. Popularną p
 ## Implementacja
 Istnieje wiele implementacji tego wzorca. Jedna z najprostszych opiera się na inicjalizowaniu obiektu poprzez publiczną metodę `getInstance` dopiero w momencie jego pierwszego wywołania. Konstruktor jest niewidoczna spoza klasy. 
 
-![Singleton diagram](/assets/img/diagrams/singleton.svg){: .center-image }
+![Singleton diagram](/assets/img/diagrams/patterns/singleton.svg){: .center-image }
 
 Poniższy listing przedstawia najprostszą implementacje `Singleton`. Rodzi ona jednak problemy w środowisku wielowątkowym.
 

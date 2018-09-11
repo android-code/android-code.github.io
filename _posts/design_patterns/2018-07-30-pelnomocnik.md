@@ -3,7 +3,7 @@ layout: post
 title: "Pełnomocnik"
 date:  2018-07-30
 categories: ["Wzorce projektowe"]
-image: proxy
+image: patterns/proxy
 github: design-patterns/tree/master/proxy
 description: "Wzorce projektowe / strukturalny"
 keywords: "pełnomocnik, proxy, wzorzec, wzorce projektowe, wzorzec strukturalny, design patterns, android, java, programowanie, programming"
@@ -21,7 +21,7 @@ Wykorzystując wzorzec `Pełnomocnik`, należy mieć na uwadze, że poza oczywis
 ## Implementacja
 Klasa pełnomocnika `Proxy` oraz klasa `RealSubject`, której obiekt udziela pełnomocnictwa implementują interfejs `Subject`. Klasa `Proxy` zawiera prywatne pole typu `Subject`, które w zależności od ustalonych warunków jest inicjalizowane instancją klasy `RealSubject`. Klasa `Proxy` nadpisuje metody interfejsu w taki sposób, że wywołują one odpowiadające im metody obiektu klasy `RealSubject`.
 
-![Pełnomocnik diagram](/assets/img/diagrams/proxy.svg){: .center-image }
+![Pełnomocnik diagram](/assets/img/diagrams/patterns/proxy.svg){: .center-image }
 
 Poniższy listing przedstawia implementacje wzorca `Pełnomocnik` dla klasy `RealSubject` w oparciu o proces autoryzacji.
 

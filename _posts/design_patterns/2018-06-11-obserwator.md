@@ -3,7 +3,7 @@ layout: post
 title: "Obserwator"
 date:  2018-06-11
 categories: ["Wzorce projektowe"]
-image: observer
+image: patterns/observer
 github: design-patterns/tree/master/observer
 description: "Wzorce projektowe / behawioralny"
 keywords: "obserwator, observer, wzorzec, wzorce projektowe, design patterns, android, java, programowanie, programming, rxandroid, rxjava, szyna zdarzeń, eventbus, event bus, otto"
@@ -21,7 +21,7 @@ Obserwatorzy otrzymują komunikat z którego wiadomo, że coś się zmieniło, a
 ## Implementacja
 Obiekt obserwowany `ConcreteObservable` zawiera liste obserwatorów `Observer` oraz implementuje interfejs `Observable` za pomocą którego zapisuje, wypisuje i powiadamia obserwatorów o zmianie stanu. Obserwatorzy `Observer1`, `Observer2` implementują interfejs `Observer`. Opcjonalny obiekt przekazywany jako parametr metody aktualizującej może pełnić podobną rolę jak zdarzenia w programowaniu reaktywnym, tzn.: określa rodzaj zdarzenia wraz z zestawem danych (argumenty opakowane w event).
 
-![Obserwator diagram](/assets/img/diagrams/observer.svg){: .center-image }
+![Obserwator diagram](/assets/img/diagrams/patterns/observer.svg){: .center-image }
 
 Poniższy listing przedstawia implementacje interfejsów obiektu obserwowanego `Observable` oraz jego obserwatorów `Observer`.
 

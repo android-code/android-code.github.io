@@ -3,7 +3,7 @@ layout: post
 title: "Łańcuch zobowiązań"
 date:  2018-08-13
 categories: ["Wzorce projektowe"]
-image: chain_responsibility
+image: patterns/chain_responsibility
 github: design-patterns/tree/master/chain-responsibility
 description: "Wzorce projektowe / behawioralny"
 keywords: "łańcuch zobowiązań, łańcuch odpowiedzialności, chain of responsibility, wzorzec, wzorce projektowe, wzorzec behawioralny, design patterns, android, java, programowanie, programming"
@@ -21,7 +21,7 @@ Wzorzec używany jest w mechanizmach przetwarzania podobnych żądań, dla któr
 ## Implementacja
 Abstrakcyjna klasa `Handler` definiuje szablon metody przepływu obsługi żądania, natomiast klasy ją rozszerzające `Handler1`, `Handler2` itd dostarczają szczegółów implementacji zadania.
 
-![Łańcuch zobowiązań diagram](/assets/img/diagrams/chain_responsibility.svg){: .center-image }
+![Łańcuch zobowiązań diagram](/assets/img/diagrams/patterns/chain_responsibility.svg){: .center-image }
 
 Poniższy listing przedstawia implementację `Łańcucha zobowiązań` dla żądania `Request` i wykonawców typu `Handler`.
 

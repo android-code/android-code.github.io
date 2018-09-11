@@ -3,7 +3,7 @@ layout: post
 title: "Polecenie"
 date:  2018-08-27
 categories: ["Wzorce projektowe"]
-image: command
+image: patterns/command
 github: design-patterns/tree/master/command
 description: "Wzorce projektowe / behawioralny"
 keywords: "polecenie, command, wzorzec, wzorce projektowe, wzorzec behawioralny, design patterns, android, java, programowanie, programming"
@@ -21,7 +21,7 @@ Wzorzec `Polecenie` wykorzystywany jest w sytuacjach, gdzie obiekt wywołujący 
 ## Implementacja
 Klasa `Invoker` decyduje o wyborze właściwego obiektu `Command` na którym wywołuje polecenie. W przypadku wymaganego kolejkowania bądź dziennika zdarzeń dodatkowo zarządza kolekcją poleceń. Klasy poleceń `Command1`, `Command2` implementują interfejs `Command` poprzez delegowanie wykonania operacji do obiektu pomocniczego `Receiver`. Jednakże w niektórych przypadkach obiekt `Receiver` jest pomijany, a implementacja operacji spoczywa wyłącznie na klasie polecenia.
 
-![Polecenie diagram](/assets/img/diagrams/command.svg){: .center-image }
+![Polecenie diagram](/assets/img/diagrams/patterns/command.svg){: .center-image }
 
 Poniższy listing przedstawia sposób wywołania operacji przy użyciu wzorca `Polecenie`.
 

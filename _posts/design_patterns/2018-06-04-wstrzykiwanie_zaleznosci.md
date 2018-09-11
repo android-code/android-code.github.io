@@ -3,7 +3,7 @@ layout: post
 title: "Wstrzykiwanie zależności"
 date:  2018-06-04
 categories: ["Wzorce projektowe"]
-image: dependency_injection
+image: patterns/dependency_injection
 github: design-patterns/tree/master/dependency-injection
 description: "Wzorce projektowe / architektoniczny"
 keywords: "wstrzykiwanie zależności, dependency injection, di, wstrzykiwanie, zależności, odwrócenie sterowania, inversion of control, loose coupling, constructor injection, setter injection, interface injection, field injection, kontener di, wzorzec, wzorce projektowe, design patterns, android, java, programowanie, programming, dagger 2, butter knife"
@@ -21,7 +21,7 @@ Ze względu na swoją charakterystykę i spełnienie trzech zasad `SOLID` użyci
 ## Implementacja
 Instancje klas, które mają zostać przekazane jako zależności do innego obiektu, są tworzone na zewnątrz poza jego ciałem. Wstrzyknięcie utworzonych zależności następuje poprzez konstruktor docelowego obiektu oraz jego metody. 
 
-![Wstrzykiwanie zależności diagram](/assets/img/diagrams/dependency_injection.svg){: .center-image }
+![Wstrzykiwanie zależności diagram](/assets/img/diagrams/patterns/dependency_injection.svg){: .center-image }
 
 Poniższy listing przedstawia realizacja wzorca na trzy sposoby.
 
