@@ -16,14 +16,14 @@ keywords: "interpreter, wzorzec, wzorce projektowe, wzorzec behawioralny, design
 W przypadku żłożonej gramatyki może powstać zbyt wiele klas (przynajmniej jedna dla każdej reguły). Takie gramatyki są trudne do zarządzania i utrzymania. Jako alternatywe należy rozważyć zastosowanie `parsera`.
 
 ## Użycie
-Wzorzec `Interpreter` wykorzystywany jest w celu interpretowania zdań zapisanych w pewnym języku o prostej gramatyce, które mogą przyjąc reprezentacje drzewa składniowego. `Interpreter` może być użyty w konwerterach notacji, przetwarzaniu języka naturalnego (`wyrażenia regularne`), automatach formalnych (`kompilatory`) czy też w logice (`sprawdzanie poprawności reguł`).
+Wzorzec `Interpreter` wykorzystywany jest w celu interpretowania zdań zapisanych w pewnym języku o prostej gramatyce, które mogą przyjąć reprezentacje drzewa składniowego. `Interpreter` może być użyty w konwerterach notacji, przetwarzaniu języka naturalnego (`wyrażenia regularne`), automatach formalnych (`kompilatory`) czy też w logice (`sprawdzanie poprawności reguł`).
 
 ## Implementacja
 Klasy wyrażeń implementują interfejs `Expression` w taki sposób, aby móc zinterpretować wyrażenie wejściowe i przekstałcić je na odpowiednie wyrażenie wyjściowe. Implementacja powinna być odporna na błędny format wprowadzonego zapytania. Klasy wyrażeń mogą być symbolami terminalnymi i nieterminalnymi.
 
 ![Interpreter diagram](/assets/img/diagrams/patterns/interpreter.svg){: .center-image }
 
-Poniższy listing przedsawia implementacje wzorca `Interpreter` dla koniukcji wyrażeń.
+Poniższy listing przedstawia implementacje wzorca `Interpreter` dla koniukcji wyrażeń.
 
 {% highlight java %}
 public class TerminalExpression implements Expression {
@@ -98,7 +98,7 @@ public static Expression getBrothersExpression(String name1, String name2) {
 {% endhighlight %}
 
 ## Przykład
-Aplikacja `GuessColor` jest grą w której sprawdzane są umiejętności znajomości kolorów zapisanych heksadecymalnie. Gracz na wejściu otrzymuje informacje o kolorach w formacie szesnastkowym i przed upływem ustalonego czasu musi odgadnąć ich reprezentacje w notacji RGB lub na odwrót (z zapisu RGB odgaduje format heksadecymalny). W celu dokonania tłumaczeń między formatami zastosowano wzorzec `Interpreter`. 
+Aplikacja `GuessColor` jest grą w której sprawdzane są umiejętności znajomości kolorów zapisanych heksadecymalnie. Gracz na wejściu otrzymuje informacje o kolorach w formacie szesnastkowym i przed upływem ustalonego czasu ma za zadanie odgadnąć ich reprezentacje w notacji RGB lub na odwrót (z zapisu RGB odgaduje format heksadecymalny). W celu dokonania tłumaczeń między formatami zastosowano wzorzec `Interpreter`. 
 
 {% highlight java %}
 public class HexToRgb implements Expression {
