@@ -3,6 +3,7 @@ layout: post
 title: "Łańcuch zobowiązań"
 date:  2018-08-13
 categories: ["Wzorce projektowe"]
+permalink: /blog/wzorce/:title/
 image: patterns/chain_responsibility
 github: design-patterns/tree/master/chain-responsibility
 description: "Wzorce projektowe / behawioralny"

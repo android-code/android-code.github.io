@@ -3,6 +3,7 @@ layout: post
 title: "Pełnomocnik"
 date:  2018-07-30
 categories: ["Wzorce projektowe"]
+permalink: /blog/wzorce/:title/
 image: patterns/proxy
 github: design-patterns/tree/master/proxy
 description: "Wzorce projektowe / strukturalny"

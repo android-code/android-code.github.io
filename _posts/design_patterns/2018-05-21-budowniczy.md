@@ -3,6 +3,7 @@ layout: post
 title: "Budowniczy"
 date:  2018-05-21
 categories: ["Wzorce projektowe"]
+permalink: /blog/wzorce/:title/
 image: patterns/builder
 github: design-patterns/tree/master/builder
 description: "Wzorce projektowe / kreacyjny"

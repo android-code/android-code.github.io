@@ -3,6 +3,7 @@ layout: post
 title: "Odwiedzający"
 date:  2018-08-20
 categories: ["Wzorce projektowe"]
+permalink: /blog/wzorce/:title/
 image: patterns/visitor
 github: design-patterns/tree/master/visitor
 description: "Wzorce projektowe / behawioralny"

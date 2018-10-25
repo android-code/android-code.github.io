@@ -3,6 +3,7 @@ layout: post
 title: "Fabryka abstrakcyjna"
 date:  2018-07-09
 categories: ["Wzorce projektowe"]
+permalink: /blog/wzorce/:title/
 image: patterns/abstract_factory
 github: design-patterns/tree/master/abstract-factory
 description: "Wzorce projektowe / kreacyjny"

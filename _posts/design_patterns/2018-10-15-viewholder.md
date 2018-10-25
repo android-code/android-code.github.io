@@ -3,6 +3,7 @@ layout: post
 title: "ViewHolder"
 date:  2018-10-15
 categories: ["Wzorce projektowe"]
+permalink: /blog/wzorce/:title/
 image: patterns/viewholder
 github: design-patterns/tree/master/viewholder
 description: "Wzorce projektowe / kreacyjny"

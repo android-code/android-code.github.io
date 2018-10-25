@@ -3,6 +3,7 @@ layout: post
 title: "Metoda wytwórcza"
 date:  2018-07-02
 categories: ["Wzorce projektowe"]
+permalink: /blog/wzorce/:title/
 image: patterns/factory_method
 github: design-patterns/tree/master/factory-method
 description: "Wzorce projektowe / kreacyjny"

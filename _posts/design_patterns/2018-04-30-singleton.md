@@ -3,6 +3,7 @@ layout: post
 title: "Singleton"
 date:  2018-04-30
 categories: ["Wzorce projektowe"]
+permalink: /blog/wzorce/:title/
 image: patterns/singleton
 github: design-patterns/tree/master/singleton
 description: "Wzorce projektowe / kreacyjny"

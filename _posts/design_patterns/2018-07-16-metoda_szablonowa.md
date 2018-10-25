@@ -3,6 +3,7 @@ layout: post
 title: "Metoda szablonowa"
 date:  2018-07-16
 categories: ["Wzorce projektowe"]
+permalink: /blog/wzorce/:title/
 image: patterns/template_method
 github: design-patterns/tree/master/template-method
 description: "Wzorce projektowe / behawioralny"

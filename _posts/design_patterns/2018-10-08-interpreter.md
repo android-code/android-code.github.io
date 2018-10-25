@@ -3,6 +3,7 @@ layout: post
 title: "Interpreter"
 date:  2018-10-08
 categories: ["Wzorce projektowe"]
+permalink: /blog/wzorce/:title/
 image: patterns/interpreter
 github: design-patterns/tree/master/interpreter
 description: "Wzorce projektowe / behawioralny"

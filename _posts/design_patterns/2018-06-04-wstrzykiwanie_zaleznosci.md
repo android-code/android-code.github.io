@@ -3,6 +3,7 @@ layout: post
 title: "Wstrzykiwanie zależności"
 date:  2018-06-04
 categories: ["Wzorce projektowe"]
+permalink: /blog/wzorce/:title/
 image: patterns/dependency_injection
 github: design-patterns/tree/master/dependency-injection
 description: "Wzorce projektowe / architektoniczny"

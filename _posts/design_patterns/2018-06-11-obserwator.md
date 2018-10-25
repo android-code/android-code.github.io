@@ -3,6 +3,7 @@ layout: post
 title: "Obserwator"
 date:  2018-06-11
 categories: ["Wzorce projektowe"]
+permalink: /blog/wzorce/:title/
 image: patterns/observer
 github: design-patterns/tree/master/observer
 description: "Wzorce projektowe / behawioralny"

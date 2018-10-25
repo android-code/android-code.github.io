@@ -3,6 +3,7 @@ layout: post
 title: "Dekorator"
 date:  2018-05-14
 categories: ["Wzorce projektowe"]
+permalink: /blog/wzorce/:title/
 image: patterns/decorator
 github: design-patterns/tree/master/decorator
 description: "Wzorce projektowe / strukturalny"

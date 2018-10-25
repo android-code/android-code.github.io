@@ -3,6 +3,7 @@ layout: post
 title: "Polecenie"
 date:  2018-08-27
 categories: ["Wzorce projektowe"]
+permalink: /blog/wzorce/:title/
 image: patterns/command
 github: design-patterns/tree/master/command
 description: "Wzorce projektowe / behawioralny"

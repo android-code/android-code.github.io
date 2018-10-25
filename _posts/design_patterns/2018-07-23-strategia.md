@@ -3,6 +3,7 @@ layout: post
 title: "Strategia"
 date:  2018-07-23
 categories: ["Wzorce projektowe"]
+permalink: /blog/wzorce/:title/
 image: patterns/strategy
 github: design-patterns/tree/master/strategy
 description: "Wzorce projektowe / behawioralny"

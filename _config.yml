@@ -30,13 +30,13 @@ plugins:
 
 # Pagination
 paginate: 6
-paginate_path: "blog/page:num/"
+paginate_path: "blog/:num/"
 
 # Date
 date_format: "%d %b %Y"
 
 # Permalinks
-permalink: /blog/:title/
+permalink: /blog/:categories/:title/
 
 # Include / Exclude
 include: ['_pages']
