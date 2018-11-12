@@ -4,7 +4,7 @@ title: "Instrukcje sterujące"
 date:  2018-11-19
 categories: ["Kotlin"]
 image: kotlin/control_flow
-github: kotlin/tree/master/control-flow
+github: kotlin/blob/master/control-flow.kt
 description: "Kotlin"
 keywords: "kotlin, instrukcje sterujące, control flow, pętla, for, while, loop, when, if, else, range, break, continue, return, android, programowanie, programming"
 ---
