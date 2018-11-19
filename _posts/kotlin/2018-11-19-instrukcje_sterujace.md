@@ -10,7 +10,7 @@ keywords: "kotlin, instrukcje sterujące, control flow, pętla, for, while, loop
 ---
 
 ## Instrukcje if-else
-Instrukcja warunkowa `if` jest wyrażaniem - zwraca wartość logiczną. Blok instrukcji warunowych `if`, `else if`, `else` działa podobnie jak w `Javie`. Jeśli blok operacji dla spełnionenego (lub nie) warunku zawiera się w jednej linii wówczas klamry są opcjonalne.
+Instrukcja warunkowa `if` jest wyrażaniem - zwraca wartość logiczną. Blok instrukcji warunowych `if`, `else if`, `else` działa podobnie jak w `Java`. Jeśli blok operacji dla spełnionenego (lub nie) warunku zawiera się w jednej linii wówczas klamry są opcjonalne.
 
 {% highlight kotlin %}
 var a = 1
@@ -61,7 +61,7 @@ when(a) {
 {% endhighlight %}
 
 ## Pętla for
-Iteruje po elementach instancji klas, które dostarczają implementacji `Iterator`. Działanie pętli jest odpowiednikiem pętli `for-each` z Javy.
+Iteruje po elementach instancji klas, które dostarczają implementacji `Iterator`. Działanie pętli jest odpowiednikiem pętli `for-each` z Java.
 
 {% highlight kotlin %}
 var array = ArrayOf(1, 2, 3)
