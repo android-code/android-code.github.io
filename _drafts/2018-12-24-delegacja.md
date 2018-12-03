@@ -84,8 +84,6 @@ print(lazyValue) //evaluted value - at first time is computed
 print(lazyValue) //value - is computed already
 {% endhighlight %}
 
-
-
 ## Obserwowalna właściwość
 Funkcja `Delegates.observable` przyjmuje dwa argumenty: wartość początkową oraz uchwyt do modyfikacji właściwości, który jest wywoływany przy każdym przypisaniu wartości do właściwości. Słuchacze są powiadamiani o zmianach we właściwości. Uchwyt opisany jest trzema parametrami: właściwość, stara wartość oraz nowa wartość. Użycie funkcji `Delegates.vetoable` umożliwia przechwytywanie przypisania.
 
