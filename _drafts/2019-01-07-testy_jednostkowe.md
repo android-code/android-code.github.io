@@ -20,16 +20,17 @@ Testy (nie tylko jednostkowe), które mogą zostać wykonane na wirtualnej maszy
 ## Przypadki testowe
 `Przypadkiem testowym` (`test case`) nazywany jest zbiór danych wejściowych, warunków początkowych, oczekiwanych rezultatów i końcowych warunków wykonania opracowanych w celu pokrycia pewnych warunków testowych. Projektowany przypadek testowy może być ogólny lub szczegółowy. Formalny zapis szczegółowego przypadku testowego może wyglądać następująco.
 
-ID: 1.0
-Tytuł: Poprawne logowanie do aplikacji
-Środowisko: Android 6.0 i wzwyż
-Warunek wstępny: połączenie z internetem, użytkownik nie jest zalogowany
-Kroki do wykonania:
-- wpisz istniejący w bazie login: user
-- wpisz przypisane do loginu android hasło: password
-- wciśnij przycisk zaloguj
-Oczekiwany rezultat: zalogowanie się do aplikacji jako "user" i przeniesienie do ekranu głównego
-Warunki końcowe: użytkownik jest zalogowany
+>**ID:** 1.0  
+>**Tytuł:** Poprawne logowanie do aplikacji  
+>**Środowisko:** Android 6.0 i wzwyż  
+>**Warunek wstępny:** połączenie z internetem, użytkownik nie jest zalogowany  
+>**Kroki do wykonania:**  
+>- wpisz istniejący w bazie login: user
+>- wpisz przypisane do loginu android hasło: password
+>- wciśnij przycisk zaloguj  
+>
+>**Oczekiwany rezultat:** zalogowanie się do aplikacji jako "user" i przeniesienie do ekranu głównego  
+>**Warunki końcowe:** użytkownik jest zalogowany  
 
 Przypadki testowe są przydatne w automatyzacji testów ponieważ dokładnie opisują kroki, które powinny zostać zautomatyzowane. Dodatkowo pomagają `programiście` oraz `QA` dokładnie zrozumieć proces działania aplikacji. Odpowiedni dobór przypadków testowych pozwala dobrze i komplementarnie przetestować kod, dlatego tak ważna jest znajomość technik, które ułatwiają projektowanie właściwych testóœ. Techniki projektowania przypadków testowych można podzielić na `białoskrzynkowe`, `czarnoskrzynkowe` oraz bazujące na doświadczeniu (`testy eksploracyjne`). Techniki białoskrzynkowe oparte są o analizę wewnętrznej struktury kodu i są to przede wszystkim testy pokrycia kodu. Natomiast techniki czarnoskrzynkowe bazują na specyfikacji i definiują warunki odwołując się do analizy dokumentów opisujących funkcjonalność systemu.
 
@@ -53,19 +54,55 @@ Jedną z głównych miar mówiącą w jakim stopniu program został sprawdzony p
 ## Techniki czarnoskrzynkowe
 Czarnoskrzynkowa (`black box`) technika projektowania przypadków testowych w odróżnieniu do białoskrzynkowej techniki nie zajmuje się analizą struktury kodu lecz jako podstawę bierze specyfikacje dokumentową. Testowana jednostka traktowana jest jak czarna skrzynka w samolocie - nie wiadomo co dokładnie znajduje się w środku. Techniki czarnoskrzynkowe są spojrzeniem od zewnątrz na testowany obiekt. Do najpopularniejszych technik czarnoskrzynkowych można zaliczyć m.in. `klasy równoważności`, `testowanie wartości brzegowych`, `przejść między stanami`, `tabeli decyzyjnych` czy w oparciu o `przypadki użycia`.
 
+>**Przykład**  
+>Aplikacja do zamawiania jedzenia umożliwia zalogowanym użytkownikom dodawanie dań z jednej resturacji w ramach jednego zamówienia. Określa również minimalną kwotę zamówienia, aby mogło zostać zrealizowane z dowozem. Na podstawie przedstawionego procesu zamawiania i wyliczania kosztów dostawy zostaną przedstawione wybrane techniki czarnoskrzynkowe.
+
 Projektowanie przypadków testowych oparciu o `klasy równoważności` polega na pokryciu każdej klasy równoważności przynajmniej raz, gdzie klasa równoważności jest podzbiorem dziedziny danych wejściowych lub wyjściowych, które na podstawie specyfikacji powinny zachowywać się tak samo.
 
-//TODO example
+>Klasy równoważności dla kwoty zamówienia i kosztów dostawy mogą przedstawiać się następująco:
+>
+>**Kwota 0-9:** brak dostawy  
+>**Kwota 10-29:** dostawa 10zł  
+>**Kwota 30-49:** dostawa 5zł  
+>**Kwota >49:** dostawa darmowa  
 
-`Wartość brzegowa` jest wartością wejścia lub wyjścia i znajduje się na granicy poprawnej klasy równoważności (lub w jej najbliższym sąsiedztwie w niepoprawnej klasy równoważności). W przypadku klas jednowymiarowej są to wartości minimalne i maksymalne.
+`Wartość brzegowa` jest wartością wejścia lub wyjścia i znajduje się na granicy poprawnej klasy równoważności (lub w jej najbliższym sąsiedztwie w niepoprawnej klasie równoważności). W przypadku klas jednowymiarowej są to wartości minimalne i maksymalne.
 
-//TODO example
+>Niech:  
+>**x<sub>1</sub>** - poprawna minimalna wartość graniczna  
+>**x<sub>2</sub>** - poprawna maksymalna wartość graniczna  
+>**y<sub>1</sub>** - niepoprawna minimalna wartość graniczna  
+>**y<sub>2</sub>** - niepoprawna maksymalna wartość graniczna  
+
+>Wówczas dla zadanego problemu dostawy w cenie 5zł wartości brzegowe przyjmują odpowiednio wartości:  
+>**x<sub>1</sub>** = 30  
+>**x<sub>2</sub>** = 49  
+>**y<sub>1</sub>** = 29  
+>**y<sub>2</sub>** = 50  
 
 Testowanie `przejść między stanami` analizuje dozwolone i niedozwolone przejścia między stanami aplikacji za pomocą `automatu skończenie stanowego`. Analizując diagram lub tabelę stanową można zaprojektować testy w taki sposób by pokryły wszystkie przejście, konkretny ciąg czy testowały przejścia zabronione.
 
+>Diagram stanów wraz z możliwymi przejściami dla kosztów dostawy ukazany jest poniżej.
+![Diagram stanów](/assets/img/diagrams/testing/flow_states.svg){: .center-image }
+
 Testowanie z użyciem `tabeli decyzyjnych` polega na sprawdzeniu działania jednostki testowanej w odniesieniu do kombinacji warunków wejściowych znajdujących się w tabeli.
 
-//TODO example
+>Przedstawione warunki składania zamówienia w poniższej tabeli implikują akcję lub możliwość jej podjęcia.
+>
+|:-----------:|:----------------------------:|:-:|:-:|:-:|:-:|---|---|
+| **Warunek** |     Użytkownik zalogowany    | F | T | T | T | T | T |
+|             |      Restauracja wybrana     |   | F | T | T | T | T |
+|             |     Wartość koszyka >9zł     |   |   | F | T | T | T |
+|             |     Wartość koszyka >29zł    |   |   |   | F | T | T |
+|             |     Wartość koszyka >49zł    |   |   |   |   | F | T |
+| **Akcja**   |    Wyświetl stronę główną    | X |   |   |   |   |   |
+|             |  Wyświetl panel użytkownika  |   | X |   |   |   |   |
+|             |  Przejdź do listy produktów  |   |   | X |   |   |   |
+|             |  Powiadom o dostawie za 10zł |   |   |   | X |   |   |
+|             |  Powiadom o dostawie za 5zł  |   |   |   |   | X |   |
+|             | Powiadom o darmowej dostawie |   |   |   |   |   | X |
+|             |        Złóż zamówienie       |   |   |   | X | X | X |
+>
 
 Przypadki testowe tworzone w oparciu o `przypadki użycia` są projektowane w taki sposób, aby wykonane były scenariusze użytkownika co w odniesieniu do biznesowego charakteru przypadków użycia sprawia, że pozwalają wykryć usterki w przepływach proesów w czasie rzeczywistym. Stosowane są głównie w testach akceptacyjnych.
 
