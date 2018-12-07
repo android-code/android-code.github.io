@@ -35,38 +35,52 @@ Testy (nie tylko jednostkowe), które mogą zostać wykonane na wirtualnej maszy
 Przypadki testowe są przydatne w automatyzacji testów ponieważ dokładnie opisują kroki, które powinny zostać zautomatyzowane. Dodatkowo pomagają `programiście` oraz `QA` dokładnie zrozumieć proces działania aplikacji. Odpowiedni dobór przypadków testowych pozwala dobrze i komplementarnie przetestować kod, dlatego tak ważna jest znajomość technik, które ułatwiają projektowanie właściwych testóœ. Techniki projektowania przypadków testowych można podzielić na `białoskrzynkowe`, `czarnoskrzynkowe` oraz bazujące na doświadczeniu (`testy eksploracyjne`). Techniki białoskrzynkowe oparte są o analizę wewnętrznej struktury kodu i są to przede wszystkim testy pokrycia kodu. Natomiast techniki czarnoskrzynkowe bazują na specyfikacji i definiują warunki odwołując się do analizy dokumentów opisujących funkcjonalność systemu.
 
 ## Pokrycie kodu
-Jedną z głównych miar mówiącą w jakim stopniu program został sprawdzony przez testy jest `pokrycie kodu` (`code coverage`). Białoskrzynkowa (`white box`) metoda analityczna wskazującą, które części programu zostały pokryte zestawem testowym, a które nie. Wynik może być zwracany procentowo w odniesieniu do całego kodu. Metrykę pokrycia kodu nie należy traktować jako cel sam w sobie, ponieważ większy wynik nie zawsze musi oznaczać poprawę jakości kodu i co więcej może rodzić złudne przekonanie o bezbłędności danego fragmentu. Metryka ta doskonale wskazuje obszary kodu niepokryte testami oraz wymusza dodatkową analizę kodu. Można wyróżnić m.in. następujące kryteria pokrycia: `instrukcji`, `gałęzi` i `ścieżek`.
+Jedną z głównych miar mówiącą w jakim stopniu program został sprawdzony przez testy jest `pokrycie kodu` (`code coverage`). Białoskrzynkowa (`white box`) metoda analityczna wskazująca, które części programu zostały pokryte zestawem testowym, a które nie. Wynik może być zwracany procentowo w odniesieniu do całego kodu. Metrykę pokrycia kodu nie należy traktować jako cel sam w sobie, ponieważ większy wynik nie zawsze musi oznaczać poprawę jakości kodu i co więcej może rodzić złudne przekonanie o bezbłędności danego fragmentu. Metryka ta doskonale wskazuje obszary niepokryte testami oraz wymusza dodatkową analizę kodu. Można wyróżnić m.in. następujące kryteria pokrycia: `instrukcji`, `gałęzi` i `ścieżek`.
 
-**Przykład**  
-Na podstawie poniższej funkcji zostaną przedstawione typy pokryć wraz z ich wartościami dla zadanych argumentów.
+>**Przykład**  
+>Na podstawie funkcji `calculate` zostaną omówione typy wspomnianych pokryć wraz z ich wartościami dla zadanych argumentów.
 
 {% highlight kotlin %}
 fun calculate(a: Boolean, b: Boolean, c: Boolean) {
-  print("some action")
-  if(a)
-    print("A")
-  if(b) print("B")
-  if(c){
-    print("C")
-  }
-  if(a && b) print("A && B")
-  else print("not A && B")
-  //some comment
+    print("some action")
+    if(a)
+        print("A")
+    if(b) print("B")
+  
+    if(c)
+        print("C")
+    else {
+        print("not C")
+    }
 }
 {% endhighlight %}
 
-`Pokrycie instrukcji` (`statement coverage`) obejmuje tylko rzeczywiste warunki, a każda linia kodu musi być analizowana. Sprawdza przepływ ścieżek oraz weryfikuje poprawność realizacji (czy robi to co jest oczekiwane). Nie weryfikuje natomiast fałszywych wyników, jest zależna od struktury kodu, pomija operatory logiczne i nie zgłasza warunku zakończenia pętli. Wynikiem pokrycia instrukcji jest iloczyn ilości linii kodu uruchomionych na skutek testów do wszystkich linii (z pominięciem instrukcji niewykonywalnych).
+`Pokrycie instrukcji` (`statement coverage`) zwane również `pokryciem linii` obejmuje tylko rzeczywiste warunki, gdzie każda linia kodu jest analizowana. Sprawdza przepływ ścieżek oraz weryfikuje poprawność realizacji (czy robi to co jest oczekiwane). Nie weryfikuje natomiast fałszywych wyników, jest zależna od struktury kodu, pomija operatory logiczne i nie zgłasza warunku zakończenia pętli. Wynikiem pokrycia instrukcji jest iloczyn ilości linii kodu uruchomionych na skutek testów do wszystkich linii (z pominięciem instrukcji niewykonywalnych).
 
 >Dla podanych argumentów pokrycie instrukcji wynosi:  
+>- **a**=true, **b**=true, **c**=true -> **statement coverage**=7/11
+>- **a**=false, **b**=true, **c**=false -> **statement coverage**=8/11
+>- **a**=true, **b**=false, **c**=false -> **statement coverage**=9/11
+>
+>Aby uzyskać całkowite pokrycie instrukcji należy przygotować 2 testy jednostkowe.  
 
-
-`Pokrycie gałęzi` (`branch coverage`) sprawdza wyliczoną w trakcie działania programu wartość logiczną warunku oraz weryfikuje ilość pokrytych decyzji (ścieżek) warunku logicznego. Weryfikuje nieoczekiwane działanie programu oraz likwiduje problemy znane z pokrycia instrukcji. Ignoruje sposób wyliczenia wartości logicznej oraz wymaga analizy struktury kodu. Przypadki testowane dobierane są w taki sposób, aby uzyskać określone rezultaty decyzyjne.
+`Pokrycie gałęzi` (`branch coverage`) zwane także `pokryciem decyzji` sprawdza wyliczoną w trakcie działania programu wartość logiczną warunku oraz weryfikuje ilość pokrytych decyzji (ścieżek) wynikających z warunków logicznych. Weryfikuje nieoczekiwane działanie programu oraz likwiduje problemy znane z pokrycia instrukcji. Ignoruje sposób wyliczenia wartości logicznej oraz wymaga analizy struktury kodu. Przypadki testowane dobierane są w taki sposób, aby uzyskać określone rezultaty decyzyjne.
 
 >Dla podanych argumentów pokrycie gałęzi wynosi:  
+>- **a**=true, **b**=true, **c**=true -> **branch coverage**=3/4
+>- **a**=false, **b**=true, **c**=false -> **branch coverage**=2/4
+>- **a**=true, **b**=false, **c**=false -> **branch coverage**=2/4
+>
+>Aby uzyskać całkowite pokrycie gałęzi należy przygotować 2 testy jednostkowe.   
 
-`Pokrycie ścieżek` (`path coverage`) wykonuje każdą ścieżke co najmniej raz wraz ze wszystkimi wariacjami warunków. Mierzy stosunek pokrycia przebytych ścieżek do wszystkich możliwych ścieżek wykonania funkcji.
+`Pokrycie ścieżek` (`path coverage`) mierzy stosunek pokrycia przebytych ścieżek do wszystkich możliwych ścieżek wykonania funkcji. Struktura drzewa binarnego może posłużyć za diagram ścieżek. Żeby uzyskać całkowite pokrycie należy zatem sporządzić tyle testów jednostkowych co możliwych ścieżek.
 
->Dla podanych argumentów pokrycie ścieżek wynosi:  
+>Dla podanych argumentów pokrycie ścieżek wynosi:    
+>- **a**=true, **b**=true, **c**=true -> **path coverage**=1/8
+>- **a**=false, **b**=true, **c**=false -> **path coverage**=1/8
+>- **a**=true, **b**=false, **c**=false -> **path coverage**=1/8
+>
+>Aby uzyskać całkowite pokrycie gałęzi należy przygotować 8 testów jednostkowych.
 
 ## Techniki czarnoskrzynkowe
 Czarnoskrzynkowa (`black box`) technika projektowania przypadków testowych w odróżnieniu do białoskrzynkowej techniki nie zajmuje się analizą struktury kodu lecz jako podstawę bierze specyfikacje dokumentową. Testowana jednostka traktowana jest jak czarna skrzynka w samolocie - nie wiadomo co dokładnie znajduje się w środku. Techniki czarnoskrzynkowe są spojrzeniem od zewnątrz na testowany obiekt. Do najpopularniejszych technik czarnoskrzynkowych można zaliczyć m.in. `klasy równoważności`, `testowanie wartości brzegowych`, `przejść między stanami`, `tabeli decyzyjnych` czy w oparciu o `przypadki użycia`.
