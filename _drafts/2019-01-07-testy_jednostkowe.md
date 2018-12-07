@@ -37,19 +37,36 @@ Przypadki testowe są przydatne w automatyzacji testów ponieważ dokładnie opi
 ## Pokrycie kodu
 Jedną z głównych miar mówiącą w jakim stopniu program został sprawdzony przez testy jest `pokrycie kodu` (`code coverage`). Białoskrzynkowa (`white box`) metoda analityczna wskazującą, które części programu zostały pokryte zestawem testowym, a które nie. Wynik może być zwracany procentowo w odniesieniu do całego kodu. Metrykę pokrycia kodu nie należy traktować jako cel sam w sobie, ponieważ większy wynik nie zawsze musi oznaczać poprawę jakości kodu i co więcej może rodzić złudne przekonanie o bezbłędności danego fragmentu. Metryka ta doskonale wskazuje obszary kodu niepokryte testami oraz wymusza dodatkową analizę kodu. Można wyróżnić m.in. następujące kryteria pokrycia: `instrukcji`, `gałęzi` i `ścieżek`.
 
-//TODO example
+**Przykład**  
+Na podstawie poniższej funkcji zostaną przedstawione typy pokryć wraz z ich wartościami dla zadanych argumentów.
+
+{% highlight kotlin %}
+fun calculate(a: Boolean, b: Boolean, c: Boolean) {
+  print("some action")
+  if(a)
+    print("A")
+  if(b) print("B")
+  if(c){
+    print("C")
+  }
+  if(a && b) print("A && B")
+  else print("not A && B")
+  //some comment
+}
+{% endhighlight %}
 
 `Pokrycie instrukcji` (`statement coverage`) obejmuje tylko rzeczywiste warunki, a każda linia kodu musi być analizowana. Sprawdza przepływ ścieżek oraz weryfikuje poprawność realizacji (czy robi to co jest oczekiwane). Nie weryfikuje natomiast fałszywych wyników, jest zależna od struktury kodu, pomija operatory logiczne i nie zgłasza warunku zakończenia pętli. Wynikiem pokrycia instrukcji jest iloczyn ilości linii kodu uruchomionych na skutek testów do wszystkich linii (z pominięciem instrukcji niewykonywalnych).
 
-//TODO example
+>Dla podanych argumentów pokrycie instrukcji wynosi:  
+
 
 `Pokrycie gałęzi` (`branch coverage`) sprawdza wyliczoną w trakcie działania programu wartość logiczną warunku oraz weryfikuje ilość pokrytych decyzji (ścieżek) warunku logicznego. Weryfikuje nieoczekiwane działanie programu oraz likwiduje problemy znane z pokrycia instrukcji. Ignoruje sposób wyliczenia wartości logicznej oraz wymaga analizy struktury kodu. Przypadki testowane dobierane są w taki sposób, aby uzyskać określone rezultaty decyzyjne.
 
-//TODO example
+>Dla podanych argumentów pokrycie gałęzi wynosi:  
 
 `Pokrycie ścieżek` (`path coverage`) wykonuje każdą ścieżke co najmniej raz wraz ze wszystkimi wariacjami warunków. Mierzy stosunek pokrycia przebytych ścieżek do wszystkich możliwych ścieżek wykonania funkcji.
 
-//TODO example
+>Dla podanych argumentów pokrycie ścieżek wynosi:  
 
 ## Techniki czarnoskrzynkowe
 Czarnoskrzynkowa (`black box`) technika projektowania przypadków testowych w odróżnieniu do białoskrzynkowej techniki nie zajmuje się analizą struktury kodu lecz jako podstawę bierze specyfikacje dokumentową. Testowana jednostka traktowana jest jak czarna skrzynka w samolocie - nie wiadomo co dokładnie znajduje się w środku. Techniki czarnoskrzynkowe są spojrzeniem od zewnątrz na testowany obiekt. Do najpopularniejszych technik czarnoskrzynkowych można zaliczyć m.in. `klasy równoważności`, `testowanie wartości brzegowych`, `przejść między stanami`, `tabeli decyzyjnych` czy w oparciu o `przypadki użycia`.
@@ -59,11 +76,10 @@ Czarnoskrzynkowa (`black box`) technika projektowania przypadków testowych w od
 
 Projektowanie przypadków testowych oparciu o `klasy równoważności` polega na pokryciu każdej klasy równoważności przynajmniej raz, gdzie klasa równoważności jest podzbiorem dziedziny danych wejściowych lub wyjściowych, które na podstawie specyfikacji powinny zachowywać się tak samo.
 
->Klasy równoważności dla kwoty zamówienia i kosztów dostawy mogą przedstawiać się następująco:
+>Klasy równoważności kosztów dostawy w stosunku do kwoty zamówienia mogą przedstawiać się następująco:
 >
 >**Kwota 0-9:** brak dostawy  
->**Kwota 10-29:** dostawa 10zł  
->**Kwota 30-49:** dostawa 5zł  
+>**Kwota 10-49:** dostawa płatna  
 >**Kwota >49:** dostawa darmowa  
 
 `Wartość brzegowa` jest wartością wejścia lub wyjścia i znajduje się na granicy poprawnej klasy równoważności (lub w jej najbliższym sąsiedztwie w niepoprawnej klasie równoważności). W przypadku klas jednowymiarowej są to wartości minimalne i maksymalne.
@@ -74,13 +90,13 @@ Projektowanie przypadków testowych oparciu o `klasy równoważności` polega na
 >**y<sub>1</sub>** - niepoprawna minimalna wartość graniczna  
 >**y<sub>2</sub>** - niepoprawna maksymalna wartość graniczna  
 
->Wówczas dla zadanego problemu dostawy w cenie 5zł wartości brzegowe przyjmują odpowiednio wartości:  
->**x<sub>1</sub>** = 30  
+>Wówczas dla zadanego problemu dostawy płatnej wartości brzegowe przyjmują odpowiednio wartości:  
+>**x<sub>1</sub>** = 10  
 >**x<sub>2</sub>** = 49  
->**y<sub>1</sub>** = 29  
+>**y<sub>1</sub>** = 9  
 >**y<sub>2</sub>** = 50  
 
-Testowanie `przejść między stanami` analizuje dozwolone i niedozwolone przejścia między stanami aplikacji za pomocą `automatu skończenie stanowego`. Analizując diagram lub tabelę stanową można zaprojektować testy w taki sposób by pokryły wszystkie przejście, konkretny ciąg czy testowały przejścia zabronione.
+Testowanie `przejść między stanami` analizuje dozwolone i niedozwolone przejścia między stanami aplikacji za pomocą `automatu skończenie stanowego`. Analizując diagram lub tabelę stanową można zaprojektować testy w taki sposób by pokryły wszystkie przejścia, konkretny ciąg czy testowały przejścia zabronione.
 
 >Diagram stanów wraz z możliwymi przejściami dla kosztów dostawy ukazany jest poniżej.
 ![Diagram stanów](/assets/img/diagrams/testing/flow_states.svg){: .center-image }
@@ -89,23 +105,36 @@ Testowanie z użyciem `tabeli decyzyjnych` polega na sprawdzeniu działania jedn
 
 >Przedstawione warunki składania zamówienia w poniższej tabeli implikują akcję lub możliwość jej podjęcia.
 >
-|:-----------:|:----------------------------:|:-:|:-:|:-:|:-:|---|---|
-| **Warunek** |     Użytkownik zalogowany    | F | T | T | T | T | T |
-|             |      Restauracja wybrana     |   | F | T | T | T | T |
-|             |     Wartość koszyka >9zł     |   |   | F | T | T | T |
-|             |     Wartość koszyka >29zł    |   |   |   | F | T | T |
-|             |     Wartość koszyka >49zł    |   |   |   |   | F | T |
-| **Akcja**   |    Wyświetl stronę główną    | X |   |   |   |   |   |
-|             |  Wyświetl panel użytkownika  |   | X |   |   |   |   |
-|             |  Przejdź do listy produktów  |   |   | X |   |   |   |
-|             |  Powiadom o dostawie za 10zł |   |   |   | X |   |   |
-|             |  Powiadom o dostawie za 5zł  |   |   |   |   | X |   |
-|             | Powiadom o darmowej dostawie |   |   |   |   |   | X |
-|             |        Złóż zamówienie       |   |   |   | X | X | X |
+|:-----------:|:----------------------------:|:-:|:-:|:-:|:-:|---|
+| **Warunek** |     Użytkownik zalogowany    | F | T | T | T | T |
+|             |      Restauracja wybrana     |   | F | T | T | T |
+|             |     Wartość koszyka >9zł     |   |   | F | T | T |
+|             |     Wartość koszyka >49zł    |   |   |   | F | T |
+| **Akcja**   |    Wyświetl stronę główną    | X |   |   |   |   |
+|             |  Wyświetl panel użytkownika  |   | X |   |   |   |
+|             |  Przejdź do listy produktów  |   |   | X | X | X |
+|             |  Powiadom o braku dostawy    |   |   | X |   |   |
+|             |  Powiadom o płatnej dostawie |   |   |   | X |   |
+|             | Powiadom o darmowej dostawie |   |   |   |   | X |
+|             |        Złóż zamówienie       |   |   |   | X | X |
 >
 
 Przypadki testowe tworzone w oparciu o `przypadki użycia` są projektowane w taki sposób, aby wykonane były scenariusze użytkownika co w odniesieniu do biznesowego charakteru przypadków użycia sprawia, że pozwalają wykryć usterki w przepływach proesów w czasie rzeczywistym. Stosowane są głównie w testach akceptacyjnych.
 
-//TODO example
-
-## Dobre praktyki
+>Przypadek testowy dla aktualizacji kosztów dostawy w oparciu o przypadki użycia może przedstawiać się następująco:
+>
+>**UC01:** Aktualizacja kosztów dostawy  
+>**Aktorzy:** Tester  
+>**Scenariusz główny:**  
+>1. Tester poprawnie loguje się do aplikacji
+>2. System wyświetla panel użytkownika
+>3. Tester wybiera restauracje
+>4. System wyświetla dostępne dania
+>5. Tester kompletuje zamówienie, aby jego wartość mieściła się w kwocie 10-49zł
+>6. System informuje o możliwości płatnej dostawy
+>7. Tester kompletuje zamówienie, aby jego wartość wynosiła przynajmniej 50zł
+>8. System informuje o możliwości darmowej dostawy  
+>
+>**Rozszerzenie:**  
+>7.A Tester kompletuje zamówienie, aby jego wartość wynosiła maksymalnie 9zł  
+>7.A 1 System informuje o braku możliwości dostawy  
