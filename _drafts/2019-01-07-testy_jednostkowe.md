@@ -5,14 +5,14 @@ date:  2019-01-07
 categories: ["Testowanie"]
 image: testing/unit_test
 description: "Testy jednostkowe"
-keywords: "testowanie, testing, testy, jednostkowe, automatyczne, lokalne, integracyjne, zaślepka, atrapa, unit test, mock, stub, przypadki testowe, czarnoskrzynkowe, białoskrzynkowe, pokrycie kodu, pokrycie instrukcji, pokrycie gałęzi, pokrycie ścieżek, code coverage, statement coverage, path coverage, branch coverage, przypadki testowe, klasy równoważności, wartości brzegowe, tabele decyzyjne, przypadki użycia, junit, roboelectric, mockito, android, programowanie, programming"
+keywords: "testowanie, testing, testy, jednostkowe, automatyczne, lokalne, integracyjne, zaślepka, atrapa, unit test, mock, stub, przypadki testowe, czarnoskrzynkowe, białoskrzynkowe, pokrycie kodu, pokrycie instrukcji, pokrycie gałęzi, pokrycie ścieżek, code coverage, statement coverage, path coverage, branch coverage, przypadki testowe, klasy równoważności, wartości brzegowe, tabele decyzyjne, przypadki użycia, junit, robolectric, mockito, android, programowanie, programming"
 ---
 
 ## Definicja
 `Testy jednostkowe` (`unit test`) poddają weryfikacji sposób działania różnych elementów składowych kodu takich jak `metody`, `klasy` czy `moduły`. Testy powinny być pisane w sposób `niezależny`, tzn. testowana jednostka nie jest podatna na wpływy innych elementów, w przeciwnym razie wynik testu może być niewiarygodny. Testy jednostkowe należą do `testów automatycznych` za których tworzenie i wykonywanie powinien odpowiadać programista. Warto przeprowadzać je często i regularnie przy każdym nowym przyroście dzięki czemu na wczesnym etapie tworzenia oprogramowania możliwe jest wykrycie usterki. Pozwala to na przeciwdziałanie kumulowania się błędów (jeden błąd rodzi kolejne) co w rezultacie redukuje koszty w póżniejszych etapach cyklu życia aplikacji. Tworzenie testów jednostkowych polega przede wszystkim na pisaniu `asercji` czyli porównywanie uzyskanego wyniku z oczekiwanym. Do przeprowadzania testów jednostkowych można wykorzystać np. bibliotekę `jUnit`. Przeważnie jednostki testowe wymagają do poprawnego działania obiektów różnego typu. Aby przekazywane argumenty nie wpływały na wynik testu danej jednostki (niezależne testy) należy dostarczać tzw. `atrapę` obiektu czyli naiwną implementację zależności.
 
 ## Testy lokalne i instrumentalne
-Testy (nie tylko jednostkowe), które mogą zostać wykonane na wirtualnej maszynie deweloperskiej nazywane są `testami lokalnymi`. Przeprowadzenie jednostkowych testów lokalnych charakteryzuje się niskim kosztem oraz szybkością w związku z czym powinny stanowić przeważającą część testów. Natomiast testy, które wymagają uruchomienia na fizycznym urządzeniu lub emulatorze nazywane są `testami instrumentalnymi`. Wynika to z faktu, że pewne fragmenty kodu są zależne bibliotek `Android SDK` oraz cyklu życia komponentów, którymi zarządza system. Takie testy w stosunku do testów lokalnych są dosyć kosztowne i powolne. Przykładem biblioteki realizującej instrumentalne testy jednostkowe jest `Roboelectrict`.
+Testy (nie tylko jednostkowe), które mogą zostać wykonane na wirtualnej maszynie deweloperskiej nazywane są `testami lokalnymi`. Przeprowadzenie jednostkowych testów lokalnych charakteryzuje się niskim kosztem oraz szybkością w związku z czym powinny stanowić przeważającą część testów. Natomiast testy, które wymagają uruchomienia na fizycznym urządzeniu lub emulatorze nazywane są `testami instrumentalnymi`. Wynika to z faktu, że pewne fragmenty kodu są zależne bibliotek `Android SDK` oraz cyklu życia komponentów, którymi zarządza system. Takie testy w stosunku do testów lokalnych są dosyć kosztowne i powolne. Przykładem biblioteki realizującej instrumentalne testy jednostkowe jest `Robolectrict`.
 
 ## Atrapa i zaślepka
 `Zaślepka` (`stub`) jest minimalną implementacją zależnego modułu używaną podczas testów innego modułu. Ma za zadanie zastępować wywoływany moduł poprzez zwracanie w prosty sposób wyniku bez dokonywania obliczeń w taki sposób, aby wykonywany test zawsze przeszedł pozytywnie. `Atrapa` (`mock`) dostarcza natomiast naiwną implementację zależności, która umożliwia rejestrowanie interakcji z implementowanym interfejsem (np. ilość wywołań i parametry) i w przeciwieństwie do zaślepki bierze udział w procesie testowania. Atrapa jest determinowana w momencie działania programu i reprezentuje instancje oczekiwanego obiektu. Posługując się fachową nomenklaturą można wyróżnić jeszcze szerszy podział obiektów zastępczych jednakże ważniejsze od teoretycznego podziału jest właściwa implementacja. Biblioteka `Mockito` ułatwia tworzenie i zarządzanie naiwnymi implementacjami.
@@ -58,9 +58,9 @@ fun calculate(a: Boolean, b: Boolean, c: Boolean) {
 `Pokrycie instrukcji` (`statement coverage`) zwane również `pokryciem linii` obejmuje tylko rzeczywiste warunki, gdzie każda linia kodu jest analizowana. Sprawdza przepływ ścieżek oraz weryfikuje poprawność realizacji (czy robi to co jest oczekiwane). Nie weryfikuje natomiast fałszywych wyników, jest zależna od struktury kodu, pomija operatory logiczne i nie zgłasza warunku zakończenia pętli. Wynikiem pokrycia instrukcji jest iloczyn ilości linii kodu uruchomionych na skutek testów do wszystkich linii (z pominięciem instrukcji niewykonywalnych).
 
 >Dla podanych argumentów pokrycie instrukcji wynosi:  
->- **a**=true, **b**=true, **c**=true -> **statement coverage**=7/11
->- **a**=false, **b**=true, **c**=false -> **statement coverage**=8/11
->- **a**=true, **b**=false, **c**=false -> **statement coverage**=9/11
+>- **a**=true, **b**=true, **c**=true -> **statement coverage**=6/7
+>- **a**=false, **b**=true, **c**=false -> **statement coverage**=5/7
+>- **a**=true, **b**=false, **c**=false -> **statement coverage**=6/7
 >
 >Aby uzyskać całkowite pokrycie instrukcji należy przygotować 2 testy jednostkowe.  
 
