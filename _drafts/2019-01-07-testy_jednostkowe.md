@@ -113,7 +113,7 @@ Projektowanie przypadków testowych oparciu o `klasy równoważności` polega na
 Testowanie `przejść między stanami` analizuje dozwolone i niedozwolone przejścia między stanami aplikacji za pomocą `automatu skończenie stanowego`. Analizując diagram lub tabelę stanową można zaprojektować testy w taki sposób by pokryły wszystkie przejścia, konkretny ciąg czy testowały przejścia zabronione.
 
 >Diagram stanów wraz z możliwymi przejściami dla kosztów dostawy ukazany jest poniżej.
-![Diagram stanów](/assets/img/diagrams/testing/flow_states.svg){: .center-image }
+![Diagram stanów](/assets/img/diagrams/testing/unit_test_flow_states.svg){: .center-image }
 
 Testowanie z użyciem `tabeli decyzyjnych` polega na sprawdzeniu działania jednostki testowanej w odniesieniu do kombinacji warunków wejściowych znajdujących się w tabeli.
 
