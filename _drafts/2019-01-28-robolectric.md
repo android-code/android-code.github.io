@@ -6,11 +6,43 @@ categories: ["Testowanie"]
 image: testing/robolectric
 github: testing/tree/master/robolectric
 description: "Robolectric"
-keywords: "testowanie, testing, testy, jednostkowe, automatyczne, instrumentalne, zaślepka, atrapa, unit test, mock, stub, robolectric, android, programowanie, programming"
+keywords: "testowanie, testing, testy, jednostkowe, automatyczne, lokalne, instrumentalne, zaślepka, atrapa, unit test, mock, stub, robolectric, robolectrictestrunner, config, shadow, build, setup, controller, activitycontroller, activity, fragment, service, intent, contenrprovider, android, programowanie, programming"
 ---
 
 ## Przeznaczenie
-Uruchamianie jednostkowych testów instrumentalnych na urządzeniu lub emulatorze jest kosztowne i powolne. Jednakże w wielu sytuacjach nie sposób uciec od testowania logiki kodu powiązanego z komponentami Androida co sprawia, że testy instrumentalne są stosowane pomimo wynikających kosztów. Alternatywnym sposobem testowania kodu zależnego od `Android SDK` może być użycie framework `Robolectric`, który umożliwia przeprowadzanie `lokalnych testów` jednostkowych w środowisku wykonawyczm `JVM` na komponentach Android takich jak m.in. `Activity`, `Fragment`, `Intent`, `Service`, `ContentProvider`. W przeciwieństwie do testów instrumentalnych Robolectric wykonuje się piaskownicy systemowej (`sandbox`) co pozwala na konfiguracje środowiska Android dla wszystkich testów. Robolectric dostarcza również dublerów komponentów Android dla których nie potrafi dokonać tłumaczenia do testów jednostkowych (np. sensory hardware, usługi systemowe). Obsługuje inflację widoków, ładowanie zasobów i wiele innych aspektów zaimplementowanych w natywnym kodzie na urządzeniach co pozwala na wykonanie większości czynności jak na prawidzwym urządzeniu. Robolectric w łatwy sposób umożliwia zapewnienie własnej implementacji wybranych metod Android SDK dzięki czemu możliwa jest np. symulacja warunków czy zachowań sensorów. Wykorzystanie Robolectric jest bliższe podejściu testowania czarnoskrzynkowego (skupionego na zachowaniu) i nie wyklucza jednoczesnego stosowania innych bibliotek naiwnych implementacji takich jak np. `Mockito`.
+Uruchamianie jednostkowych testów instrumentalnych na urządzeniu lub emulatorze jest kosztowne i powolne. Jednakże w wielu sytuacjach nie sposób uciec od testowania logiki kodu powiązanego z komponentami Androida co sprawia, że testy instrumentalne są stosowane pomimo wynikających kosztów. Alternatywnym sposobem testowania kodu zależnego od `Android SDK` może być użycie framework `Robolectric`, który umożliwia przeprowadzanie `lokalnych testów` jednostkowych w środowisku wykonawyczm `JVM` na komponentach Android takich jak m.in. `Activity`, `Fragment`, `Intent`, `Service` czy `ContentProvider`. W przeciwieństwie do testów instrumentalnych Robolectric wykonuje się piaskownicy systemowej (`sandbox`) co pozwala na konfiguracje środowiska Android dla wszystkich testów. Robolectric dostarcza również `dublerów` komponentów Android dla których nie potrafi dokonać tłumaczenia do testów jednostkowych (np. sensory hardware, usługi systemowe). Obsługuje inflację widoków, ładowanie zasobów i wiele innych aspektów zaimplementowanych w natywnym kodzie na urządzeniach co pozwala na wykonanie większości czynności tak jak na prawidzwym urządzeniu. Robolectric w łatwy sposób pozwala na zapewnienie własnej implementacji wybranych metod Android SDK dzięki czemu możliwa jest np. symulacja warunków czy zachowań sensorów. Wykorzystanie Robolectric jest bliższe podejściu testowania czarnoskrzynkowego (skupionego na zachowaniu) i nie wyklucza jednoczesnego stosowania innych bibliotek naiwnych implementacji takich jak np. `Mockito`.
+
+>**Przykład**  
+>Na podstawie Aktywności `MainActivity` zostaną przedstawione możliwości implementacji testów jednostkowych w Robolectric.
+
+{% highlight kotlin %}
+class MainActivity : AppCompatActivity() {
+
+    companion object {
+        const val TITLE_KEY = "TITLE"
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        buttonAction.setOnClickListener {
+            val intent = Intent(this, SecondActivity::class.java)
+            startActivity(intent)
+        }
+
+        textViewTitle.setOnClickListener { textViewTitle.setText(R.string.clicked) }
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        savedInstanceState?.let {
+            if(it.containsKey(TITLE_KEY))
+                textViewTitle.text = it.getString(TITLE_KEY)
+        }
+    }
+}
+{% endhighlight %}
 
 ## Uruchomienie
 Aby uruchomić test w Robolectric należy opatrzeć klasę testową adnotacją `@RunWith(RobolectricTestRunner.class)` oraz uzyskać instancję żądanej klasy komponentu.
@@ -50,12 +82,8 @@ class SimpleTest {
 }
 {% endhighlight %}
 
-
-## Shadow
-
-
 ## Konfiguracja
-Aby zmienić domyślną konfiguracje testów należy oznaczyć klasy lub metody adnotacją `@Config` wraz z deklaracją konfiguracji. Metody z adnotacją `@Config` nadpisują zachowanie poziomu klasy. Konfiguracji mogą podlegać m.in. poziom `sdk`, plik `manifest`, klasy `shadows`, ścieżki do zasobów czy `kwalifikatory` (np. języka, regionu itp).
+Aby zmienić domyślną konfiguracje testów należy oznaczyć klasy lub metody adnotacją `@Config` wraz z deklaracją konfiguracji. Metody z adnotacją `@Config` nadpisują zachowanie z poziomu klasy. Konfiguracji mogą podlegać m.in. poziom `sdk`, plik `manifest`, klasy `shadows`, ścieżki do zasobów czy `kwalifikatory` (np. języka, regionu itp).
 
 {% highlight kotlin %}
 @RunWith(RobolectricTestRunner::class)
@@ -106,7 +134,7 @@ class ConfigurationTest {
 {% endhighlight %}
 
 ## Cykl życia
-`ActivityController` odpowiada za tworzenie oraz zarządzanie cyklem życia tworzonej Aktywności. Metoda `buildActivity` tworzy instancję `ActivityController`, która umożliwia wywołanie wybranych metod cyklu życia oraz pobranie instancji Aktywności. Aby bezpośrednio uzyskać obiekt Aktywności z przebytym pełnym cyklem tworzenia należy wywołać metodę `setupActivity`.
+`ActivityController` odpowiada za tworzenie oraz zarządzanie cyklem życia tworzonej Aktywności. Metoda `buildActivity` tworzy instancję `ActivityController`, która umożliwia wywołanie wybranych metod cyklu życia (`create`, `start`, `resume`, `pause`, `stop`, `destroy`) oraz pobranie instancji Aktywności dla bieżącego stanu. Aby bezpośrednio uzyskać obiekt Aktywności z przebytym pełnym cyklem tworzenia należy wywołać metodę `setupActivity`. 
 
 {% highlight kotlin %}
 @RunWith(RobolectricTestRunner::class)
@@ -132,14 +160,64 @@ class LifecycleTest {
 
         assertEquals(Lifecycle.State.CREATED, activity.lifecycle.currentState)
         //do more assertion for this state
+        
         controller.start()
         assertEquals(Lifecycle.State.STARTED, activity.lifecycle.currentState)
         //do more assertion for this state
+        
         controller.resume()
         assertEquals(Lifecycle.State.RESUMED, activity.lifecycle.currentState)
         //do more assertion for this state
+        
         controller.pause().stop().destroy()
         assertEquals(Lifecycle.State.DESTROYED, activity.lifecycle.currentState)
     }
+
+    @Test
+    fun checkMainActivityHasWorkingRestoringState() {
+        val savedInstanceState = Bundle()
+        savedInstanceState.putString(TITLE_KEY, "value restored")
+        val activity = Robolectric.buildActivity(MainActivity::class.java)
+            .create().restoreInstanceState(savedInstanceState).get()
+
+        assertEquals("value restored", activity.textViewTitle.text)
+    }
 }
 {% endhighlight %}
+
+W analogiczny sposób można zarządzać innymi kompontentami Androida i ich cyklem życia poprzez operowanie na dedykowanym kontrolerze (`ServiceController`, `FragmentController`, `ContentProviderController` itp.) oraz wykonanie metod odpowiadających ich cyklowi życia.
+
+{% highlight kotlin %}
+@RunWith(RobolectricTestRunner::class)
+class ServiceTest {
+
+    @Test
+    fun checkSomeServiceProperlyBindAndUnbind() {
+        val service = Robolectric.buildService(SomeService::class.java).bind().get()
+        assertTrue(service.bound)
+        service.onUnbind(null)
+        assertFalse(service.bound)
+    }
+}
+
+//this is only dummy implementation
+class SomeService : Service() {
+
+    var bound = false
+
+    override fun onBind(intent: Intent?): IBinder? {
+        bound = true
+        return null
+    }
+
+    override fun onUnbind(intent: Intent?): Boolean {
+        bound = false
+        return super.onUnbind(intent)
+    }
+
+    //more methods
+}
+{% endhighlight %}
+
+## Shadow
+//TODO
