@@ -139,19 +139,6 @@ class ConfigurationTest {
 {% highlight kotlin %}
 @RunWith(RobolectricTestRunner::class)
 class LifecycleTest {
-    
-    @Test
-    fun checkMainActivityHasWorkingFinishLifecycle() {
-        //this activity goes throw all create lifecycle
-        val controller = Robolectric.buildActivity(MainActivity::class.java)
-        val activity = controller.create().start().resume().visible().get()
-        //equivalent of val activity = Robolectric.setupActivity(MainActivity::class.java)
-        //visible methods assures that activity view's is attached
-
-        assertFalse(activity.isFinishing)
-        activity.finish()
-        assertTrue(activity.isFinishing)
-    }
 
     @Test
     fun checkMainActivityHasWorkingLifecycle() {
@@ -171,6 +158,19 @@ class LifecycleTest {
         
         controller.pause().stop().destroy()
         assertEquals(Lifecycle.State.DESTROYED, activity.lifecycle.currentState)
+    }
+
+    @Test
+    fun checkMainActivityHasWorkingFinishLifecycle() {
+        //this activity goes throw all create lifecycle
+        val controller = Robolectric.buildActivity(MainActivity::class.java)
+        val activity = controller.create().start().resume().visible().get()
+        //equivalent of val activity = Robolectric.setupActivity(MainActivity::class.java)
+        //visible methods assures that activity view's is attached
+
+        assertFalse(activity.isFinishing)
+        activity.finish()
+        assertTrue(activity.isFinishing)
     }
 
     @Test
@@ -220,4 +220,48 @@ class SomeService : Service() {
 {% endhighlight %}
 
 ## Shadow
-//TODO
+Robolectric tworzy środowisko wykonawcze zawierające prawdziwy kod Android SDK co zwiększa realizm testów tak jakby były przeprowadzane na fizycznym urządzeniu. Wszystkie klasy Android są zastąpione tzw. `obiektami cienia` (`Shadows`). Każdy obiekt cienia może modyfikować lub rozszerzać zachowanie odpowiadającej mu klasy z Android SDK. Aby stworzyć klasę `Shadow` należy oznaczyć ją adnotacją `@Implements` wraz z nazwą odpowiadającej klasy Android, opcjonalnie rozszerzyć superklasę Shadow oraz dostarczyć publiczny bez argumentowy konstruktor. Metody rozszerzene muszą mieć adnotację `@Implementation` (obiekt cienia implementuje metody z tą samą sygnaturą dla odpowiadającej klasy Android niezależnie od modyfikatora dostępu) i przeważnie modyfikator `protected`. Metoda `directlyOn` pozwala na wywołanie akcji na faktycznym obiekcie.
+
+{% highlight kotlin %}
+@Implements(TextView::class)
+class CustomTextShadowView : ShadowView() {
+
+    @Implementation
+    fun setEnabled(enable: Boolean) {
+        directlyOn(realView, View::class.java).setEnabled(enable)
+        if(enable)
+            directlyOn(realView, View::class.java).setAlpha(1.0f)
+        else
+            directlyOn(realView, View::class.java).setAlpha(0.5f)
+    }
+
+    fun getAlpha() : Float {
+        return realView.alpha
+    }
+}
+{% endhighlight %}
+
+Klasa testowa lub metoda wykorzystująca własną implementacje klas Shadows musi być oznaczona adnotacją `@Config(shadows=arrayOf(CustomShadowClass::class))` (lub zawierać odpowiedni wpis w pliku ustawień) co umożliwia rozpoznanie i skojarzenie klas Shadow z klasami przykrywanymi. Metoda `shadowOf` jest przeznaczona dla dostarczonych przez Robolectric klas Shadow, natomiast `extract` dla autorskich klas Shadow.
+
+{% highlight kotlin %}
+@RunWith(RobolectricTestRunner::class)
+@Config(shadows=arrayOf(CustomShadowTextView::class))
+class ShadowTest {
+
+    @Test
+    fun shadowCustomClassImplicit() {
+        val activity = Robolectric.setupActivity(MainActivity::class.java)
+        val view = activity.textViewTitle //TextView instance
+        view.setEnabled(false) 
+        assertEquals(0.5f, view.getAlpha())
+    }
+
+    @Test
+    fun shadowCustomClassExplicit() {
+        val activity = Robolectric.setupActivity(MainActivity::class.java)
+        val view = extract(activity.textViewTitle) as CustomShadowTextView
+        view.setEnabled(false)
+        assertEquals(0.5f, view.getAlpha())
+    }
+}
+{% endhighlight %} 
