@@ -5,7 +5,7 @@ date: 2019-01-28
 categories: ["Testowanie"]
 image: testing/robolectric
 github: testing/tree/master/robolectric
-description: "Robolectric"
+description: "Testowanie"
 keywords: "testowanie, testing, testy, jednostkowe, automatyczne, lokalne, instrumentalne, zaślepka, atrapa, unit test, mock, stub, robolectric, robolectrictestrunner, config, shadow, build, setup, controller, activitycontroller, activity, fragment, service, intent, contenrprovider, android, programowanie, programming"
 ---
 
@@ -224,7 +224,7 @@ Robolectric tworzy środowisko wykonawcze zawierające prawdziwy kod Android SDK
 
 {% highlight kotlin %}
 @Implements(TextView::class)
-class CustomTextShadowView : ShadowView() {
+class CustomShadowTextView : ShadowView() {
 
     @Implementation
     fun setEnabled(enable: Boolean) {

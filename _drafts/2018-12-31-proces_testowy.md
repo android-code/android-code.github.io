@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Proces"
+title: "Proces testowy"
 date:  2018-12-31
 categories: ["Testowanie"]
 image: testing/process
-description: "Testowanie - proces"
-keywords: "testowanie, testing, testy, jednostkowe, integracyjne, systemowe, akceptacyjne, manualne, automatyczne, lokalne, integracyjne, unit test, ui test, błąd, usterka, junit, jmeter, espresso, robolectric, android, programowanie, programming"
+description: "Testowanie"
+keywords: "testowanie, testing, testy, proces, poziomy, jednostkowe, integracyjne, systemowe, akceptacyjne, manualne, automatyczne, lokalne, integracyjne, unit test, ui test, błąd, usterka, junit, jmeter, espresso, robolectric, android, programowanie, programming"
 ---
 
 ## Definicja

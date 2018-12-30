@@ -5,7 +5,7 @@ date:  2018-12-24
 categories: ["Kotlin"]
 image: kotlin/delegation
 github: kotlin/blob/master/delegation.kt
-description: "Delegacja"
+description: "Kotlin"
 keywords: "kotlin, delegacja, delegat, właściwości, delegation, delegate, properties, lazy, observable, map, android, programowanie, programming"
 ---
 

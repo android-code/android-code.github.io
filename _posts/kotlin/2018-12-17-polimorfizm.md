@@ -5,7 +5,7 @@ date:  2018-12-17
 categories: ["Kotlin"]
 image: kotlin/polymorphism
 github: kotlin/blob/master/polymorphism.kt
-description: "Polimorfizm"
+description: "Kotlin"
 keywords: "kotlin, polimorfizm, dziedziczenie, interfejsy, abstrakcja, klasa, inheritance, polymorphism, interface, abstract, class, open, override, extensions, android, programowanie, programming"
 ---
 

@@ -4,7 +4,7 @@ title: "Testy jednostkowe"
 date:  2019-01-07
 categories: ["Testowanie"]
 image: testing/unit_test
-description: "Testy jednostkowe"
+description: "Testowanie"
 keywords: "testowanie, testing, testy, jednostkowe, automatyczne, lokalne, integracyjne, zaślepka, atrapa, unit test, mock, stub, przypadki testowe, czarnoskrzynkowe, białoskrzynkowe, pokrycie kodu, pokrycie instrukcji, pokrycie gałęzi, pokrycie ścieżek, code coverage, statement coverage, path coverage, branch coverage, przypadki testowe, klasy równoważności, wartości brzegowe, tabele decyzyjne, przypadki użycia, junit, robolectric, mockito, android, programowanie, programming"
 ---
 
