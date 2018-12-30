@@ -10,7 +10,7 @@
 		{% if category_posts.size > max_posts %}
 			<label class="category-title show-more-trigger" for="category-posts-{{ category_name }}" 
 				text-all="&darr; {{ site.data.strings.show-all-posts | default: 'Show all' }}" 
-				text-less="&uarr; {{ site.data.string.show-less-posts | default: 'Show less' }}">			
+				text-less="&uarr; {{ site.data.strings.show-less-posts | default: 'Show less' }}">			
 			</label>
 		{% endif %}
 
