@@ -6,6 +6,7 @@ categories: ["Kotlin"]
 image: kotlin/control_flow
 github: kotlin/blob/master/control-flow.kt
 description: "Kotlin"
+version: Kotlin v1.3
 keywords: "kotlin, instrukcje sterujące, control flow, pętla, for, while, loop, when, if, else, range, break, continue, return, android, programowanie, programming"
 ---
 

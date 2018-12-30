@@ -18,5 +18,11 @@
       {{ site.data.strings.post-read | default: "read" }}
     </span>
   </div>
-  
+
+  {% if page.version %}
+    <div class="hero__meta">
+      <span><small>({{ page.version }})</small></span>
+    </div>
+  {% endif %}
+
 </div>

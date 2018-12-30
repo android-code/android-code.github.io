@@ -6,6 +6,7 @@ categories: ["Testowanie"]
 image: testing/robolectric
 github: testing/tree/master/robolectric
 description: "Testowanie"
+version: Robolectric v4.12
 keywords: "testowanie, testing, testy, jednostkowe, automatyczne, lokalne, instrumentalne, zaślepka, atrapa, unit test, mock, stub, robolectric, robolectrictestrunner, config, shadow, build, setup, controller, activitycontroller, activity, fragment, service, intent, contenrprovider, android, programowanie, programming"
 ---
 

@@ -6,6 +6,7 @@ categories: ["Kotlin"]
 image: kotlin/delegation
 github: kotlin/blob/master/delegation.kt
 description: "Kotlin"
+version: Kotlin v1.3
 keywords: "kotlin, delegacja, delegat, właściwości, delegation, delegate, properties, lazy, observable, map, android, programowanie, programming"
 ---
 

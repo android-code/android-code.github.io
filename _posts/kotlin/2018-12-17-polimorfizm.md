@@ -6,6 +6,7 @@ categories: ["Kotlin"]
 image: kotlin/polymorphism
 github: kotlin/blob/master/polymorphism.kt
 description: "Kotlin"
+version: Kotlin v1.3
 keywords: "kotlin, polimorfizm, dziedziczenie, interfejsy, abstrakcja, klasa, inheritance, polymorphism, interface, abstract, class, open, override, extensions, android, programowanie, programming"
 ---
 
