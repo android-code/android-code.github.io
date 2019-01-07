@@ -5,7 +5,7 @@ permalink: /kategorie/
 ---
 
 <div class="categories-post-wrapper">
-	{% for category in site.categories %}
+	{% for category in site.categories reversed %}
 	  {% include category-posts.html %}
 	{% endfor %}
 </div>
