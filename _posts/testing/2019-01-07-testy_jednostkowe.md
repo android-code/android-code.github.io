@@ -118,7 +118,7 @@ Testowanie `przejść między stanami` analizuje dozwolone i niedozwolone przej�
 Testowanie z użyciem `tabeli decyzyjnych` polega na sprawdzeniu działania jednostki testowanej w odniesieniu do kombinacji warunków wejściowych znajdujących się w tabeli.
 
 >Przedstawione warunki składania zamówienia w poniższej tabeli implikują akcję lub możliwość jej podjęcia.
->
+
 |:-----------:|:----------------------------:|:-:|:-:|:-:|:-:|---|
 | **Warunek** |     Użytkownik zalogowany    | F | T | T | T | T |
 |             |      Restauracja wybrana     |   | F | T | T | T |
@@ -131,7 +131,6 @@ Testowanie z użyciem `tabeli decyzyjnych` polega na sprawdzeniu działania jedn
 |             |  Powiadom o płatnej dostawie |   |   |   | X |   |
 |             | Powiadom o darmowej dostawie |   |   |   |   | X |
 |             |        Złóż zamówienie       |   |   |   | X | X |
->
 
 Przypadki testowe tworzone w oparciu o `przypadki użycia` są projektowane w taki sposób, aby wykonane były scenariusze użytkownika co w odniesieniu do biznesowego charakteru przypadków użycia sprawia, że pozwalają wykryć usterki w przepływach proesów w czasie rzeczywistym. Stosowane są głównie w testach akceptacyjnych.
 
