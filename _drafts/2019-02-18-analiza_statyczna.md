@@ -10,7 +10,7 @@ keywords: "testowanie, testing, testy, analiza, statyczna, gradle, lint, pmd, fi
 ---
 
 ## Definicja
-`Statyczna analiza kodu` wykorzystywana jest w celu znajdywania błędów w kodzie, wyszukiwanie luk i niedopatrzeń oraz sprawdzania czy napisany kod spełnia zasady dobrego programowania i przestrzega wytycznych. Co więcej pozwala na detekcję hipotetycznych błędów, które mogły nie zostać wykrytę przez testy jednostkowe i manualne, a także ułatwia definiowanie i przestrzeganie `standardów kodu` w zespole. Dzięki temu utrzymanie odpowiedniej jakości kodu staje się łatwiejsze. Statyczna analiza jest częścią procesu `ciągłej integracji` (`continous integration`) i może być wykorzystywana również jako narzędzie wspierające `testowanie` (`białoskrzynkowe`) oraz `refactoring`. Dokonywana analiza przeprowadzana jest bez wykonania kodu i odbywa się przy pomocy różnych narzędzi analitycznych takich jak np. `lint`, `checkstyle`, `pmd` czy `findbugs`  dostępnych jako `plugin` dla `Gradle` oraz platform wspierających ciągłą integracje jak np. `SonarQube`. Weryfikują one zgodność kodu w zestawieniu do zbioru reguł. W przypadku niespełnienia zasad informują o potencjalnych błędach i zagrożeniach. Nie rzadko różne pluginy zawierają podobną funkcjonalność co nie wyklucza ich ze wzajemnego użycia, wręcz przeciwnie, uzupełniają się.
+`Statyczna analiza kodu` wykorzystywana jest w celu znajdywania błędów w kodzie, wyszukiwanie luk i niedopatrzeń oraz sprawdzania czy napisany kod spełnia zasady dobrego programowania i przestrzega wytycznych. Co więcej pozwala na detekcję hipotetycznych błędów, które mogły nie zostać wykrytę przez testy jednostkowe i manualne, a także ułatwia definiowanie i przestrzeganie `standardów kodu` w zespole. Dzięki temu utrzymanie odpowiedniej jakości kodu staje się łatwiejsze. Statyczna analiza jest częścią procesu `ciągłej integracji` (`continous integration`) i może być wykorzystywana również jako narzędzie wspierające `testowanie` (`białoskrzynkowe`) oraz `refactoring`. Dokonywana analiza przeprowadzana jest bez wykonania kodu i odbywa się przy pomocy różnych narzędzi analitycznych takich jak np. `lint`, `checkstyle`, `pmd` czy `findbugs`  dostępnych jako `wtyczka` (`plugin`) dla `Gradle` oraz platform wspierających ciągłą integracje jak np. `SonarQube`. Weryfikują one zgodność kodu w zestawieniu do zbioru reguł. W przypadku niespełnienia zasad informują o potencjalnych błędach i zagrożeniach. Nierzadko różne wtyczki zawierają podobną funkcjonalność co nie wyklucza ich ze wzajemnego użycia, wręcz przeciwnie, uzupełniają się.
 
 ## Checkstyle
 `Checkstyle` analizuje kod źródłowy weryfikując jego standardy oraz konwencję w stosunku do zbioru wybranych zasad. Skupia się przede wszystkim na analizie stylu kodu (np. nazewnictwo, klamry). Aby stworzyć konfigurację dla checkstyle należy dodać plik zasad (np. `checkstyle.xml`) oraz uzupełnić plik `gradle` aplikacji (lub stworzyć nowy) o nowe zadanie co przedstawia poniższy listing.
@@ -52,7 +52,7 @@ task checkstyle(type: Checkstyle) {
 }
 {% endhighlight %}
 
-Wykonane zadanie `checkstyle` dla klasy `CheckstyleCode` zwróci raport z uwagami dotyczącymi nie używanego import, nie poprawnych nazw dla stałej i metody oraz zbyt dużą ilość argumentów metody.
+Wykonane zadanie `checkstyle` dla klasy `CheckstyleCode` zwróci raport z uwagami dotyczącymi nieużywanego import, niepoprawnych nazw dla stałej i metody oraz zbyt dużą ilość argumentów metody.
 
 {% highlight java %}
 import java.math.BigInteger; //unused import
@@ -103,7 +103,7 @@ task pmd(type: Pmd) {
 }
 {% endhighlight %}
 
-Wykonane zadanie `pmd` dla klasy `PmdCode` zwróci raport z uwagami dotyczącymi nie używanej zmiennej, pustej metody, braku klamr dla pętli oraz bloku warunkowego zawsze prawdziwego.
+Wykonane zadanie `pmd` dla klasy `PmdCode` zwróci raport z uwagami dotyczącymi nieużywanej zmiennej, pustej metody, braku klamr dla pętli oraz bloku warunkowego zawsze prawdziwego.
 
 {% highlight java %}
 public class PmdCode {
@@ -150,7 +150,7 @@ task findbugs(type: FindBugs) {
 }
 {% endhighlight %}
 
-Wykonane zadanie `findbugs` dla kodu bajtowego klasy `FindbugsCode` zwróci raport z uwagami dotyczącymi nie używanej metody prywatnej, porównywania obiektów typu `String` za pomocą operatora == oraz ignorowanie rezultatu metody.
+Wykonane zadanie `findbugs` dla kodu bajtowego klasy `FindbugsCode` zwróci raport z uwagami dotyczącymi nieużywanej metody prywatnej, porównywania obiektów typu `String` za pomocą operatora == oraz ignorowanie rezultatu metody.
 
 {% highlight java %}
 public class FindbugsCode {
@@ -172,9 +172,7 @@ public class FindbugsCode {
 {% endhighlight %}
 
 ## Lint
-`Lint` jest narzędziem dostarczonym przez `Android Studio`, który podobnie jak wspomniane wcześniej pluginy sprawdza pliki źródłowe pod kątem potencjalnych błędów, optymalizacji poprawności, bezpieczeństwa, wydajności, użyteczności i dostępności kodu. Z uwagi na integracje ze środowiskiem programistycznym nie wymaga dodatkowej konfiguracji.
-
-//TODO
+`Lint` jest narzędziem analitycznym, który dokonuje skanowania struktury projektu `Android` w poszukiwaniu potencjalnych błędów. Sprawdza pliki źródłowe i zasoby pod kątem optymalizacji poprawności, bezpieczeństwa, wydajności, użyteczności, dostępności i wielojęzykowości. Z uwagi na integrację z `Android Studio`, mnogości funkcjonalności oraz weryfikację nie tylko kodu źródłowego, ale i zasobów projektu, a także wsparcia dla `Kotlin` jest rekomendowanym narzędziem analizy statycznej dla programistów Android. Poza podstawową funkcjonalnością znaną z pozostałych narzędzi analitycznych pozwala także na znalezienie błędów m.in. w obszarze brakujących tłumaczeń, nieodpowiednich rozmiarów czy gęstości ikon, nieużywanych zasobów, problemów z plikami layout i Manifest. Aby uruchomić pełną konfigurację dla `lint` wystarczy wykonać zadanie w zależności od typu build (`lint`, `lintDebug`, `lintRelease`). Wybierając `Analyze` z menu kontekstowego środowiska programistycznego można dokonać spersonalizowanej inspekcji kodu ze względu na lokalizację, charakter czy przedmiot analizy.
 
 ## SonarQube
-//TODO
+`SonarQube` jest platformą wspierającą proces ciągłej integracji poprzez użycie narzędzi do analizy statycznej oraz prezentacje wyników w przyjaznej formie graficznej. Skupia się przede wszystkim na kondycji projektu, wyciekach pamięci, wyszukiwaniu błędów w strukturze kodu i łamaniu zasad dobrego kodu, wykrywaniu luk w bezpieczeństwie, analizie gałęzi projektu czy śledzenie długu technologicznego. Dostępny jest dla ponad 20 języków programowania (w tym `Java`, `Kotlin`, `C++`) i oferuje limitowane darmowe użycie poprzez aplikację internetową lub desktopową. SonarQube oferuje również wtyczkę `SonarLint` przeznaczoną dla środowiska programistycznego, która przeprowadza analizę w rzeczywistym czasie pracy programisty wyświetlając odpowiednie uwagi i wskazówki. 
