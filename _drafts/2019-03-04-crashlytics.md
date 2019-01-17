@@ -7,10 +7,10 @@ image: firebase/crashlytics
 github: firebase/tree/master/crashlytics
 description: "Firebase"
 version: Crashlytics 2.9
-keywords: "firebase, crashlytics, crash, android, programowanie, programming"
+keywords: "firebase, crashlytics, crash, błąd, awaria, wyjątek, exception, android, programowanie, programming"
 ---
 
-## Możliwości
+## Cechy
 `Firebase Crashlytics` jest narzędziem raportującym awarie w aplikacji w czasie rzeczywistym, które pochodzą z urządzeń użytkowników na których zainstalowana jest aplikacja włączając w to urządzenia deweloperskie. Pomaga śledzić błędy oraz ustalać ich priorytety dzięki czemu możliwa jest weryfikacja i naprawa problemów związanych ze stabilnością co znacząco wpływa na utrzymanie jakości. Inteligentne grupowanie awarii wraz z informacjami o okolicznościach, które do nich doprowadziły pozwala zaoszczędzić czas w procesie diagnozy, zlokalizować błędny lub potencjalnie niebezpieczny fragment kodu oraz ustalić zakres użytkowników których awaria dotyczy. Crashlytics jest ogromnym wsparciem dla deweloperów w procesie utrzymania i rozwoju aplikacji.
 
 ## Zgłaszanie
@@ -44,8 +44,8 @@ buttonThirdValue.setOnClickListener {
         //do more work
     } 
     catch (e: Exception) {
-        Crashlytics.log("buttonThirdValue action error") //to logcat
-        Crashlytics.setInt("array_size", values.size)
+        Crashlytics.log("buttonThirdValue action error extra log") //to logcat
+        Crashlytics.setInt("first_number", values[0])
         Crashlytics.logException(e) //log to Firebase
     }
 }
@@ -54,6 +54,14 @@ private fun getThirdValue(values: ArrayList<Int>): Int {
     return values[2]
 }
 {% endhighlight %}
+
+Przegląd błędów w konsoli Firebase może prezentować się następujaco. Warto zauważyć, że przechwycone awarie mają status niekrytyczny.
+
+![Lista awarii](/assets/img/diagrams/firebase/crashes_list.png){: .center-image }
+
+Widok podglądu dostarcza natomiast szczegółowych informacji co może być przydatne w kontekście znalezienia błędu i okoliczności jego wystąpienia.
+
+![Trasa awarii](/assets/img/diagrams/firebase/crash_trace.png){: .center-image }
 
 W diagnozie problemów często przydatna może być informacja identyfikująca użytkownika, który doświadczył awarii co możliwe jest poprzez ustawienie id metodą `setUserIdentifier`.
 
@@ -77,10 +85,10 @@ adb logcat -s Fabric CrashlyticsCore
 {% endhighlight %}
 
 ## Automatyczne raportowanie
-Zbieranie i wysyłanie raportów jest domyślnie włączone dla wszystkich użytkowników. Aby dać użytkownikom możliwość decydowania o przesyłanych informacjach należy wyłączyć automatyczne raportowanie dodając odpowiedni wpis `meta-data` do `AndroidManifest` oraz włączyć w kodzie nasłuchiwanie dla wybranych użytkowników.
+Zbieranie i wysyłanie raportów jest domyślnie włączone dla wszystkich użytkowników. Aby dać użytkownikom możliwość decydowania o przesyłanych informacjach należy wyłączyć automatyczne raportowanie dodając odpowiedni wpis `meta-data` do `AndroidManifest` oraz opcjonalnie włączyć raportowanie w kodzie zgodnie z decyzją użytkownika.
 
 {% highlight xml %}
-//in AndroidManifest.xml
+<!-- in AndroidManifest.xml -->
 <meta-data
     android:name="firebase_crashlytics_collection_enabled"
     android:value="false" />

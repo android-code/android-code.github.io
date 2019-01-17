@@ -7,10 +7,10 @@ image: firebase/analytics
 github: firebase/tree/master/analytics
 description: "Firebase"
 version: Firebase-Core 16.0
-keywords: "firebase, analytics, event, user properties, android, programowanie, programming"
+keywords: "firebase, analityka, analytics, zdarzenie, event, właściwość, user properties, android, programowanie, programming"
 ---
 
-## Możliwości
+## Cechy
 `Google Analytics` dla `Firebase` jest narzędziem analitycznym przeznaczonym do pomiaru oraz rejestrowania wykorzystania aplikacji i zaangażowania użytkowników. Jest rdzeniem dla całej usługi Firebase i pozwala na integracje z różnymi innymi funkcjami. Dostarczane raporty pomagają w zrozumieniu zachowania użytkowników (w jaki sposób korzystają z aplikacji) co ułatwia podejmowanie przemyślanych, świadomych i opartych o trendy decyzje dotyczące marketingu aplikacji i optymalizacji wydajności. `SDK` rejestruje dwa podstawowe typy informacji: zdarzenia (`event`) oraz właściwości użytkownika (`user properties`), które mogą być personalizowane dla aplikacji lub pochodzić z grupy predefiniowanych. Informacje przechwytywane są w sposób automatyczny, a ich podgląd dostępny z poziomu pulpitu nawigacyjnego w `konsoli Firebase`. Na podstawie danych urządzenia, zdarzeń czy właściwości użytkownika możliwe jest tworzenie niestandardowej grupy odbiorców usług Firebase. Dodatkowo raportowane informacje mogą być przypisane do konkretnego użytkownika za pomocą jego identyfikatora przy zachowaniu polityki prywatności i regulaminu. Aby użyć Analytics do ręcznego raportowania dla konkretnego ekranu wystarczy pobrać instancje typu `FirebaseAnalytics` w `onCreate` Aktywności.
 
 {% highlight kotlin %}
