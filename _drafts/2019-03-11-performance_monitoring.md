@@ -7,7 +7,7 @@ image: firebase/performance_monitoring
 github: firebase/tree/master/performance_monitoring
 description: "Firebase"
 version: Firebase-Perf 16.2
-keywords: "firebase, wydajność, performance, monitoring, trasa, trace, network, android, programowanie, programming"
+keywords: "firebase, wydajność, performance, monitoring, trasa, trace, metryka, metric, atrybut, attribute, network, android, programowanie, programming"
 ---
 
 ## Cechy
@@ -16,59 +16,86 @@ keywords: "firebase, wydajność, performance, monitoring, trasa, trace, network
 ## Trasy personalizowane
 Rejestrowanie wydajności aplikacji zachodzi na tzw. trasach (`traces`), które opisane są między dwoma miejscami: punktem startowym i końcowym. Automatyczna trasa dla działania aplikacji w tle (`App in background`) rozpoczyna się od momentu kiedy ostatnia Aktywność (`Activity`) będąca w `foreground` wywoła `onStop`, a zakończy się w momencie wywołania `onResume` przez pierwszą Aktywność przechodzącą z trybu `background` do `foreground`. Podobnie rzecz ma się z trasami własnymi, które dotyczą wybranego przez programistę przedziału cyklu życia.
 
-//TODO
 {% highlight kotlin %}
-val myTrace = FirebasePerformance.getInstance().newTrace("test_trace")
-myTrace.start()
-myTrace.stop()
+class MainActivity : AppCompatActivity() {
+
+    lateinit var trace: Trace
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        trace = FirebasePerformance.getInstance().newTrace("activity_creation")
+        trace.start()
+
+        //do some work
+    }
+
+    //more lifecycle methods
+
+    override fun onResume() {
+        super.onResume()
+        trace.stop()
+    }
+}
 {% endhighlight %}
 
-Trasy personalizowane mogą być dodatkowo opisane metrykami, których zadaniem jest liczenie wystąpień pewnych zdarzeń.
+Trasy personalizowane mogą być dodatkowo opisane metrykami, których zadaniem jest liczenie wystąpień pewnych zdarzeń oraz atrybutami informacyjnymi.
 
-//TODO
 {% highlight kotlin %}
-val item = cache.fetch("item")
-if (item != null) {
-    myTrace.incrementMetric("item_cache_hit", 1)
-} else {
-    myTrace.incrementMetric("item_cache_miss", 1)
+//TextView mock, use some RecyclerView or ListView instead
+private fun addItem(item: String) {
+    //start trace
+    val addItemTrace = FirebasePerformance.getInstance().newTrace("add_item_trace")
+    addItemTrace.start()
+
+    //set metrics and attributes
+    addItemTrace.incrementMetric("text_length", item.length.toLong())
+    addIteaTrace.putAttribute("item", item) //avoid personal info
+
+    //update UI
+    val text = textViewItems.text
+    textViewItems.text = "$text \n $item"
+
+    //stop trace
+    addItemTrace.stop()
 }
 {% endhighlight %}
 
 Dodanie adnotacji `@AddTrace` do metody wraz z jej nazwą powoduje rejestrowanie wydajności podczas wykonywania funkcji (trasa rozpoczyna się na początku metody, a kończy kiedy zostanie wykonana). Jednakże tak stworzone trasy nie mają możliwości dodawania metryk.
 
-//TODO
 {% highlight kotlin %}
-@AddTrace(name = "onCreateTrace", enabled = true /* optional */)
-override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
+//use instead of addItem method if extra info no needed
+@AddTrace(name = "add_item_trace")
+private fun addItemWithoutMetrics(item: String) {
+    val text = textViewItems.text
+    textViewItems.text = "$text \n $item"
 }
 {% endhighlight %}
 
 ## Zapytania sieciowe
-Wysyłane żądania sieciowe `HTTP/S` są przechwytywane i przetwarzane do postaci raportów zawierających informacje takie jak: czas odpowiedzi, rozmiar wysłanych żądań i otrzymanych odpowiedzi, wskaźnik sukcesu oraz metadane urządzenia. Ze względu na zachowanie polityki prywatności Performance Monitoring pomija parametry `URL` w procesie budowania anonimowych wzorców adresów wyświetlanych w `konsoli Firebase`. Rejestrowanie zdarzeń sieciowych wspierane jest tylko dla żądań stworzony przy użyciu `OkHttp3`.
+Wsyłane żądania sieciowe `HTTP/S` są w większośći automatycznie przechwytywane i przetwarzane do postaci raportów zawierających informacje takie jak: czas odpowiedzi, rozmiar wysłanych żądań i otrzymanych odpowiedzi, wskaźnik sukcesu oraz metadane urządzenia. Ze względu na zachowanie polityki prywatności Performance Monitoring pomija parametry `URL` w procesie budowania anonimowych wzorców adresów wyświetlanych w `konsoli Firebase`. Rejestrowanie zdarzeń sieciowych wspierane jest tylko dla żądań stworzony przy użyciu `OkHttp3`. W przypadku personalizacji raportowania zapytań sieciowych lub ich ręcznego wywołania można wykorzystać kod na poniższym listingu.
 
-//TODO
 {% highlight kotlin %}
-val metric = FirebasePerformance.getInstance().newHttpMetric("https://www.google.com",
-        FirebasePerformance.HttpMethod.GET)
-val url = URL("https://www.google.com")
-metric.start()
-val conn = url.openConnection() as HttpURLConnection
-conn.doOutput = true
-conn.setRequestProperty("Content-Type", "application/json")
-try {
-    val outputStream = DataOutputStream(conn.outputStream)
-    outputStream.write(data)
-} catch (ignored: IOException) {
+private fun download(link: String) {
+    //run on background thread
+    val url = URL(link)
+    val metric = FirebasePerformance.getInstance().newHttpMetric(link, FirebasePerformance.HttpMethod.GET)
+    metric.start()
+
+    //set connections
+    val conn = url.openConnection() as HttpURLConnection
+    conn.doOutput = true
+    conn.setRequestProperty("Content-Type", "application/json")
+    val content = convertStreamToString(conn.outputStream) //do something with content
+    
+    metric.setHttpResponseCode(conn.responseCode)
+    conn.disconnect()
+    metric.stop()
 }
 
-metric.setRequestPayloadSize(data.size.toLong())
-metric.setHttpResponseCode(conn.responseCode)
-printStreamContent(conn.inputStream)
-
-conn.disconnect()
-metric.stop()
+fun convertStreamToString(outputStream: OutputStream): String {
+    return "webpage content" //mock
+}
 {% endhighlight %}
 
 ## Debugowanie
