@@ -11,7 +11,7 @@ keywords: "firebase, analityka, analytics, zdarzenie, event, właściwość, use
 ---
 
 ## Cechy
-`Google Analytics` dla `Firebase` jest narzędziem analitycznym przeznaczonym do pomiaru oraz rejestrowania wykorzystania aplikacji i zaangażowania użytkowników. Jest rdzeniem dla całej usługi Firebase i pozwala na integracje z różnymi innymi funkcjami. Dostarczane raporty pomagają w zrozumieniu zachowania użytkowników (w jaki sposób korzystają z aplikacji) co ułatwia podejmowanie przemyślanych, świadomych i opartych o trendy decyzje dotyczące marketingu aplikacji i optymalizacji wydajności. `SDK` rejestruje dwa podstawowe typy informacji: zdarzenia (`event`) oraz właściwości użytkownika (`user properties`), które mogą być personalizowane dla aplikacji lub pochodzić z grupy predefiniowanych. Informacje przechwytywane są w sposób automatyczny, a ich podgląd dostępny z poziomu pulpitu nawigacyjnego w `konsoli Firebase`. Na podstawie danych urządzenia, zdarzeń czy właściwości użytkownika możliwe jest tworzenie niestandardowej grupy odbiorców usług Firebase. Dodatkowo raportowane informacje mogą być przypisane do konkretnego użytkownika za pomocą jego identyfikatora przy zachowaniu polityki prywatności i regulaminu. Aby użyć Analytics do ręcznego raportowania dla konkretnego ekranu wystarczy pobrać instancje typu `FirebaseAnalytics` w `onCreate` Aktywności.
+`Google Analytics` dla `Firebase` jest narzędziem analitycznym przeznaczonym do pomiaru oraz rejestrowania wykorzystania aplikacji i zaangażowania użytkowników. Jest rdzeniem dla całej usługi Firebase i pozwala na integracje z różnymi innymi funkcjami. Dostarczane raporty pomagają w zrozumieniu zachowania użytkowników (w jaki sposób korzystają z aplikacji) co ułatwia podejmowanie przemyślanych, świadomych i opartych o trendy decyzje dotyczące marketingu aplikacji i optymalizacji wydajności. Rejestrowane są dwa podstawowe typy informacji: zdarzenia (`event`) oraz właściwości użytkownika (`user properties`), które mogą być personalizowane dla aplikacji lub pochodzić z grupy predefiniowanych. Informacje przechwytywane są w sposób automatyczny, a ich podgląd dostępny z poziomu pulpitu nawigacyjnego w `konsoli Firebase`. Na podstawie danych urządzenia, zdarzeń czy właściwości użytkownika możliwe jest tworzenie niestandardowej grupy odbiorców usług Firebase. Dodatkowo raportowane informacje mogą być przypisane do konkretnego użytkownika za pomocą jego identyfikatora przy zachowaniu polityki prywatności i regulaminu. Aby użyć Analytics do ręcznego raportowania dla konkretnego ekranu wystarczy pobrać instancje typu `FirebaseAnalytics` w `onCreate` Aktywności (`Activity`).
 
 {% highlight kotlin %}
 //define at the top of the activity
@@ -51,12 +51,12 @@ class MainActivity : AppCompatActivity() {
 }
 {% endhighlight %}
 
-Przegląd danych zdarzeń w konsoli Firebase może prezentować się jak poniżej. Warto zauważyć, że niecałe 30% użytkowników przechodzi z pierwszego do drugiego ekranu i niewiele więcej wypełnia pole edycji w pierwszym ekranie.
+Przegląd danych zdarzeń w konsoli Firebase może prezentować się jak poniżej. Łatwo zauważyć ilość wykonanych akcji w stosunku do wyświetleń ekranu.
 
 ![Statystyki zdarzeń](/assets/img/diagrams/firebase/analytics_events.png){: .center-image }
 
 ## Właściwości użytkownika
-`Właściwości użytkownika` (`user attributes`) są atrybutami opisującymi segmenty bazy użytkowników dzięki którym przesyłane dane mogą być analizowane i filtrowane pod kątem wskazanej grupy docelowej. Podobnie jak w przypadku zdarzeń niektóre właściwości rejestrowane są w sposób auotomatyczny i są to np. wiek (`Age`), kraj (`Country`), marka urządzenia (`Device brand`), płeć (`Gender`), wersja systemu (`OS Version`) czy język (`Language`). W przypadku przesyłania dodatkowych informacji należy zarejestrować właściwość w konsoli Firebase oraz ustawić właściwość w kodzie za pomocą metody `setUserProperty` przekazując klucz oraz parametr opisujący.
+`Właściwości użytkownika` (`user attributes`) są atrybutami opisującymi segmenty bazy użytkowników dzięki którym przesyłane dane mogą być analizowane i filtrowane pod kątem wskazanej grupy docelowej. Podobnie jak w przypadku zdarzeń niektóre właściwości rejestrowane są w sposób auotomatyczny i są to np. wiek (`Age`), kraj (`Country`), marka urządzenia (`Device brand`), płeć (`Gender`), wersja systemu (`OS Version`) czy język (`Language`). W przypadku przesyłania dodatkowych informacji należy zarejestrować właściwość w konsoli Firebase oraz ustawić właściwość w kodzie za pomocą metody `setUserProperty` przekazując klucz i parametr opisujący.
 
 {% highlight kotlin %}
 class SecondActivity : AppCompatActivity() {
@@ -74,12 +74,12 @@ class SecondActivity : AppCompatActivity() {
 }
 {% endhighlight %}
 
-Konsola Firebase dostarcza także informacji nt właściwości użytkownika. Co ciekawe z aplikacji korzystają tylko urządzenia z Android 9, a użytkownicy pochodzą z Polski.
+Konsola Firebase dostarcza także informacji nt właściwości użytkownika. Co ciekawe z aplikacji korzystają tylko urządzenia z `Android Pie`, a użytkownicy pochodzą z Polski.
 
 ![Statystyki właściwości użytkownika](/assets/img/diagrams/firebase/analytics_user_properties.png){: .center-image }
 
 ## Śledzenie ekranów
-Analytics śledzi także przejścia między ekranami i dołącza do zdarzeń informacje o aktualnymi ekranie. Kiedy następuje zdarzenie wyświetlenia ekranu automatycznie dołącza parametr `firebase_screen_class` z informacją o nazwie klasy np. `MainActivity` oraz generuje `firebase_screen_id`. Śledzenie ekranów może być zgłaszane ręcznie poprzez metodę `setCurrentScreen` co może być przydatne jeśli aplikacja nie używa oddzielnego kontrolera `UIView` lub `Activity` na każdym śledzonym ekranie.
+Analytics śledzi także przejścia między ekranami i dołącza do zdarzeń informacje o aktualnymi ekranie. Kiedy następuje zdarzenie wyświetlenia ekranu automatycznie dodaje parametr `firebase_screen_class` z informacją o nazwie klasy np. `MainActivity` oraz generuje `firebase_screen_id`. Śledzenie ekranów może być zgłaszane ręcznie poprzez metodę `setCurrentScreen` co może być przydatne jeśli aplikacja nie używa oddzielnego kontrolera `UIView` lub `Activity` na każdym śledzonym ekranie.
 
 ## Debugowanie
 Aby dokonać weryfikacji poprawności konfiguracji Analytics z aplikacją można włączyć debugowanie i sprawdzić na maszynie deweloperskiej (w konsoli `logcat`) czy i jakie informacje są przesyłane.
@@ -90,7 +90,7 @@ adb shell setprop log.tag.FA-SVC VERBOSE
 adb logcat -v time -s FA FA-SVC
 {% endhighlight %}
 
-Dodatkowo konsola Firebase oferuje możliwość wykorzystania trybu `DebugView`, który pozwala na walidację przesyłanych informacji w trybie rzeczywistym. W przeciwieństwie do standardowego produkcyjnego trybu `StreamView` w którym informacje wysyłane są grupowe co jakiś czas, logowanie odbywa się dla każdego zdarzenia osobno z minimalnym opoźnieniem. Aby włączyć tryb `DebugView` na urządzeniu należy wykonać poniższe polecenie.
+Dodatkowo konsola Firebase oferuje możliwość wykorzystania trybu `DebugView`, który pozwala na walidację przesyłanych informacji w trybie rzeczywistym. W przeciwieństwie do standardowego produkcyjnego trybu `StreamView` w którym informacje wysyłane są zbiorczo co jakiś czas, logowanie odbywa się dla każdego zdarzenia osobno z minimalnym opoźnieniem. Aby włączyć tryb `DebugView` na urządzeniu należy wykonać poniższe polecenie.
 
 {% highlight console %}
 adb shell setprop debug.firebase.analytics.app <package_name> //enable

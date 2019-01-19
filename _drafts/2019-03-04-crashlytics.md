@@ -14,7 +14,7 @@ keywords: "firebase, crashlytics, crash, błąd, awaria, wyjątek, exception, an
 `Firebase Crashlytics` jest narzędziem raportującym awarie w aplikacji w czasie rzeczywistym, które pochodzą z urządzeń użytkowników na których zainstalowana jest aplikacja włączając w to urządzenia deweloperskie. Pomaga śledzić błędy oraz ustalać ich priorytety dzięki czemu możliwa jest weryfikacja i naprawa problemów związanych ze stabilnością co znacząco wpływa na utrzymanie jakości. Inteligentne grupowanie awarii wraz z informacjami o okolicznościach, które do nich doprowadziły pozwala zaoszczędzić czas w procesie diagnozy, zlokalizować błędny lub potencjalnie niebezpieczny fragment kodu oraz ustalić zakres użytkowników których awaria dotyczy. Crashlytics jest ogromnym wsparciem dla deweloperów w procesie utrzymania i rozwoju aplikacji.
 
 ## Zgłaszanie
-Crashlytics automatycznie zbiera i wysyła raporty o występujących błędach i awariach do konsoli Firebase (np. gdy zostanie wyrzucony `fatal exception`) oraz umożliwia ręczne logowanie przechwyconych błędów za pomocą metody `logException`. Warto odnotować, że wyjątki nie są zgłaszane pojedynczo lecz grupowo co odbywa się na dedykowanym wątku w tle dzięki czemu wpływ na wydajność aplikacji jest minimalny. Crashlytics przechowuje informacje o 8 ostatnich wyjątkach.
+Crashlytics automatycznie zbiera i wysyła raporty o występujących błędach i awariach do konsoli Firebase (np. gdy zostanie wyrzucony `fatal exception`) oraz umożliwia ręczne logowanie przechwyconych błędów za pomocą metody `logException`. Warto odnotować, że wyjątki nie są zgłaszane pojedynczo lecz grupowo (8 ostatnich wyjątków) co odbywa się na dedykowanym wątku działającym w tle dzięki czemu wpływ na wydajność aplikacji jest minimalny.
 
 {% highlight kotlin %}
 buttonDivide.setOnClickListener {
@@ -55,7 +55,8 @@ private fun getThirdValue(values: ArrayList<Int>): Int {
 }
 {% endhighlight %}
 
-Przegląd błędów w konsoli Firebase może prezentować się następujaco. Warto zauważyć, że przechwycone awarie mają status niekrytyczny.
+## Przegląd
+Przegląd błędów w konsoli Firebase może prezentować się następujaco z którego wynika, że przechwycone awarie mają status niekrytyczny.
 
 ![Lista awarii](/assets/img/diagrams/firebase/crashes_list.png){: .center-image }
 
@@ -63,7 +64,7 @@ Widok podglądu dostarcza natomiast szczegółowych informacji co może być prz
 
 ![Trasa awarii](/assets/img/diagrams/firebase/crash_trace.png){: .center-image }
 
-W diagnozie problemów często przydatna może być informacja identyfikująca użytkownika, który doświadczył awarii co możliwe jest poprzez ustawienie id metodą `setUserIdentifier`.
+W diagnozie problemów często użyteczna może być informacja identyfikująca użytkownika, który doświadczył awarii co możliwe jest poprzez ustawienie `id` metodą `setUserIdentifier`.
 
 ## Debugowanie
 Aby sprawdzić poprawność konfiguracji Crashlytics z aplikacją nie trzeba czekać na pierwsze zgłoszenia wyjątków lecz można ręcznie wymuśić przesłanie zgłoszenia metodą `crash`.
