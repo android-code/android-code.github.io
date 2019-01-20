@@ -72,6 +72,10 @@ private fun addItemWithoutMetrics(item: String) {
 }
 {% endhighlight %}
 
+Ekran przeglądu wydajności aplikacji w konsoli Firebase dla tras automatycznych i dodaktowych przedstawia się następująco. Uzyskane rezultaty informują zespół deweloperski o akceptowalnych czasach reakcji.
+
+![Wydajność aplikacji](/assets/img/diagrams/firebase/performance_app.png){: .center-image }
+
 ## Zapytania sieciowe
 Wysyłane żądania sieciowe `HTTP/S` są w większośći automatycznie przechwytywane i przetwarzane do postaci raportów zawierających informacje takie jak: czas odpowiedzi, rozmiar wysłanych żądań i otrzymanych odpowiedzi, wskaźnik sukcesu oraz metadane urządzenia. Ze względu na zachowanie polityki prywatności Performance Monitoring pomija parametry `URL` w procesie budowania anonimowych wzorców adresów wyświetlanych w `konsoli Firebase`. Rejestrowanie zdarzeń sieciowych wspierane jest tylko dla żądań opartych o `OkHttp3`. W przypadku personalizacji raportowania zapytań sieciowych lub ich ręcznego wywołania można wykorzystać kod na poniższym listingu.
 
@@ -97,6 +101,10 @@ private fun convertStreamToString(outputStream: OutputStream): String {
     return "webpage content" //mock
 }
 {% endhighlight %}
+
+Czas reakcji dla zapytań sieciowych wychodzących z aplikacji mieści się w normie. Więcej informacji nt zapytań dla konkretnych witryn można znaleźć w zakładce szczegółów wydajności sieci.
+
+![Wydajność sieci](/assets/img/diagrams/firebase/performance_network.png){: .center-image }
 
 ## Debugowanie
 Tryb debugowania pozwala już na wczesnym etapie deweloperskim sprawdzić poprawność konfiguracji oraz otrzymywane rezultaty. Aby włączyć debugowanie należy dodać odpowiedni wpis `meta-data` do `AndroidManifest` oraz uruchomić właściwe polecenie w `adb`.
