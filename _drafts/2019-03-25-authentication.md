@@ -28,12 +28,15 @@ class FirebaseUIActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_firebase_ui)
 
+        //check if user is already signed in
+        //if not then show sign in screen
+
         //add available providers
         val providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build(),
             AuthUI.IdpConfig.PhoneBuilder().build(),
-            AuthUI.IdpConfig.GoogleBuilder().build(),
-            AuthUI.IdpConfig.TwitterBuilder().build())
+            AuthUI.IdpConfig.GoogleBuilder().build())
+        //add more like Twitter, Facebook etc
 
         //start sign in screen and optional customize by logo, theme and urls
         val intent = AuthUI.getInstance()
