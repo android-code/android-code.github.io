@@ -5,7 +5,8 @@ date:  2019-03-25
 categories: ["Firebase"]
 image: firebase/authentication
 description: "Firebase"
-keywords: "firebase, autentykacja, autoryzacja, authentication, account, user, email, password, phone, google, facebook, twitter, github, rejestracja, logowanie, sign in, log in, sign up, log out, android, programowanie, programming"
+version: Firebase-Auth 16.1, Firebase-UI-Auth 4.1
+keywords: "firebase, autentykacja, autoryzacja, authentication, firebaseui, firebaseauth, auth, account, user, email, password, phone, google, facebook, twitter, github, rejestracja, logowanie, sign in, log in, sign up, log out, android, programowanie, programming"
 ---
 
 ## Wprowadzenie
@@ -71,14 +72,14 @@ class UserActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
 
-        signOut.setOnClickListener {
+        signOutButton.setOnClickListener {
             AuthUI.getInstance().signOut(this)
                 .addOnCompleteListener {
                     //do something like navigate to home screen
                 }
         }
 
-        delete.setOnClickListener {
+        deleteAccountButton.setOnClickListener {
             AuthUI.getInstance().delete(this)
                 .addOnCompleteListener {
                     //do something like navigate to home screen
@@ -94,7 +95,58 @@ class UserActivity : AppCompatActivity() {
 Kiedy zachodzi potrzeba przejęcia większej kontroli nad procesami uwierzytelniania należy w tym celu wykorzystać `Firebase SDK`, który umożliwia zdefiniowanie zachowania i obsługę zdarzeń na każdym kroku danego procesu. Poniższy listing prezentuje wykorzystanie Firebase SDK w procesie rejestracji za pomocą email i hasła, logowania i wylogowania użytkownika.
 
 {% highlight kotlin %}
-//TODO code
+class FirebaseAuthActivity : AppCompatActivity() {
+
+    private lateinit var auth: FirebaseAuth
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_firebase_auth)
+        auth = FirebaseAuth.getInstance()
+
+        signUpButton.setOnClickListener { updateProfile() }
+        signInButton.setOnClickListener { changeEmail() }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if(auth.currentUser != null) {
+            //user is signed in, update UI or navigate
+        }
+    }
+
+    private fun signUp() {
+        //validate fields before
+        val email = emailEditText.getText().toString()
+        val password = passwordEditText.getText().toString()
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                //sign up success, update UI or navigate
+                val user = auth.currentUser
+                startActivity(Intent(this, ProfileActivity::class.java))
+            }
+            else {
+                //sign up fails, show error message
+            }
+        }
+    }
+
+    private fun signIn() {
+        //validate fields before
+        val email = emailEditText.getText().toString()
+        val password = passwordEditText.getText().toString()
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                //sign ip success, update UI or navigate
+                val user = auth.currentUser
+                startActivity(Intent(this, ProfileActivity::class.java))
+            }
+            else {
+                //sign in fails, show error message
+            }
+        }
+    }
+}
 {% endhighlight %}
 
 Co więcej istnieje możliwość ręcznej konfiguracji zewnętrznych API autoryzacji dla m.in. Google, Twitter, Facebook, Github i integracji z kontem użytkownika Firebase. Ponadto Firebase Authentication oferuje także mechanizm uwierzytelniania kont anonimowych i ich konwersji do kont stałych oraż możliwość logowania się za pomocą linka w wiadomości email.
@@ -103,5 +155,92 @@ Co więcej istnieje możliwość ręcznej konfiguracji zewnętrznych API autoryz
 Firebase Authentication poza podstawowymi właściwościami użytkownika Firebase umożliwia także uzyskanie dostępu do informacji profilowych dostarczonych przez zewnętrznych usługodawców autoryzacji. Ponadto możliwe jest dodanie lub zmiana bieżących danych (informacje profilowe, email, hasło, itp), a także usuwanie konta oraz wysyłanie maili zmiany hasła, weryfikacji czy ponownej autoryzacji konta.
 
 {% highlight kotlin %}
-//TODO code
+class ProfileActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_profile)
+        
+        showUserInfo()
+        showProfiles()
+
+        updateProfileButton.setOnClickListener { updateProfile() }
+        changeEmailButton.setOnClickListener { changeEmail() }
+        changePasswordButton.setOnClickListener { changePassword() }
+        deleteAccountButton.setOnClickListener { deleteAccount() }
+    }
+
+    private fun showUserInfo() {
+        val user = FirebaseAuth.getInstance().currentUser
+        user?.let {
+            var info = String()
+            info += "uid: ${user.uid}\n"
+            info += "name: ${user.displayName}\n"
+            info += "email: ${user.email}\n"
+            info += "is verified: ${user.isEmailVerified}\n"
+            info += "photoUrl: ${user.photoUrl.toString()}\n"
+            //get more info
+            userInfo.setText(info)
+        }
+    }
+
+    private fun showProfiles() {
+        val user = FirebaseAuth.getInstance().currentUser
+        user?.let {
+            for(profile in it.providerData) {
+                var info = String()
+                info += "PROVIDER: ${profile.providerId}\n"
+                info += "uid: ${profile.uid}\n"
+                info += "name: ${profile.displayName}\n"
+                //get more info
+                userProfiles.setText(info)
+            }
+        }
+    }
+
+    private fun updateProfile() {
+        val user = FirebaseAuth.getInstance().currentUser
+        val profileUpdates = UserProfileChangeRequest.Builder()
+                .setDisplayName(editText.getText().toString())
+                .setPhotoUri(Uri.parse("http://androidcode.pl/assets/img/logo.png"))
+                .build()
+
+        user?.updateProfile(profileUpdates)?.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                //show some message and change UI
+            }
+        }
+    }
+
+    private fun changeEmail() {
+        val user = FirebaseAuth.getInstance().currentUser
+        val email = editText.getText().toString() //validate
+        user?.updateEmail(email)?.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                //show some message and change UI
+            }
+        }
+    }
+
+    private fun changePassword() {
+        val user = FirebaseAuth.getInstance().currentUser
+        val newPassword = editText.getText().toString() //validate
+        user?.updatePassword(newPassword)?.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                //show some message and change UI
+            }
+        }
+    }
+
+    private fun deleteAccount() {
+        val user = FirebaseAuth.getInstance().currentUser
+        user?.delete()?.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                //show some message and change UI
+            }
+        }
+    }
+
+    //more methods
+}
 {% endhighlight %}
