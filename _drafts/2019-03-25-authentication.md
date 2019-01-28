@@ -4,6 +4,7 @@ title: "Authentication"
 date:  2019-03-25
 categories: ["Firebase"]
 image: firebase/authentication
+github: firebase/tree/master/authentication
 description: "Firebase"
 version: Firebase-Auth 16.1, Firebase-UI-Auth 4.1
 keywords: "firebase, autentykacja, autoryzacja, authentication, firebaseui, firebaseauth, auth, account, user, email, password, phone, google, facebook, twitter, github, rejestracja, logowanie, sign in, log in, sign up, log out, android, programowanie, programming"
@@ -13,7 +14,9 @@ keywords: "firebase, autentykacja, autoryzacja, authentication, firebaseui, fire
 Tworzenie i zarządzania kontem użytkownika to dla większości aplikacji podstawowa funkcjonalność, która pozwala na personalizowane wykorzystanie funkcjonalności aplikacji, a znajomość tożsamości ułatwia bezpieczne zapisywanie i powiązanie danych z kontem synchronizowanym na różnych urządzeniach. `Firebase Authentication` dostarcza łatwych w użyciu usług `backend` przeznaczonych do uwierzytelniania użytkowników w aplikacji za pomocą `hasła`, `numeru telefonu`, popularnych dostawców tożsamości typu `Google`, `Twitter`, `Facebook`, `Github` oraz umożliwia integracje z innymi zewnętrznymi usługami. Wykorzystuje także popularne standardy branżowe takie jak `OAuth 2.0` i `OpenID Connect` oraz ściśle współpracuje z innymi usługami Firebase. Operacje procesu uwierzytelniania mogą odbywać się poprzez użycie gotowych komponentów interfejsu użytkownika (`FirebaseUI`) lub wykorzystując `Firebase SDK` do ręcznej konfiguracji.
 
 ## Użytkownicy
-Obiekt `Firebase User` reprezentuje konto użytkownika zarejestrowanego w aplikacji w projekcie Firebase. Do użytkownika przypisany jest zestaw podstawowych właściwości takich jak: unikalny identyfikator, podstawowy adres email, nazwa i adres URL zdjęcia, które są przechowywane w bazie danych projektu i mogą być aktualizowane. Nie ma możliwości dodania bezpośrednio innych właściwości do obiektu w bazie danych projektu, zamiast tego należy przechowywać dodatkowe właściwości w bazie danych `Firebase Realtime Database`. Przy pierwszej rejestracji do aplikacji profil użytkownika zostanie uzupełniony o dostępne informacje w zależności od udostępnionych danych przez dostarczyciela, np. przy rejestracji adresem email i hasłem zostanie dodany tylko podstawowy adres email. Użytkownik może zalogować się na to samo konto za pomocą różnych metod np. używając adresu email i hasła, konta Google czy konta Twitter. W momencie pomyślnej rejestracji lub logowania następuje przypisanie instancji `Firebase Auth` dla bieżącego użytkownika, której zadaniem jest utrzymanie stanu użytkownika do momentu wylogowania, np. ponowne uruchomienie aplikacji nie powoduje utraty informacji.
+Obiekt `Firebase User` reprezentuje konto użytkownika zarejestrowanego w aplikacji w projekcie Firebase. Do użytkownika przypisany jest zestaw podstawowych właściwości takich jak: unikalny identyfikator, podstawowy adres email, nazwa i adres URL zdjęcia, które są przechowywane w bazie danych projektu i mogą być aktualizowane. Nie ma możliwości dodania bezpośrednio innych właściwości do obiektu w bazie danych projektu, zamiast tego należy przechowywać dodatkowe właściwości w bazie danych `Cloud Firestore` lub `Firebase Realtime Database`. Przy pierwszej rejestracji do aplikacji profil użytkownika zostanie uzupełniony o dostępne informacje w zależności od udostępnionych danych przez dostarczyciela, np. przy rejestracji adresem email i hasłem zostanie dodany tylko podstawowy adres email. Użytkownik może zalogować się na to samo konto za pomocą różnych metod np. używając adresu email i hasła, konta Google czy konta Twitter. W momencie pomyślnej rejestracji lub logowania następuje przypisanie instancji `Firebase Auth` dla bieżącego użytkownika, której zadaniem jest utrzymanie stanu użytkownika do momentu wylogowania, np. ponowne uruchomienie aplikacji nie powoduje utraty informacji.
+
+![Konta użytkowników](/assets/img/diagrams/firebase/users.png){: .center-image }
 
 ## FirebaseUI
 `FirebaseUI` jest biblioteką opartą o pakiet `SDK Firebase Authentication`, która dostarcza komponenty interfejsu graficznego umożliwiające w łatwy sposób wykonanie operacji autoryzacji. Już za pomocą jednego kliknięcia możliwe jest zalogowanie się do aplikacji przy użyciu wielu dostarczycieli (email, telefoniczna autoryzacja, `Google Sign-In` itp) czy też wywołanie różnych metod uwierzytelniania i zadań zarządzania kontem. FirebaseUI automatycznie integruje się z mechanizmem `Smart Lock for Password` i pozwala także na personalizacje stylu graficznego. Aby skorzystać z wybranych dostarczycieli autoryzacji należy dodać odpowiednie zewnętrzne zależności do pliku `build.gradle`, włączyć wspieranie logowania i uzupełnić wymagane informacje w konsoli Firebase oraz dla Facebook i Twitter dodać klucz aplikacji do zasobów tekstowych. Poniższy listing przedstawia sposób wykorzystanie FirebaseUI w procesie logowania, wylogowania i usuwania konta.
@@ -168,6 +171,7 @@ class ProfileActivity : AppCompatActivity() {
         changeEmailButton.setOnClickListener { changeEmail() }
         changePasswordButton.setOnClickListener { changePassword() }
         deleteAccountButton.setOnClickListener { deleteAccount() }
+        signOutButton.setOnClickListener { signOut() }
     }
 
     private fun showUserInfo() {
@@ -239,6 +243,11 @@ class ProfileActivity : AppCompatActivity() {
                 //show some message and change UI
             }
         }
+    }
+
+    private fun signOut() {
+        FirebaseAuth.getInstance().signOut()
+        finish()
     }
 
     //more methods
