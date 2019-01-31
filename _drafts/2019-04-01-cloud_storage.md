@@ -146,6 +146,7 @@ override fun onSaveInstanceState(outState: Bundle) {
     super.onSaveInstanceState(outState)
     //save the reference to upload task if is in progress
     fileRef?.let { outState.putString("reference", it.toString()) }
+    //remove passed listeners
 }
 
 override fun onRestoreInstanceState(savedInstanceState: Bundle) {
