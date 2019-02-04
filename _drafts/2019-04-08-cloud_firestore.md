@@ -7,7 +7,7 @@ image: firebase/cloud_firestore
 github: firebase/tree/master/cloud_firestore
 description: "Firebase"
 version: Firebase-Firestore 18.0
-keywords: "firebase, chmura, dane, baza, cloud, storage, database, nosql, android, programowanie, programming"
+keywords: "firebase, chmura, dane, baza, cloud, storage, database, nosql, dokument, kolekcja, referencja, zapis, odczyt, transakcje, document, collection, reference, save, set, get, add, delete, update, android, programowanie, programming"
 ---
 
 ## Wprowadzenie
@@ -16,7 +16,7 @@ keywords: "firebase, chmura, dane, baza, cloud, storage, database, nosql, androi
 ## Model
 Dane reprezentowane są w postaci dokumentów (zbliżonych w stukurze do formatu `JSON`) przechowywanych w zorganizowanej kolekcji w hierarchicznej strukturze bazy danych `NoSQL` (w przeciwieństwie do `SQL` nie ma tabel ani wierszy). Każdy `dokument` (`document`) składa się z nazwy, zbioru par `klucz - wartość` (prymityw lub obiekt złożony) i może posiadać obiekty zagnieżdzone i podkolekcje. `Kolekcje` (`collection`) pełnią rolę kontenera dla różnych dokumentów i nie mogą posiadać innych kolekcji, a w doborze ich zawartości warto zachować logiczny porządek dzieląc dokumenty ze względu na kategorie i przeznaczenie co upraszcza poruszanie się po strukturze w kodzie klienta. `Podkolekcja` jest kolekcją w dokumencie i służy do budowania zagnieżdzonej struktury folderów.
 
-//TODO rysunek
+![Model bazy](/assets/img/diagrams/firebase/database.png){: .center-image }
 
 Ze względu na optymalizacje wydajności dostępu do bazy danych wprowadzony został mechanizm indeksowania, który wyróżnia dwa rodzaje indeksów: `single-field` (przechowuje posortowaną mapę wszystkich dokumentów zawierających dane pole) i `composite` (przechowuje posortowaną mapę wszystkich dokumentów zawierających wiele danych pól). Cloud Firestore jest zaprojektowany przede wszystkim z myślą o dużych kolekcjach małych dokumentów. Aby uzyskać dostęp do dokumentu lub kolekcji należy uzyskać `referencje` - obiekt typu `DocumentReference`.
 
@@ -111,8 +111,7 @@ private fun updateData() {
 
 private fun updateArrayData() {
     //add new data
-    database.collection("club").document("acmilan").set(club, SetOptions.merge())
-
+    val reference = database.collection("club").document("acmilan")
     reference.update("uclTrophiesYear", FieldValue.arrayUnion(2007))
     //add some listeners
 }
@@ -182,10 +181,9 @@ private fun getDocumentsByQueries() {
 Ponadto istnieje możliwość nasłuchiwania modyfikacji danych dla dokumentu i kolekcji w czasie rzeczywistym poprzez dodanie obiektu słuchacza z uwzględnieniem źródła i typu zmian.
 
 {% highlight kotlin %}
-private fun listenForDocumentChanges() {
-    val reference = database.collection("club").document("acmilan")
-
-    reference.addSnapshotListener(EventListener<DocumentSnapshot> { snapshot, exception ->
+private fun listenForChanges() {
+    val documentRef = database.collection("club").document("acmilan")
+    documentRef.addSnapshotListener(EventListener<DocumentSnapshot> { snapshot, exception ->
         //check is exception
         if (exception != null) return@EventListener
 
@@ -193,17 +191,22 @@ private fun listenForDocumentChanges() {
         if (snapshot != null && snapshot.metadata.hasPendingWrites()) {
             //local changes
         }
-        else { 
+        else {
             //server changes
         }
 
+        //do more job
+    })
+
+    val collectionRef = database.collection("club")
+    collectionRef.addSnapshotListener(EventListener<QuerySnapshot> { snapshots, exception ->        
         //check type of the change
         for (changes in snapshots!!.documentChanges) {
             //could be: DocumentChange.Type.ADDED, MODIFIED or REMOVED
         }
-    })
 
-    //do the same on the multiple documents from collection to listen more documents
+        //do more job
+    })
 }
 {% endhighlight %}
 
@@ -217,7 +220,7 @@ private fun makeTransaction() {
     database.runTransaction { transaction ->
         val snapshot = transaction.get(reference)
         val budget = snapshot.getLong("budget")
-        if(budget <= 1000)
+        if(budget!! <= 1000)
             transaction.update(reference, "budget", budget + 500L)
     }
 }
@@ -231,13 +234,13 @@ private fun makeWriteBatch() {
     batch.set(rmReference, realMadrid)
 
     //update current
-    val acmReference = databae.collection("club").document("acmilan")
+    val acmReference = database.collection("club").document("acmilan")
     batch.update(acmReference, "budget", 2000L)
 
     //do more add, update, delete operations
 
     //commit operations and add some listeners
-    batch.commit.addOnCompleteListener {
+    batch.commit().addOnCompleteListener {
         //some action
     }
 }
