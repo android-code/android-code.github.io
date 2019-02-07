@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Cloud Storage"
-date:  2019-04-01
+date: 2019-04-01
 categories: ["Firebase"]
 image: firebase/cloud_storage
 github: firebase/tree/master/cloud_storage

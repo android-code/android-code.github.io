@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Cloud Firestore"
-date:  2019-04-08
+date: 2019-04-08
 categories: ["Firebase"]
 image: firebase/cloud_firestore
 github: firebase/tree/master/cloud_firestore

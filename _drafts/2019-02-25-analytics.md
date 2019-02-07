@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Analytics"
-date:  2019-02-25
+date: 2019-02-25
 categories: ["Firebase"]
 image: firebase/analytics
 github: firebase/tree/master/analytics

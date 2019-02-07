@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Authentication"
-date:  2019-03-25
+date: 2019-03-25
 categories: ["Firebase"]
 image: firebase/authentication
 github: firebase/tree/master/authentication

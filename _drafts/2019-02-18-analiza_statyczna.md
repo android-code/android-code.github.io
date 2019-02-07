@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Analiza statyczna"
-date:  2019-02-18
+date: 2019-02-18
 categories: ["Testowanie"]
 image: testing/static_analysis
 github: testing/tree/master/static_analysis

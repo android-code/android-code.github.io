@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Remote Config"
-date:  2019-04-08
+date: 2019-04-15
 categories: ["Firebase"]
 image: firebase/remote_config
 github: firebase/tree/master/remote_config
@@ -66,6 +66,3 @@ remoteConfig.fetch(36000L) //cache expiration for 10h
         //do something with fetched values
     }
 {% endhighlight %}
-
-## Czas rzeczywisty
-//TODO

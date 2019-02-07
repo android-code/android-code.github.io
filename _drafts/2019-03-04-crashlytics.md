@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Crashlytics"
-date:  2019-03-04
+date: 2019-03-04
 categories: ["Firebase"]
 image: firebase/crashlytics
 github: firebase/tree/master/crashlytics
