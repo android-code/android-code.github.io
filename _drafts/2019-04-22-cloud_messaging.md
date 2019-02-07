@@ -6,8 +6,8 @@ categories: ["Firebase"]
 image: firebase/cloud_messaging
 github: firebase/tree/master/cloud_messaging
 description: "Firebase"
-version: Firebase-Firestore 17.3
-keywords: "firebase, chmura, cloud, message, notification, data, android, programowanie, programming"
+version: Firebase-Messaging 17.3
+keywords: "firebase, chmura, cloud, message, notification, data, token, topic, send, receive, android, programowanie, programming"
 ---
 
 ## Wiadomość
@@ -81,7 +81,7 @@ class FcmTokenService : FirebaseMessagingService() {
 
 {% highlight xml %}
 <!-- register service -->
-<service android:name=".java.FcmTokenService">
+<service android:name=".FcmTokenService">
     <intent-filter>
         <action android:name="com.google.firebase.MESSAGING_EVENT" />
     </intent-filter>
@@ -131,27 +131,60 @@ class FcmTokenService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
         //check message contains data payload
         remoteMessage?.data?.isNotEmpty()?.let {
-            //prepare some action
+            //prepare some action like put data into variables
         }
 
         //check message contains notification payload
         remoteMessage?.notification?.let {
             //prepare some action like show notification
+            showNotification(it)
         }
     }
 
     override fun onDeletedMessages() {
         //do something like server sync for deleted and not received message
     }
+
+    private fun showNotification(notification: RemoteMessage.Notification) {
+        //create action on tap
+        val intent = Intent(this, NotificationActionActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, REQUEST_CODE, intent, 0)
+
+        //build notification
+        val builder = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_launcher_background)
+            .setContentTitle(notification.title)
+            .setContentText(notification.body)
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+
+        //show notification
+        NotificationManagerCompat.from(this).notify(NOTIFICATION_ID, builder.build())
+    }
+}
+
+class LauncherActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_launcher)
+
+        //check are some keys from notification exists 
+        if(intent.extras.containsKey("key1")) {
+            //do some action depends on keys value like launch another activity
+        }
+    }
 }
 {% endhighlight %}
 
 ## Grupowanie
-Wiadomości mogą być wysyłane do grupy użytkowników na podstawie informacji przypisanych do konta, zapisanych do tematu (`topic`) lub należących do grupy urządzeń (zawiera dodatkowo autentykacje). W celu zapisania i wypisania klienta do tematu należy wywołać metodę `subscribeToTopic` lub `unsubscribeFromTopic`.
+Wiadomości mogą być wysyłane do grupy użytkowników na podstawie informacji przypisanych do konta, zapisanych do tematu (`topic`) lub należących do grupy urządzeń. W celu zapisania i wypisania klienta do tematu należy wywołać metodę `subscribeToTopic` lub `unsubscribeFromTopic`.
 
 {% highlight kotlin %}
-fun subscribeToTopic() {
-    FirebaseMessaging.getInstance().subscribeToTopic("title").addOnCompleteListener { task ->
+private fun subscribeToTopic() {
+    FirebaseMessaging.getInstance().subscribeToTopic("topic").addOnCompleteListener { task ->
         if (!task.isSuccessful) {
             //subscribe failed
         }
@@ -159,8 +192,8 @@ fun subscribeToTopic() {
     }
 }
 
-fun unsubscribeToTopic() {
-    FirebaseMessaging.getInstance().unsubscribeFromTopic("title").addOnCompleteListener { task ->
+private fun unsubscribeFromTopic() {
+    FirebaseMessaging.getInstance().unsubscribeFromTopic("topic").addOnCompleteListener { task ->
         if (!task.isSuccessful) {
             //unsubscribe failed
         }
