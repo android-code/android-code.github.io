@@ -7,7 +7,7 @@ image: firebase/remote_config
 github: firebase/tree/master/remote_config
 description: "Firebase"
 version: Firebase-Config 16.1
-keywords: "firebase, chmura, konfiguracja, ustawienia, zdalna, parametr, warunek, remote, config, settings, parameter, condition, android, programowanie, programming"
+keywords: "firebase, chmura, konfiguracja, ustawienia, zdalna, parametr, warunek, remote, config, settings, parameter, condition, testy a/b, testing a/b, predykcje, prognoza, predictions, android, programowanie, programming"
 ---
 
 ## Wprowadzenie
@@ -37,32 +37,37 @@ Aby wykorzystać Remote Config w aplikacji należy dodać parametry i warunki w 
 {% endhighlight %}
 
 {% highlight kotlin %}
-//get instance
-val remoteConfig = FirebaseRemoteConfig.getInstance()
+fun startRemoteConfig() {
+    //get instance
+    val remoteConfig = FirebaseRemoteConfig.getInstance()
 
-//set remote config singleton
-val configSettings = FirebaseRemoteConfigSettings.Builder()
-    .setDeveloperModeEnabled(BuildConfig.DEBUG) //for developer purpose
-    .build()
-remoteConfig.setConfigSettings(configSettings)
+    //set remote config singleton
+    val configSettings = FirebaseRemoteConfigSettings.Builder()
+        .setDeveloperModeEnabled(BuildConfig.DEBUG) //for developer purpose
+        .build()
+    remoteConfig.setConfigSettings(configSettings)
 
-//set defaults value from xml or Map object
-remoteConfig.setDefaults(R.xml.remote_config_default)
+    //set defaults value from xml or Map object
+    remoteConfig.setDefaults(R.xml.remote_config_default)
 
-//fetch parameters from remote config and add some listeners
-remoteConfig.fetch(36000L) //cache expiration for 10h
-    .addOnCompleteListener(this) { task ->
-        if (task.isSuccessful) {
-            remoteConfig.activateFetched() //active new data before use
-            //do some action
-        } 
-        else {
-            //do some action
+    //fetch parameters from remote config and add some listeners
+    remoteConfig.fetch(36000L) //cache expiration for 10h
+        .addOnCompleteListener(this) { task ->
+            if (task.isSuccessful) {
+                remoteConfig.activateFetched() //active new data before use
+                //do some action
+            } 
+            else {
+                //do some action
+            }
+
+            //get current values and use them in some variable, preferences etc
+            val showTutorial = remoteConfig.getBoolean("show_tutorial")
+            val skin = remoteConfig.getString("skin")
+            //do something with fetched values
         }
-
-        //get current values and use them in some variable, preferences etc
-        val showTutorial = remoteConfig.getBoolean("show_tutorial")
-        val skin = remoteConfig.getString("skin")
-        //do something with fetched values
-    }
+}
 {% endhighlight %}
+
+## Prognozy
+Usługa `Firebase Predictions` wykorzystuje `uczenie maszynowe` oparte o dane analityczne (pochodzące z `Firebase Analytics`) w celu tworzenia `dynamicznych segmentów` użytkowników na podstawie ich zachowań w aplikacji. Utworzone w ten sposób prognozy grupy użytkowników mogą być wykorzystane do wybierania odbiorców zdalnej konfiguracji (`Remote Config`), wiadomości i notyfikacji (`Cloud Messaging`, `In-App Messaging`) czy też testów A/B (`Testing A/B`). Dzięki temu zwiększenie liczby konwersji, kierowanie kampanii, dostosowanie treści i interfejsu użytkownika zgodnie z jego preferencjami i strategią marketingową staje się jeszcze prostsze. Dodatkowo testy A/B pozwalają na przeprowadzenie eksperymentów pod kątem optymalizacji zajścia pewnej akcji dla usług zdalnej konfiguracji oraz wiadomości i notyfikacji. W rezultacie zwracane są wyniki konwersji dla różnych wybranych wariantów co ułatwia testowanie i porównanie zmian w interfejsie użytkownika i kierowanych kampaniach oraz podjęcia decyzji o ich wprowadzeniu dla szerszej grupy odbiorców.

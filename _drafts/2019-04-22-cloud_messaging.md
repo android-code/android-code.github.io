@@ -6,8 +6,8 @@ categories: ["Firebase"]
 image: firebase/cloud_messaging
 github: firebase/tree/master/cloud_messaging
 description: "Firebase"
-version: Firebase-Messaging 17.3
-keywords: "firebase, chmura, cloud, message, notification, data, token, topic, send, receive, android, programowanie, programming"
+version: Firebase-Messaging 17.3, Firebase-InAppMessaging-Display 17.0
+keywords: "firebase, chmura, cloud, message, notification, data, token, topic, send, receive, in-app messaging, android, programowanie, programming"
 ---
 
 ## Wiadomość
@@ -201,3 +201,6 @@ private fun unsubscribeFromTopic() {
     }
 }
 {% endhighlight %}
+
+## Komunikaty w aplikacji
+Usługa `In-App Messaging` pozwala na przedstawianie ukierunkowanych wiadomości kontekstowych w aplikacji w postaci banerów dla aktualnie aktywnych użytkowników w celu zachęcenia ich do podjęcia dodatkowych działań czy odkrywania nowych obszarów i funkcjonalności. Aby rozpocząć wysyłanie komunikatów z poziomu `konsoli Firebase` wystarczy wskazać docelową grupę odbiorców (np. na podstawie prognoz czy testów A/B), skonfigurować wygląd wiadomości i wyzwalacze oraz podpiąć akcje w postaci `dynamicznych linków` (`Dynamic Links`) i dodać ich obsługę po stronie aplikacji. W przypadku modyfikacji sposobu wyświetlania wiadomości należy stworzyć i zarejestrować autorską implementację klasy rozszerzającej `FirebaseInAppMessagingDisplay`.
