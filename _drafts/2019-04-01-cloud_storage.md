@@ -54,7 +54,6 @@ Wszystkie operacje na plikach, tzn. wysyłanie, pobieranie, usuwanie i zmiana me
 {% highlight kotlin %}
 private fun startUploadFile() {
     //get file and create reference
-    val storageRef = FirebaseStorage.getInstance().reference
     val file = Uri.fromFile(File("path/file.jpg"))
     val fileRef = storageRef.child("images/${file.lastPathSegment}")
 
@@ -67,20 +66,17 @@ private fun startUploadFile() {
 }
 
 private fun startDownloadFile() {
-    val storageRef = FirebaseStorage.getInstance().reference
     val file = File.createTempFile("images", "jpg")
     val fileRef = storageRef.child("images/file.jpg")
     val downloadTask = fileRef.getFile(file)
 }
 
 private fun startDeleteFile() {
-    val storageRef = FirebaseStorage.getInstance().reference
     val fileRef = storageRef.child("images/file.jpg")
     val deleteTask = fileRef.delete()
 }
 
 private fun startUpdateMetadata() {
-    val storageRef = FirebaseStorage.getInstance().reference
     val fileRef = storageRef.child("images/file.jpg")
 
     val metadata = StorageMetadata.Builder()
@@ -96,72 +92,83 @@ private fun startUpdateMetadata() {
 Rozpoczęcie wykonywania zadania zwraca właściwy dla danej operacji obiekt rozszerzający klasę `StorageTask`, który pozwala na zarządzanie i monitorowanie statusu operacji poprzez podpięcie słuchaczy dla różnych stanów, tj. `OnProgressListener`, `OnPausedListener`, `OnSuccessListener`, `OnFailureListener`. Metody `pause`, `resume`, `cancel` umożliwiają manualne zarządzanie statusem zadania. W przypadku zamknięcia procesu aplikacji wszystkie zadania są przerywane. Należy więc zadbać o ich właściwe wznowienie w miejscu przerwania (nie od początku) co pozwoli na oszczędzenie czasu i transmisji danych użytkownika.
 
 {% highlight kotlin %}
-override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
+class StatusActivity : AppCompatActivity() {
 
-    uploadButton.setOnClickListener { startUploadFileWithListeners() }
-    cancelButton.setOnClickListener { uploadTask?.cancel() }
+    private lateinit var storageRef: StorageReference
+    private lateinit var uploadTask: UploadTask
 
-    //check if upload task has been interrupted
-    val taskInterrupted = false //mock, get from persistent storage
-    if(taskInterrupted) {
-        restartUploadFile()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_status)
+
+        storageRef = FirebaseStorage.getInstance().reference
+
+        startUploadFileWithListeners()
     }
-}
 
-private fun startUploadFileWithListeners() {
-    val storageRef = FirebaseStorage.getInstance().reference
-    val file = Uri.fromFile(File("path/file.jpg"))
-    fileRef = storageRef.child("images/${file.lastPathSegment}")
+    private fun startUploadFileWithListeners() {
+        val file = Uri.fromFile(File("path/file.jpg"))
+        val fileRef = storageRef.child("images/${file.lastPathSegment}")
 
-    //start and add listeners
-    uploadTask = fileRef.putFile(file)
-    uploadTask.addOnProgressListener { taskSnapshot ->
-        //save session URI in persistent storage in case of process die
-        val sessionUri = taskSnapshot.uploadSessionUri
-        //show some progress
-    }.addOnFailureListener {
-        //action on error like show message
-    }.addOnSuccessListener {
-        //action on success like show file in UI
+        //start and add listeners
+        uploadTask = fileRef.putFile(file)
+        uploadTask.addOnProgressListener { taskSnapshot ->
+            //save session URI in persistent storage in case of process die
+            val sessionUri = taskSnapshot.uploadSessionUri
+            //show some progress
+        }.addOnFailureListener {
+            //action on error like show message
+        }.addOnSuccessListener {
+            //action on success like show file in UI
+        }
     }
-}
 
-private fun restartUploadFile {
-    val storageRef = FirebaseStorage.getInstance().reference
-    val file = Uri.fromFile(File("path/file.jpg"))
-    val sessionUri = Uri.EMPTY //mock value, get from persistent storage
-    uploadTask = storageRef.putFile(file, StorageMetadata.Builder().build(), sessionUri)
-}
+    private fun restartUploadFile {
+        val file = Uri.fromFile(File("path/file.jpg"))
+        val sessionUri = Uri.EMPTY //mock value, get from persistent storage
+        uploadTask = storageRef.putFile(file, StorageMetadata.Builder().build(), sessionUri)
+    }
 
-//do in the similar way for other operations
+    //do in the similar way for other operations
+}
 {% endhighlight %}
 
 ## Cykl życia
 Przesyłanie kontynuowane jest w tle niezależnie od zmian cyklu życia `Aktywności` co pomimo niewątpliwej zalety może prowadzić do wycieku pamięci dla dodanych wcześniej obserwatorów. Aby temu zapobiec należy we właściwym miejscu cyklu życia wyrejestrować obiekty słuchaczy, a następnie zarejestrować ponownie pobierając instancje bieżącego zadania za pomocą metody `getActiveUploadTask` lub `getActiveDownloadTask`.
 
 {% highlight kotlin %}
-override fun onSaveInstanceState(outState: Bundle) {
-    super.onSaveInstanceState(outState)
-    //save the reference to upload task if is in progress
-    fileRef?.let { outState.putString("reference", it.toString()) }
-    //remove passed listeners
-}
+class LifecycleActivity : AppCompatActivity() {
 
-override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-    super.onRestoreInstanceState(savedInstanceState)
+    private var fileRef: StorageReference?
 
-    //get reference to upload task if was in progress
-    val reference = savedInstanceState.getString("reference")
-    if(reference != null) {
-        fileRef = FirebaseStorage.getInstance().getReferenceFromUrl(reference)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_lifecycle)
 
-        //get all UploadTask - in this case there should be one
-        fileRef?.activeUploadTasks?.let { it ->
-            if (it.size > 0) {
-                val task = it[0]
-                //set listeners to task here
+        //start some upload task on fileRef
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        //save the reference to upload task if is in progress
+        fileRef?.let { outState.putString("reference", it.toString()) }
+        //remove passed listeners
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+
+        //get reference to upload task if was in progress
+        val reference = savedInstanceState.getString("reference")
+        if(reference != null) {
+            fileRef = FirebaseStorage.getInstance().getReferenceFromUrl(reference)
+
+            //get all UploadTask - in this case there should be one
+            fileRef?.activeUploadTasks?.let { it ->
+                if (it.size > 0) {
+                    val task = it[0]
+                    //set listeners to task here
+                }
             }
         }
     }

@@ -67,6 +67,7 @@ Aby odebrać i przetworzyć otrzymany `DynamicLink` należy dodać w `AndroidMan
 
 {% highlight xml %}
 <!-- autoVerify flags is responsible for handling Dynamic Links using App Links -->
+<!-- add filter to MainActivity -->
 <intent-filter android:autoVerify="true">
     <action android:name="android.intent.action.VIEW"/>
     <category android:name="android.intent.category.DEFAULT"/>
@@ -76,18 +77,28 @@ Aby odebrać i przetworzyć otrzymany `DynamicLink` należy dodać w `AndroidMan
 {% endhighlight %}
 
 {% highlight kotlin %}
-private fun receiveDynamicLink() {
-    FirebaseDynamicLinks.getInstance()
-        .getDynamicLink(intent)
-        .addOnSuccessListener(this) { pendingDynamicLinkData ->
-            // Get deep link from result (may be null if no link is found)
-            var deepLink: Uri? = null
-            if (pendingDynamicLinkData != null) {
-                deepLink = pendingDynamicLinkData.link
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        receiveDynamicLink() 
+    }
+
+    private fun receiveDynamicLink() {
+        FirebaseDynamicLinks.getInstance()
+            .getDynamicLink(intent)
+            .addOnSuccessListener(this) { pendingDynamicLinkData ->
+                // Get deep link from result (may be null if no link is found)
+                var deepLink: Uri? = null
+                if (pendingDynamicLinkData != null) {
+                    deepLink = pendingDynamicLinkData.link
+                }
+            }.addOnFailureListener {
+                //some action
             }
-        }.addOnFailureListener {
-            //some action
-        }
+    }
 }
 {% endhighlight %}
 

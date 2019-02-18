@@ -172,7 +172,7 @@ class LauncherActivity : AppCompatActivity() {
         setContentView(R.layout.activity_launcher)
 
         //check are some keys from notification exists 
-        if(intent.extras.containsKey("key1")) {
+        if(intent?.extras.containsKey("key1")) {
             //do some action depends on keys value like launch another activity
         }
     }

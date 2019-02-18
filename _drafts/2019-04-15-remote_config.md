@@ -37,7 +37,7 @@ Aby wykorzystać Remote Config w aplikacji należy dodać parametry i warunki w 
 {% endhighlight %}
 
 {% highlight kotlin %}
-fun startRemoteConfig() {
+private fun startRemoteConfig() {
     //get instance
     val remoteConfig = FirebaseRemoteConfig.getInstance()
 
