@@ -81,7 +81,8 @@ Aby odebrać i przetworzyć otrzymany `DynamicLink` należy dodać w `AndroidMan
     <action android:name="android.intent.action.VIEW"/>
     <category android:name="android.intent.category.DEFAULT"/>
     <category android:name="android.intent.category.BROWSABLE"/>
-    <data android:host="androidcode.pl" android:scheme="http"/>
+    <data android:host="androidcode.page.link" android:scheme="http"/>
+    <data android:host="androidcode.page.link" android:scheme="https"/>
 </intent-filter>
 {% endhighlight %}
 
