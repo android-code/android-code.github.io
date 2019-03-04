@@ -21,28 +21,28 @@ Obiekt obserwatora dokonuje subskrybcji obiektu obserwowanego za pomocą metody 
 
 {% highlight java %}
 private Observer<String> createObserver() {
-	Observer<String> observer = new Observer<String>() {
-		@Override
-		public void onSubscribe(Disposable d) {
-			//Observer subscribe to Observable
-		}
+    Observer<String> observer = new Observer<String>() {
+        @Override
+        public void onSubscribe(Disposable d) {
+            //Observer subscribe to Observable
+        }
 
-		@Override
-		public void onNext(String s) {
-			//Observer received some data stream
-		}
+        @Override
+        public void onNext(String s) {
+            //Observer received some data stream
+        }
 
-		@Override
-		public void onError(Throwable e) {
-			//Observer received emitted error
-		}
+        @Override
+        public void onError(Throwable e) {
+            //Observer received emitted error
+        }
 
-		@Override
-		public void onComplete() {
-			//Observer completed receiving data from Observable
-		}
-	};
-	return observer;
+        @Override
+        public void onComplete() {
+            //Observer completed receiving data from Observable
+        }
+    };
+    return observer;
 }
 {% endhighlight %}
 
@@ -51,45 +51,45 @@ Obiekt obserwowany w `RxJava` jest strumieniem danych wykonującym operacje i em
 
 {% highlight java %}
 private Observable<String> createObservableJust() {
-	//up to 10 items
-	Observable<String> observable = Observable.just("Catan", "Splendor", "7 Wonders", "Codenames", "Taboo");
-	return observable;
+    //up to 10 items
+    Observable<String> observable = Observable.just("Catan", "Splendor", "7 Wonders", "Codenames", "Taboo");
+    return observable;
 }
 
 private Observable<String> createObservableFrom() {
-	//create Observable by one of: fromArray, fromCallable, fromFuture, fromIterable, fromPublisher
-	Observable<String> observable = Observable.fromArray("Catan", "Splendor", "7 Wonders", "Codenames", "Taboo");
-	return observable;
+    //create Observable by one of: fromArray, fromCallable, fromFuture, fromIterable, fromPublisher
+    Observable<String> observable = Observable.fromArray("Catan", "Splendor", "7 Wonders", "Codenames", "Taboo");
+    return observable;
 }
 
 private Observable<String> createObservable() {
-	final List<String> data = prepareData();
-	Observable<String> observable = Observable.create(new ObservableOnSubscribe<String>() {
-		@Override
-		public void subscribe(ObservableEmitter<String> emitter) throws Exception {
-			//emit all data one by one
-			for(String item : data) {
-				if(!emitter.isDisposed()) {
-					emitter.onNext(item);
-				}
-			}
-			//emit completed event
-			if(!emitter.isDisposed()) {
-				emitter.onComplete();
-			}
-		}
-	});
-	return observable;
+    final List<String> data = prepareData();
+    Observable<String> observable = Observable.create(new ObservableOnSubscribe<String>() {
+        @Override
+        public void subscribe(ObservableEmitter<String> emitter) throws Exception {
+            //emit all data one by one
+            for(String item : data) {
+                if(!emitter.isDisposed()) {
+                    emitter.onNext(item);
+                }
+            }
+            //emit completed event
+            if(!emitter.isDisposed()) {
+                emitter.onComplete();
+            }
+        }
+    });
+    return observable;
 }
 
 private List<String> prepareData() {
-	List<String> data = new ArrayList<>();
-	data.add("Catan");
-	data.add("Splendor");
-	data.add("7 Wonders");
-	data.add("Codenames");
-	data.add("Taboo");
-	return data;
+    List<String> data = new ArrayList<>();
+    data.add("Catan");
+    data.add("Splendor");
+    data.add("7 Wonders");
+    data.add("Codenames");
+    data.add("Taboo");
+    return data;
 }
 {% endhighlight %}
 
@@ -98,43 +98,45 @@ Wprowadzone w module `RxAndroid` harmonogramy decydują o tym na jakim wątku ob
 
 {% highlight java %}
 private void startWorkAndSubscribe() {
-	//create Observable and Observer
-	Observable<String> observable = createObservable();
-	Observer<String> observer = createObserver();
+    //create Observable and Observer
+    Observable<String> observable = createObservable();
+    Observer<String> observer = createObserver();
 
-	//subscribe on choosen schedulers
-	observable
-			.observeOn(Schedulers.io()) //emit data on background thread
-			.subscribeOn(AndroidSchedulers.mainThread()) //receive data on UI thread
-			.subscribe(observer); //subscribe observer to observable
+    //subscribe on choosen schedulers
+    observable
+        .observeOn(Schedulers.io()) //emit data on background thread
+        .subscribeOn(AndroidSchedulers.mainThread()) //receive data on UI thread
+        .subscribe(observer); //subscribe observer to observable
 }
 {% endhighlight %}		
 
 ## Operatory
 Operatory pozwalają na manipulacje i modyfikacje emitowanych danych za pomocą zadań transformacji, filtrowania, łączenia, agregacji czy tworzenia. RxJava dostarcza szeroki zbiór operatorów podzielonych na kategorie w zależności od rodzaju operacji, a ich łączenie umożliwia uzyskanie dowolnego złożonego strumienia danych. Poza operatorami odpowiedzialnymi za tworzenie obiektów obserwowanych (`create`, `just`, `from` itp) do często wykorzystywanych należą m.in. `filter`, `map`, `skip`, `take`, `concat`.
 
+{% highlight java %}
 private void startWorkAndSubscribeWithOperators() {
-	Observable<String> observable = createObservable();
-	Observer<Object> observer = createObserver();
+    Observable<String> observable = createObservable();
+    Observer<Object> observer = createObserver();
 
-	observable
-			.observeOn(Schedulers.io())
-			.subscribeOn(AndroidSchedulers.mainThread())
-			.filter(new Predicate<String>() { //emit only some elements
-				@Override
-				public boolean test(String s) throws Exception {
-					return s.toLowerCase().startsWith("c");
-				}
-			})
-			.map(new Function<String, Object>() { //modify data
-				@Override
-				public Object apply(String s) {
-					return s.toUpperCase();
-				}
-			})
-			.subscribe(observer);
-}	
-	
+    observable
+        .observeOn(Schedulers.io())
+        .subscribeOn(AndroidSchedulers.mainThread())
+        .filter(new Predicate<String>() { //emit only some elements
+            @Override
+            public boolean test(String s) throws Exception {
+                return s.toLowerCase().startsWith("c");
+            }
+        })
+        .map(new Function<String, Object>() { //modify data
+            @Override
+            public Object apply(String s) {
+                return s.toUpperCase();
+            }
+        })
+        .subscribe(observer);
+}
+{% endhighlight %}
+
 ## Uchwyt
 W celu uniknięcia wycieków pamięci związanych z niepożądaną dłużej subskrypcją obserwatora należy przypisać referencje `Disposable` z poziomu obserwatora oraz wypisać go z subskrypcji.
 
@@ -152,9 +154,9 @@ public class SingleObserverActivity extends AppCompatActivity {
         Observer<String> observer = createObserver();
 
         observable
-                .observeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
+            .observeOn(Schedulers.io())
+            .subscribeOn(AndroidSchedulers.mainThread())
+            .subscribe(observer);
     }
 
     @Override
@@ -168,7 +170,7 @@ public class SingleObserverActivity extends AppCompatActivity {
         Observer<String> observer = new Observer<String>() {
             @Override
             public void onSubscribe(Disposable d) {
-				//assign subscription to dispoable
+                //assign subscription to dispoable
                 disposable = d;
             }
             @Override
@@ -181,7 +183,7 @@ public class SingleObserverActivity extends AppCompatActivity {
         return observer;
     }
 	
-	private Observable<String> createObservableJust() {
+    private Observable<String> createObservableJust() {
         Observable<String> observable = Observable.just("Catan", "Splendor", "7 Wonders", "Codenames", "Taboo");
         return observable;
     }
@@ -205,21 +207,20 @@ public class MultipleObserversActivity extends AppCompatActivity {
         DisposableObserver<String> observerFilteredGames = createDisposableObserver();
 
         compositeDisposable.add(observable
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(observerGames));
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeWith(observerGames));
 
         compositeDisposable.add(observable
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .filter(new Predicate<String>() {
-                    @Override
-                    public boolean test(String s) throws Exception {
-                        return s.toLowerCase().startsWith("c");
-                    }
-                })
-                .subscribeWith(observerFilteredGames));
-
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .filter(new Predicate<String>() {
+                @Override
+                public boolean test(String s) throws Exception {
+                    return s.toLowerCase().startsWith("c");
+                }
+            })
+            .subscribeWith(observerFilteredGames));
     }
 
     @Override
@@ -228,7 +229,7 @@ public class MultipleObserversActivity extends AppCompatActivity {
         compositeDisposable.clear(); //clear all disposable
     }
 	
-	private Observable<String> createObservableJust() {
+    private Observable<String> createObservableJust() {
         Observable<String> observable = Observable.just("Catan", "Splendor", "7 Wonders", "Codenames", "Taboo");
         return observable;
     }
