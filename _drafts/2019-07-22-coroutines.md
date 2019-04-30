@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Coroutines"
-date:  2019-07-22
+date: 2019-07-22
 categories: ["Kotlin"]
 image: kotlin/coroutines
 github: kotlin/blob/master/coroutines
@@ -24,7 +24,19 @@ suspend fun suspendingFunction() : Int  {
 {% endhighlight %}
 
 ## Kontekst
-Kontekst współprogramu (`CoroutineContext`) jest zbiorem zasad i konfiguracji, która definiuje sposób w jaki coroutine będzie wykonywany (może być kombinacją różnych kontekstów `CombinedContext`). Jednym z możliwych sposobów dostarczenia kontekstu jest użycie klasy `Dispatchers` zawierającej zbiór implementacji różniących się wykorzystaniem wątków. `Dispatchers.Default` może działać na wielu wątkach i używany jest do kosztownych zadań o dużym zapotrzebowaniu mocy obliczeniowej jak np. algorytmy. `Dispatchers.Main` działa na głównym wątku co w przypadku Android pozwala na modyfikację interfejsu użytkownika. `Dispatchers.IO` jest używany przede wszystkim do prostych operacji typu wejście/wyjście jak np. zapytanie sieciowe, dostęp do bazy danych, plików czy sensorów. `Dispatchers.Unconfined` nie ogranicza się do żadnego wątku w wyniku czego jego zachowanie jest trudne do przewidzenia. Kontekst może być przekazany jawnie jako argument lub uzyskiwany niejawnie na podstawie zakresu w którym jest wykonywany.
+Kontekst współprogramu (`CoroutineContext`) jest zbiorem zasad i konfiguracji, która definiuje sposób w jaki coroutine będzie wykonywany. Może być także kombinacją obiektów różnych typów kontekstu (`CombinedContext`). Składa się przeważnie z obiektów typu `Job`, `CoroutineDispatcher` oraz `CoroutineExceptionHandler`. Coroutine zawsze wykonywany jest w ramach jakiegoś kontekstu, który może być przekazany jawnie jako argument lub uzyskiwany niejawnie na podstawie zakresu w którym jest wykonywany.
+
+{% highlight kotlin %}
+val handler = CoroutineExceptionHandler { context, exception ->
+    //manage caught exception like logger action
+}
+
+//actually this is CombinedContext object
+val context : CoroutineContext = Dispatchers.Default + Job() + handler
+{% endhighlight %}
+
+## Dispatcher
+Kontekts zawiera m.in. instancję `CoroutineDispatcher`, której zadaniem jest określenie wątków wykonawczych dla coroutine. `Dispatchers.Default` może działać na wielu wątkach i używany jest do kosztownych zadań o dużym zapotrzebowaniu mocy obliczeniowej jak np. algorytmy. `Dispatchers.Main` działa na głównym wątku co w przypadku Android pozwala na modyfikację interfejsu użytkownika. `Dispatchers.IO` jest używany przede wszystkim do prostych operacji typu wejście/wyjście jak np. zapytanie sieciowe, dostęp do bazy danych, plików czy sensorów. `Dispatchers.Unconfined` nie ogranicza się do żadnego wątku w wyniku czego jego zachowanie jest trudne do przewidzenia.
 
 {% highlight kotlin %}
 //withContext is suspend functions itself so no need to declare in inside suspend function if used inside coroutine
@@ -52,10 +64,9 @@ fun testSuspendingWork() = runBlocking {
 `launch` jest często wykorzystywanym budowniczym, który w przeciwieństwie do `runBlocking` nie blokuje bieżącego wątku. Zwraca obiekt typu `Job` dzięki któremu możliwe jest manualne zarządzanie stanem zadań. Metoda `join` blokuje powiązany coroutine tak długo dopóki wszystkie jego zadania nie zostaną wykonane, natomiast `cancel` anuluje wszystkie zadania. Wykorzystywany do zadań typu `fire and forget` w których nie oczekuje się zwrócenia rezultatu.
 
 {% highlight kotlin %}
-//coroutines must be called on some scope so just use main scope called GlobalScope
 suspend fun launchJobAndJoin() {
     //Job extends CoroutineContext to it's context itself
-    val job = GlobalScope.launch(Dispatchers.Main) {
+    val job = launch { //note that coroutines must be called on some scope 
         //some work
         val result1 = suspendingWork1()
         //wait for result1
@@ -63,20 +74,20 @@ suspend fun launchJobAndJoin() {
         //wait for result2
         //process results
     }
-	
-    //wait here until suspendingWork tasks finished
+    
+    //wait here until child tasks finished
     job.join() //suspending function itself
 }
 
 fun launchJobAndCancel() {
-    val job = GlobalScope.launch(Dispatchers.Main) {
+    val job = launch {
         //some work
         val result1 = suspendingWork1()
         val result2 = suspendingWork2()
         //process results
     }
-	
-    //cancel all the jobs, so if suspendingWork is running then cancel it and pending tasks
+    
+    //cancel all cancellable jobs, so if suspendingWork is running then cancel it and pending tasks
     job.cancel() //regular function so no need to run inside coroutine or suspend function
 }
 {% endhighlight %}
@@ -85,21 +96,91 @@ fun launchJobAndCancel() {
 
 {% highlight kotlin %}
 fun launchAsync() {
-    val job = GlobalScope.launch(Dispatchers.Main) {
+    val job = launch {
         val result = suspendingWork()
+        
         val deferred1 = async {
             //some work
             return@async "result2"
         }
-        val deferred2 = async {
+        
+        //async can be lazy started when manual start or await called
+        val deferred2 = async(start = CoroutineStart.LAZY) {
             //some work
             return@async "result3"
         }
+        //note that if no start for lazy async called then behaviour is sequantial when await called
+        deferred2.start()
 
         //if in this place deferred1 and deferred2 not finished, wait for it
         val finalResult = "$result ${deferred1.await()} ${deferred2.await()}"
     }
     //run job.cancel() to cancel parent and all childs
+}
+{% endhighlight %}
+
+## Anulowanie
+Wszystkie funkcje zawieszenia w coroutine są `cancellable`, tzn. potrafią obsłużyć żądanie o anulowaniu pracy przez metodę `cancel`. Jeśli coroutine został anulowany to wyrzucany jest wyjątek `CancellationException` w wyniku czego następuje przerwanie działania. Jednakże jeśli blok kodu nie jest elementem funkcji zawieszenia wówczas nie dochodzi do automatycznego sprawdzania stanu pracy co sprawia, że kod nie reaguje na żądanie `cancel`. W takiej sytuacji należy ręcznie sprawdzać stan pracy poprzez właściwość `isActive` lub funkcję `yield` (okresowo zawiesza działanie funkcji) czy też ustawienie maksymalnego czasu wykonania za pomocą funkcji `withTimeout` i `withTimeoutOrNull`.
+
+{% highlight kotlin %}
+fun cancellableSuspsend() = runBlocking {
+    val job = launch(Dispatchers.Default) {
+        repeat(100) {
+            //this computation are suspend function, so it is cancellable
+            suspendingWork()
+        }
+    }
+    
+    delay(1) //allow to start coroutine before cancel
+    job.cancel()
+}
+
+fun notCancellableComputation() = runBlocking {
+    val job = launch(Dispatchers.Default) {
+        repeat(100) { 
+            //some intensive computation
+            notSuspendingWork()
+        }
+    }
+
+    delay(1) //allow to start coroutine before cancel
+    job.cancel() //this won't work
+}
+
+fun cancellableComputation() = runBlocking {
+    val job = launch(Dispatchers.Default) {
+        //cancellable code throw CancellationException on cancel
+        try {
+            repeat(100) {
+                //check periodically is scope active or has been cancelled
+                if (isActive) {
+                    //do some intensive computation if coroutine is still active
+                    notSuspendingWork()
+                }
+            }
+        }
+        finally {
+            //coroutine has been cancelled
+            //run suspending function here will throw CancellationException
+            withContext(NonCancellable) {
+                //running suspending function is now possible
+            }
+        }
+    }
+
+    delay(1) //allow to start coroutine before cancel
+    job.cancel()
+}
+
+//coroutines must be called on some scope so just use main scope called GlobalScope
+fun cancellableByTimeout() = runBlocking {
+    //cancel when coroutine couldn't complete after 1 second
+    val result = withTimeoutOrNull(1000) {
+        repeat(100) {
+            notSuspendingWork()
+        }
+    }
+    //use withTime to do the same but throw TimeoutCancellationException instead of return null
 }
 {% endhighlight %}
 
@@ -118,14 +199,13 @@ class ScopeActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             //work
         }
-		
-        val job = GlobalScope.launch(Dispatchers.Main) { 
+        
+        val job = GlobalScope.launch { 
             //work
             async {
                 //coroutine nested in coroutine
             }
         }
-        //job.cancel() will cancel parent and childs
     }
 }
 
@@ -139,12 +219,12 @@ class ScopeClassActivity : AppCompatActivity(), CoroutineScope {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        //now calling launch { } is possible because Activity is CoroutineScope itself
+        //now calling launch is possible because Activity is CoroutineScope itself
         launch { 
             //work
         }
     }
-	
+    
     override fun onDestroy() {
         super.onDestroy()
         cancel() //cancel on scope so all coroutines inside scope are cancelling
@@ -157,31 +237,31 @@ class ScopeDelegateActivity : AppCompatActivity(), CoroutineScope by MainScope()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-	
+    
     //this class is CoroutineScope itself
 }
 {% endhighlight %}
 
 ## Kanały
-Kanały są mechanizmem (podobnym do kolejki) pozwalającymi na przesyłanie i odbieranie potoku strumienia wartości między coroutines. W celu zbudowania kanału należy stworzyć instancję klasy `Channel`, która implementuje interfejsy zachowania zarówno nadawcy (`SendChannel`) jak i odbiorcy (`ReceiveChannel`). Opcjonalny parametr przekazany do metody wytwórczej odpowiada za wielkość bufora. Funkcja `send` i `receive` są funkcjami zawieszenia (zawieszają się w przypadku braku odbiorcy lub braku emisji) i umożliwiają odpowiednio emisję i odbiór wartości. Przetwarzanie wartości może także odbywać się poprzez iteracje kanału lub funkcje `consume`, `consumeEach`. 
+Kanały są mechanizmem (podobnym do kolejki) pozwalającymi na przesyłanie i odbieranie potoku strumienia wartości między coroutines. W celu zbudowania kanału należy stworzyć instancję klasy `Channel`, która implementuje interfejsy zachowania zarówno nadawcy (`SendChannel`) jak i odbiorcy (`ReceiveChannel`). Opcjonalny parametr przekazany do metody wytwórczej odpowiada za wielkość bufora. Kanały bez buforowe przesyłają elementy dopiero wtedy gdy nadawca i odbiorca są gotowi do komunikacji (spotykają się), tzn. funkcja `send` oczekuje na odbiorcę aby dokonać emisji natomiast funkcja `receive` oczekuje na nadawcę aby rozpocząć odbieranie. W przypadku kanałów buforowych strategia zawieszenia pozwala na wcześniejszą emisję w zależności od wielkościu bufora. Przetwarzanie wartości może także odbywać się poprzez iteracje kanału lub funkcje `consume`, `consumeEach`. 
 
 {% highlight kotlin %}
 fun runChannel() = runBlocking {
     //create channel using factory method
     //use one of RENDEZVOUS, UNLIMITED, CONFLATED optional param to specify buffer
-    val channel = Channel<Int>(RENDEZVOUS)
-	
+    val channel = Channel<Int>(RENDEZVOUS) //it is unbuffered channel
+    
     launch { 
         repeat(3) {
             //send some items from this coroutine
             channel.send(it)
             //suspend if no receivers
         } 
-		
+        
         //close channel to stop emission, this guarantees to send pending items
         channel.close()
     }
-	
+    
     //receive emitted values by receive function
     val value = channel.receive()
 
@@ -189,7 +269,7 @@ fun runChannel() = runBlocking {
     channel.consumeEach { 
         //do something with received values: 1, 2, 3
     }
-	
+    
     //emitted items can be consumed single time, so trying to receive again will no result
 }
 {% endhighlight %}
@@ -199,14 +279,14 @@ Kanały typu `Channel` ograniczone są do jednorazowego przepływu informacji, t
 {% highlight kotlin %}
 fun runBroadcastChannel() = runBlocking {
     val channel = BroadcastChannel<Int>(UNLIMITED)
-	launch {
+    launch {
         repeat(3) { channel.send(it) } //doesn't supsend if no receivers
         channel.close()
     }
-	
+    
     //items can be consumed by multiple receivers
     channel.consumeEach {}
-    channel.consumeEach {}	
+    channel.consumeEach {}  
 }
 {% endhighlight %}
 
@@ -214,7 +294,7 @@ Możliwe jest także tworzenie coroutine z automatycznie załączonym kanałem n
 
 {% highlight kotlin %}
 //use it as some variable in real world
-fun runProducer() = GlobalScope.launch {
+fun runProducer() = launch {
     //produce is extension function of CoroutineScope
     val producer : ReceiveChannel<Int> = produce {
         repeat(3) { send(it) }
@@ -223,7 +303,7 @@ fun runProducer() = GlobalScope.launch {
     //use instance of ReceiveChannel to receive values emitted by produce
     producer.consumeEach {
         //do something
-    }	
+    }   
 }
 {% endhighlight %}
 
@@ -231,14 +311,48 @@ fun runProducer() = GlobalScope.launch {
 
 {% highlight kotlin %}
 //use it as some variable in real world
-fun runActor() = GlobalScope.launch {	
+fun runActor() = launch {   
     //actor is extension function of CoroutineScope
     val actor : SendChannel<Int> = actor {
         for(item in channel) {
-            //do something
+            //often used with selead class to do something
         }
     }
 
     repeat(3) { actor.send(it) }
+}
+{% endhighlight %}
+
+Wyrażenie `select` umożliwia jednoczesne oczekiwanie na wiele funkcji zawieszenia i wybranie pierwszej, która stanie się dostępna. Metoda `onReceive` definiuje zachowania otrzymania wiadomości przez kanał, natomiast `onSend` dokonuje emisji wartości do kanału. 
+
+{% highlight kotlin %}
+fun runSelect() = launch {
+    val producer = produce {
+        repeat(5) { send(it) }
+    }
+    //more producers
+
+    val actor = actor<Int> {
+        consumeEach {
+            //do something
+        }
+    }
+    //more actors
+
+    //select works on some channels
+    repeat(5) {
+        select<Unit> {
+            //do only one action for first available supsend fun
+            
+            //imagine the case when select must do receive action for multiple channels
+            producer.onReceive { value ->
+                //do something
+            }
+            //define more onReceive for other channels
+            
+            //or to send value for multiple channels
+            actor.onSend(100) {}
+        }
+    }
 }
 {% endhighlight %}
