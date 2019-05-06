@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "IntentService"
-date: 2019-07-08
+date: 2019-07-15
 categories: ["Background"]
 image: background/intentservice
 github: background/tree/master/intentservice
@@ -10,7 +10,7 @@ keywords: "intentservice, jobintentservice, broadcastreceiver, async, task, back
 ---
 
 ## Wstęp
-`IntentService` jest rozszerzeniem klasy `Service` o obsługę zadań przetwarzanych na w tle na dedykowanym wątku roboczym przy pomocy klasy Handler. Umożliwia wykonanie pracy w sposób asynchroniczny niezależnie od wątku głównego, jednakże obsługuje tylko jedno zadanie w danej chwili. Wysyłane żądania w postaci obiektu `Intent` zostają natychmiast obsłużone lub trafiają do kolejki oczekujących. Gdy cała kolejka zadań zostanie zrealizowana wówczas usługa automatycznie kończy pracę. Większość zdarzeń cyklu życia interfejsu użytkownika nie ma wpływu na działanie `IntentService` (w przeciwieństwie do `AsyncTask`). Przeznaczony jest przede wszystkim do prostych operacji w tle, które niekoniecznie wymagają reakcji interfejsu użytkownika na otrzymany rezultat.
+`IntentService` jest rozszerzeniem klasy `Service` o obsługę zadań przetwarzanych na w tle na dedykowanym wątku roboczym przy pomocy klasy `Handler`. Umożliwia wykonanie pracy w sposób asynchroniczny niezależnie od wątku głównego, jednakże obsługuje tylko jedno zadanie w danej chwili. Wysyłane żądania w postaci obiektu `Intent` zostają natychmiast obsłużone lub trafiają do kolejki oczekujących. Gdy cała kolejka zadań zostanie zrealizowana wówczas usługa automatycznie kończy pracę. Większość zdarzeń cyklu życia interfejsu użytkownika nie ma wpływu na działanie `IntentService` (w przeciwieństwie do `AsyncTask`). Przeznaczony jest przede wszystkim do prostych operacji w tle, które niekoniecznie wymagają reakcji interfejsu użytkownika na otrzymany rezultat.
 
 ## Implementacja
 Aby stworzyć komponent `IntentService` należy zdefiniować klasę rozszerzającą klasę `IntentService`, nadpisać metodę `onHandleIntent` odpowiedzialną za przechwytywanie żądań i podobnie jak przy klasycznej usłudze (`Service`) dodać do pliku manifestu (`AndroidManifest`).

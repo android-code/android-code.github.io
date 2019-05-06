@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "WorkManager"
-date: 2019-07-15
+date: 2019-07-22
 categories: ["Background"]
 image: background/workmanager
 github: background/tree/master/workmanager
