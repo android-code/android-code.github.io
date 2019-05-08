@@ -29,11 +29,11 @@ class CustomIntentService : IntentService("name") {
     //they are automatically invoked by IntentService
 }
 
-class MainActivity : AppCompatActivity() {
+class CustomActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_custom)
         button.setOnClickListener { startIntentService() }
     }
 
@@ -70,13 +70,13 @@ class IntentServiceCommunication : IntentService("name") {
     }
 }
 
-class MainActivity : AppCompatActivity() {
+class CommunicationActivity : AppCompatActivity() {
 
     private val receiver = CustomBroadcastReceiver()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_communication)
         button.setOnClickListener { startIntentService() }
 
         registerReceiver(receiver, IntentFilter("FILTER_ACTION"))

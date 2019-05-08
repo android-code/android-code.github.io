@@ -169,7 +169,7 @@ class FinalWorker(context: Context, params: WorkerParameters) : Worker(context, 
 `JobScheduler` pozwala na planowanie zadań w tle gwarantując ich ukończenie w nieokreślonej przyszłości. Wykonanie zadania jest uzależnione od warunków stanu systemu. Może się zdarzyć, że rozpoczęcie pracy będzie natychmiastowe lub pozostanie w oczekiwaniu na korzystny stan systemu umożliwiający podjęcie działania zgodnie z wymaganiami wstępnymi. Optymalizuje użycie baterii i pamięci w stosunku do innych kosztownych rozwiązań realizacji pracy w tle takich jak np. `Service`, `AlarmManager` czy `BroadcastReceiver`. Usługa `JobScheduler` jest jednak dostępna od wersji systemu `Android L`. Alernatywnym rozwiązaniem może być wykorzystanie `FirebaseJobDispatcher` (działa także poniżej `Android L`). Obie usługi działają w oparciu o `JobService`, którego zadaniem jest obsługa zdarzeń rozpoczęcia i zatrzymania pracy. Warunki wstępne deklarowane są w obiektach `JobInfo` lub `Job`, a zaplanowanie zadania odbywa się przy pomocy metody `schedule`.
 
 {% highlight kotlin %}
-class JobScheduler : AppCompatActivity() {
+class JobSchedulerActivity : AppCompatActivity() {
 
     lateinit var jobScheduler: JobScheduler //works min for API 21
     lateinit var jobDispatcher: FirebaseJobDispatcher //alernative for lower API

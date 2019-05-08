@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "RxAndroid"
+title: "RxJava"
 date: 2019-05-27
 categories: ["Biblioteki"]
-image: libraries/rxandroid
-github: libraries/tree/master/rxandroid
+image: libraries/rxjava
+github: libraries/tree/master/rxjava
 description: "Biblioteki"
-version: RxAndroid 2.1, RxJava 2.2
+version: RxJava 2.2, RxAndroid 2.1
 keywords: "reaktywne, reactive, rxandroid, rxjava, reactivex, obserwator, obserwowany, observer, observable, schedulers, operator, disposable, subscribe, async, thread, java, android, programowanie, programming"
 ---
 
@@ -94,7 +94,7 @@ private List<String> prepareData() {
 {% endhighlight %}
 
 ## Harmonogramy
-Wprowadzone w module `RxAndroid` harmonogramy decydują o tym na jakim wątku obiekt obserwowany będzie wykonywał zadanie oraz na jakim wątku obiekt obserwatora będzie odbierał i przetwarzał wyemitowane dane. Najpopularniejszymi harmonogrami są: `AndroidSchedulers.mainThread` - odpowiada za główny wątek aplikacji, `Schedulers.io` - wykorzystywany w nie wymagających operacjach i `Schedulers.computation` - przeznaczony do przetwarzania intensywnych zadań. Wyróżnia się także `Schedulers.newThread`, `Schedulers.single`, `Schedulers.immediate`, `Schedulers.trampoline`, `Schedulers.from`, które różnią się synchronicznością, kolejnością, czasem rozpoczęcia i ilością przetwarzanych zadań. Przypisanie harmonogramu dokonywane jest na obiekcie obserwowanym za pomocą metod `subscribeOn` i `observeOn`.
+Harmonogramy decydują o tym na jakim wątku obiekt obserwowany będzie wykonywał zadanie oraz na jakim wątku obiekt obserwatora będzie odbierał i przetwarzał wyemitowane dane. Najpopularniejszymi harmonogrami są: `AndroidSchedulers.mainThread` - odpowiada za główny wątek aplikacji (wprowadzony w module `RxAndroid`), `Schedulers.io` - wykorzystywany w nie wymagających operacjach i `Schedulers.computation` - przeznaczony do przetwarzania intensywnych zadań. Wyróżnia się także `Schedulers.newThread`, `Schedulers.single`, `Schedulers.immediate`, `Schedulers.trampoline`, `Schedulers.from`, które różnią się synchronicznością, kolejnością, czasem rozpoczęcia i ilością przetwarzanych zadań. Przypisanie harmonogramu dokonywane jest na obiekcie obserwowanym za pomocą metod `subscribeOn` i `observeOn`.
 
 {% highlight java %}
 private void startWorkAndSubscribe() {
