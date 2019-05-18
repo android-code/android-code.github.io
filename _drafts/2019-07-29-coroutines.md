@@ -4,7 +4,7 @@ title: "Coroutines"
 date: 2019-07-29
 categories: ["Kotlin"]
 image: kotlin/coroutines
-github: kotlin/blob/master/coroutines
+github: kotlin/blob/master/coroutines.kt
 description: "Kotlin"
 version: Kotlin v1.3
 keywords: "kotlin, coroutines, coroutine, scope, context, dispatcher, suspend, suspendig, async, withcontext, coroutinescope, runBlocking, launch, channel, actor, produce, android, programowanie, programming"
