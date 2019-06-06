@@ -161,3 +161,38 @@ class DataStore : PreferenceDataStore {
     }
 }
 {% endhighlight %}
+
+## Bezpieczeństwo
+Biblioteka `Security` dostarcza dodatkowej ochrony przed niepowołanym dostępem do danych stosując się do kryptograficznych reguł bezpieczeństwa z jednoczesnym zachowaniem wydajności. Wykorzystuje dwuczęściowy system zarządzania kluczami składający się ze zbioru kluczy `keyset` oraz z klucza głównego `master key`. `Keyset` zawiera klucze szyfrujące dane, które są przechowywane w `SharedPreferences`, natomiast `master key` jest kluczem szyfrującym klucze z `keyset` i przechowywany jest w `KeyStore`. Dostęp do zaszyfrowanych `SharedPreferences` odbywa się przez instancję `EncryptedSharedPreferences`.
+
+{% highlight kotlin %}
+class EncryptedActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val encryptedSharedPref = createEncryptedSharedPref()
+        encryptedSharedPref.edit().putInt("key", 100).commit()
+        val encrypted = encryptedSharedPref.getInt("key", 0) //100
+		
+        //encrypted and standard SharedPreferences are different despite the same file key declaration
+        val sharedPref = getSharedPreferences("pl.androidcode.app.FILE_KEY", Context.MODE_PRIVATE)
+        val normal = sharedPref.getInt("key", 0) //it will be 0
+    }
+
+    fun createEncryptedSharedPref(): SharedPreferences {
+        return EncryptedSharedPreferences.create(
+            "pl.androidcode.app.FILE_KEY",
+            getMasterKeyAlias(),
+            this,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+    }
+
+    fun getMasterKeyAlias(): String {
+        val keyGenParameterSpec = MasterKeys.AES256_GCM_SPEC
+        return MasterKeys.getOrCreate(keyGenParameterSpec)
+    }
+}
+{% endhighlight %}
