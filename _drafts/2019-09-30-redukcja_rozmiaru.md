@@ -1,0 +1,27 @@
+---
+layout: post
+title: "Redukcja rozmiaru"
+date: 2019-09-30
+categories: ["Budowanie"]
+image: build/reduce_size
+description: "Budowanie"
+keywords: "budowanie, kompilacja, konfiguracja, zasoby, build, gradle, apk, app, bundles, resources, android, programowanie, programming"
+---
+
+## Wstęp
+Rozmiar aplikacji ma znaczenie zarówno dla użytkownika jak i zespołu deweloperskiego. Może się zdarzyć, że aplikacja nie zostanie pobrana z uwagi na zbyt duży rozmiar, szczególnie przez użytkowników z limitowanym dostępem do sieci. Poza tym wielkość instalacji wpływa także na zapełnienie pamięci dyskowej urządzenia. Pomimo stale podnoszonej jakości i szybkości sieci oraz rozwoju urządzeń nadal istnieje potencjalna grupa odbiorców o ograniczonych parametrach technicznych. Warto zatem dążyć do redukcji rozmiaru aplikacji, szczególnie że `Google Play` stawia limit 100MB dla pojedynczego `APK` oraz 150MB dla `AAB`.
+
+## Struktura APK
+Plik wyjściowy `APK` składa się z archiwum `ZIP` zawierającego wszystkie pliki aplikacji w kilku katalogach. `META-INF` zawiera pliki sygnatur, `assets` przechowuje zasoby aplikacji dostępne z poziomu `AssetManager`, `res` zawiera wszystkie inne zasoby nieskompliowane do `resources.arsc`, a `lib` posiada skompilowany kod specyficzny dla warstwy programowej procesora w odpowiadających im podkatalogach np. `x86`. Dodatkowo `APK` zawiera `AndroidManifest.xml` i opcjonalnie skompilowane zasoby z konfiguracji `res/values` w pliku `resources.ars`c oraz skompilowane klasy `classes.dex`. Zmniejszenie rozmiaru `APK` jest więc osiągane poprzez bezpośrednią redukcję wielkości plików w jego strukturze.
+
+## Zasoby
+Podstawowym sposobem na zmniejszenie rozmiaru aplikacji jest redukcja ilości i wielkości zasobów. Zespół deweloperski powinien dbać, aby w projekcie znajdowały się tylko bieżące używane zasoby. W tym celu może zostać wykorzystany statyczny analizator `lint`. Jeśli jednak z różnych przyczyn nieużywane zasoby pozostają w projekcie mogą zostać automatycznie usunięte z pliku wyjściowego przez kompilator gdy aktywny jest wpis `shrinkResources` w `build.gradle`. Zamiast tworzenia wielu wariantów tego samego obrazu różniących się np. kątem obrotu należy wykorzystać jeden zasób bazowy, a przekstałcenia zastosować w `xml`. Ponadto warto rozważyć rezygnację ze wspieranie niektórych gęstości, szczególnie jeśli dotyczy to wąskiej grupy użytkowników np. `ldpi`. W przypadku braku grafiki dla danej gęstości `Android` automatycznie dokona skalowania z zasobu o najbliższej dostępnej gęstości. Jeśli jest to możliwe należy wykorzystywać dynamicznie renderowane obrazy `Drawable` opisane znacznikiem `shape` w pliku `xml`. Dla małych obrazów warto użyć grafiki wektorowej `VectorDrawable` niezależnej od rozdzielczości. Pliki graficzne `PNG`, `JPEG`, `BMP`, `GIF` mogą być zastąpione stratnym formatem `WEBP` o wysokim współczynniku jakości kompresji do uzyskanego rozmiaru. W pozostałych przypadkach rozmiar plików graficznych może być zredukowany stratnie lub bezstratnie przez różne zewnętrzne narzędzia.
+
+## Kod źródłowy
+Redukcja kodu źródłowego również potrafi przyczynić się do zmniejszenia rozmiaru `APK` choć przeważnie nie w tak dużym stopniu jak redukcja zasobów. Jednakże jest kilka aspektów, które pozytywnie mogą wpłynąc na wielkość pliku wyjściowego. Aktywny wpis `minifyEnabled` w pliku `build.gradle` dokonuje automatycznego usuwania nieużywanego kodu oraz optymalizacji i zaciemniania pozostałego. Ponadto należy unikać pojedynczego `Enum` na rzecz `@IntDef` oraz usuwać nadmiarowy automatycznie generowany kod. W przypadku aplikacji wykorzystujących `natywny kod` oraz `Android NDK` redukcja rozmiaru natywnych plików binarnych może być zrealizowana poprzez usuwanie `symboli debug` i unikanie rozpakowania bibliotek za pomocą wyłączenia wpisu `android:extractNativeLibs` w elemencie `application` manifestu.
+
+## Dedykowane APK
+W przypadku budowania jednej paczki `APK` dla wszystkich konfiguracji możliwe jest że będzie ona zawierać nieużywane zasoby takie jak dodatkowy język czy obrazy dla innych gęstości ekranu. Definicja zasad budowania `wielu APK` w `build.gradle` częściowo eliminuje ten problem poprzez możliwość rozdzielenia `APK` względem gęstości i architektury procesora. Zalecanym sposobem na budowanie plików wyjściowych z dedykowanymi zasobami jest użycie `Android App Bundles`.
+
+## Pakiet aplikacji
+Pakiet aplikacji dla Android (`Android App Bundle`) to format przesyłania aplikacji obejmujący cały skompilowany kod i zasoby. Model obsługi aplikacji w `Google Play` zwany dostarczaniem dynamicznym (`Dynamic Delivery`) wykorzystuje pakiet `AAB` do generowania i udostępniania zoptymalizowanych pakietów `APK` dla wszystkich dostępnych konfiguracji w związku z czym użytkownik pobiera tylko niezbędny dla danej konfiguracji kod i zasoby. Dzięki czemu nie ma już potrzeby budowania, podpisywania i zarządzania wieloma `APK`. Zamiast tego wystarczy przesłać jeden plik `AAB` składający się z zestawu konfiguracji modułu podstawowego i modułów dynamicznych (`Dynamic Feature`), które mogą zostać pobrane na żądanie w trakcie działania programu. `AAB` nie jest zatem formatem umożliwiającym bezpośrednią instalację aplikacji na urządzeniu lecz sposobem dystrybucji w `Google Play`. Należy mieć także na uwadzę przeprowadzenie testów generowania `APK` dla różnych konfiguracji np. przy użyciu narzędzia `bundletool`.
