@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Redukcja rozmiaru"
-date: 2019-09-30
+date: 2019-10-07
 categories: ["Budowanie"]
 image: build/reduce_size
 description: "Budowanie"
