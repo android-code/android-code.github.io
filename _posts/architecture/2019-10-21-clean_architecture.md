@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Clean Architecture"
-date: 2019-09-02
+date: 2019-10-21
 categories: ["Wzorce architektoniczne"]
 permalink: /blog/wzorce/:title/
 image: architecture/clean_architecture
