@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Single Activity"
-date: 2019-09-09
+date: 2019-10-28
 categories: ["Wzorce architektoniczne"]
 permalink: /blog/wzorce/:title/
 image: architecture/single_activity
