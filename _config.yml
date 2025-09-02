@@ -2,7 +2,6 @@
 title: Android Code
 author: Maciej Nowak
 email: kontakt@androidcode.pl
-twitter: maciejnowa
 github: android-code
 baseurl: ""
 url: "http://androidcode.pl"
@@ -10,7 +9,7 @@ ghpage: "https://android-code.github.io"
 
 # Switches
 lang: "pl"
-lang-switch-enable: true
+lang-switch-enable: false
 post-share-enable: true
 post-controls-enable: true
 category-posts-show-less-number: 5
